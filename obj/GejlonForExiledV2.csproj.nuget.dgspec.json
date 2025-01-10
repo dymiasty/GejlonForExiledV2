@@ -1,0 +1,62 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\GejlonForExiledV2\\GejlonForExiledV2.csproj": {}
+  },
+  "projects": {
+    "E:\\GejlonForExiledV2\\GejlonForExiledV2.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\GejlonForExiledV2\\GejlonForExiledV2.csproj",
+        "projectName": "GejlonForExiledV2",
+        "projectPath": "E:\\GejlonForExiledV2\\GejlonForExiledV2.csproj",
+        "packagesPath": "C:\\Users\\Krzysztof\\.nuget\\packages\\",
+        "outputPath": "E:\\GejlonForExiledV2\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Programy\\Visual Studio SDK\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Krzysztof\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net4.8"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net4.8",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net4.8",
+          "dependencies": {
+            "ExMod.Exiled": {
+              "target": "Package",
+              "version": "[9.2.2, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
