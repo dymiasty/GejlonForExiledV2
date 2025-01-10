@@ -1,4 +1,4 @@
 .vs/
 todo.txt
-/bin
-/obj
+bin/
+obj/
