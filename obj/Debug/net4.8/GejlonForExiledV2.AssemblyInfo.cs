@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GejlonForExiledV2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+860313892cb65f4acf882e35c7d127dd98c85bbe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+515c3676060ed91bce61881b5b6005ab91a853ea")]
 [assembly: System.Reflection.AssemblyProductAttribute("GejlonForExiledV2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GejlonForExiledV2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
