@@ -1,2 +1,4 @@
 .vs/
 todo.txt
+bin/
+obj/
