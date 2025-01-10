@@ -135,3 +135,4 @@ E:\GejlonForExiledV2\obj\Debug\net4.8\GejlonForExiledV2.dll
 E:\GejlonForExiledV2\obj\Debug\net4.8\GejlonForExiledV2.pdb
 E:\GejlonForExiledV2\obj\Debug\net4.8\GejlonForExiledV2.Properties.Resources.resources
 E:\GejlonForExiledV2\obj\Debug\net4.8\GejlonForExiledV2.csproj.GenerateResource.cache
+E:\GejlonForExiledV2\obj\Debug\net4.8\GejlonForExiledV2.sourcelink.json
