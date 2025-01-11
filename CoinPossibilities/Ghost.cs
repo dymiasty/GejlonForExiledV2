@@ -16,7 +16,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 
         public Ghost() : base("ghost", 25, _hint, PossibilityType.Positive) { }
 
-        public override bool CanExecute(Player player) { return true; }
+        public override bool CanExecute(Player player)
+        {
+            if (player.CurrentRoom.Type == RoomType.Pocket)
+            {
+                return false;
+            }
+
+            return true;
+        }
 
         public override void Execute(Player player)
         {

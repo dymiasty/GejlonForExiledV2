@@ -17,7 +17,7 @@ namespace GejlonForExiledV2.CoinPossibilities
 
         /// <summary>
         /// Duration of the Hint that will be shown to player
-        /// when Execute() method goes off
+        /// about the effects, when Execute() method goes off
         /// </summary>
         public float HintDuration = 3f;
 
@@ -37,11 +37,13 @@ namespace GejlonForExiledV2.CoinPossibilities
 
         /// <summary>
         /// Method that allows to customize
-        /// requirements for a possibility
-        /// to go off
+        /// requirements for a possibility's
+        /// Execute() method to be executed
         /// </summary>
         /// <param name="player"></param>
-        /// <returns>True or False</returns>
+        /// <returns>True - if Execute() method should be executed,
+        /// False - if Execute() method should NOT be executed.
+        /// </returns>
         public abstract bool CanExecute(Player player);
         protected CoinPossibility(string id, int tickets, string hint, PossibilityType type) {
             Id = id;

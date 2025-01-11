@@ -96,7 +96,7 @@ namespace GejlonForExiledV2
 
                 if (Random.Range(0, 101) > O5chance)
                 {
-                    foreach (Item item in ev.Player.Items)
+                    foreach (Item item in ev.Player.Items.ToList())
                     {
                         if (item.Type != ItemType.Coin)
                         {

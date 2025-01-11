@@ -1,7 +1,9 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.API.Features.Items;
+using PlayerRoles.PlayableScps.Scp079.Rewards;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace GejlonForExiledV2.CoinPossibilities
@@ -14,7 +16,25 @@ namespace GejlonForExiledV2.CoinPossibilities
 
         public InventorySwap() : base("invSwap", 30, _hint, PossibilityType.Mid) { }
 
-        public override bool CanExecute(Player player) { return true; }
+        public override bool CanExecute(Player player)
+        {
+            int humanPlayers = 0;
+
+            foreach (Player playr in Player.List.ToList())
+            {
+                if (!playr.IsNPC && playr.IsHuman)
+                {
+                    humanPlayers++;
+                }
+
+                if (humanPlayers >= 2)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         public override void Execute(Player player)
         {
