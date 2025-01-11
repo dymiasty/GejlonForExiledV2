@@ -7,6 +7,9 @@ namespace GejlonForExiledV2
 {
     public class CoinMachine
     {
+        /// <summary>
+        /// List of all possible <seealso cref="CoinPossibility">Coin Possibilities</seealso>.
+        /// </summary>
         public List<Type> CoinPossibilityTypes = new List<Type>
         {
             typeof(Ahp40), // 0
@@ -52,6 +55,13 @@ namespace GejlonForExiledV2
             typeof(RandomRole) // 40
         };
 
+        /// <returns>
+        /// Possibility of numeric id from <paramref name="possibilityNumericId"/>
+        /// </returns>
+        /// <param name="possibilityNumericId">Numeric Id corresponding
+        /// to a possibility in the <see cref="CoinPossibilityTypes"/> list.
+        /// </param>
+        /// <returns></returns>
         public CoinPossibility GetPossibility(int possibilityNumericId)
         {
             return (CoinPossibility)Activator.CreateInstance(CoinPossibilityTypes[possibilityNumericId]);

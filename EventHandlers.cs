@@ -89,7 +89,6 @@ namespace GejlonForExiledV2
 
         public void OnPlayerSpawned(SpawnedEventArgs ev)
         {
-            // small sublclasses for classD and scientists
             if (ev.Player.Role == RoleTypeId.Scientist)
             {
                 int O5chance = 95;
