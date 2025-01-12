@@ -7,6 +7,7 @@ using CommandSystem;
 using System;
 using System.Linq;
 using PlayerRoles;
+using Exiled.API.Enums;
 
 namespace GejlonForExiledV2
 {
@@ -89,7 +90,7 @@ namespace GejlonForExiledV2
 
         public void OnPlayerSpawned(SpawnedEventArgs ev)
         {
-            if (ev.Player.Role == RoleTypeId.Scientist)
+            if (ev.Player.Role == RoleTypeId.Scientist && ev.Reason != SpawnReason.ItemUsage)
             {
                 int O5chance = 95;
 
@@ -112,7 +113,7 @@ namespace GejlonForExiledV2
                 }
             }
 
-            if (ev.Player.Role == RoleTypeId.ClassD)
+            if (ev.Player.Role == RoleTypeId.ClassD && ev.Reason != SpawnReason.ItemUsage)
             {
                 int smugglerNegativeChance = 95;
 

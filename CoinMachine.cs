@@ -8,7 +8,8 @@ namespace GejlonForExiledV2
     public class CoinMachine
     {
         /// <summary>
-        /// List of all possible <seealso cref="CoinPossibility">Coin Possibilities</seealso>.
+        /// List of all <seealso cref="CoinPossibility">Coin Possibilities</seealso>
+        /// that flipping a coin can generate
         /// </summary>
         public List<Type> CoinPossibilityTypes = new List<Type>
         {
@@ -52,7 +53,10 @@ namespace GejlonForExiledV2
             typeof(WeaponExchange), // 37
             typeof(RandomMedItem), // 38
             typeof(InventorySwap), // 39
-            typeof(RandomRole) // 40
+            typeof(RandomRole), // 40
+            typeof(PosistionSwap), // 41
+            typeof(LifeSwap) // 42
+
         };
 
         /// <returns>
