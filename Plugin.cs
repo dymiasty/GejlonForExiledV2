@@ -45,6 +45,7 @@ namespace GejlonForExiledV2
             // Player events
             Player.FlippingCoin += Handlers.OnPlayerCoinFlipping;
             Player.Spawned += Handlers.OnPlayerSpawned;
+            Player.Shooting += Handlers.OnPlayerShooting;
 
             base.OnEnabled();
         }
@@ -60,6 +61,7 @@ namespace GejlonForExiledV2
             // Player events
             Player.FlippingCoin -= Handlers.OnPlayerCoinFlipping;
             Player.Spawned -= Handlers.OnPlayerSpawned;
+            Player.Shooting -= Handlers.OnPlayerShooting;
 
             Handlers = null;
             CoinMachine = null;

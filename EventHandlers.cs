@@ -137,6 +137,17 @@ namespace GejlonForExiledV2
                 }
             }
         }
+
+        public void OnPlayerShooting(ShootingEventArgs ev)
+        {
+            if (Random.Range(0, 1001) == 1000)
+            {
+                int ammoCount = ev.Firearm.MagazineAmmo;
+                ev.Firearm.MagazineAmmo = 0;
+                ev.Player.AddAmmo(ev.Firearm.AmmoType, (ushort)ammoCount);
+                ev.Player.ShowHint("Twoja broń się zacięła!\nMusisz ją przeładować!", 5f);
+            }
+        }
     }
 
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
