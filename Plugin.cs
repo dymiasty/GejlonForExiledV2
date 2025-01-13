@@ -25,7 +25,7 @@ namespace GejlonForExiledV2
         public override string Prefix => "GFEV2";
         public override Version RequiredExiledVersion => new Version(9, 2, 2);
         public override string Author => "dymiasty";
-        public override Version Version => new Version(0, 1, 8);
+        public override Version Version => new Version(0, 1, 9);
 
         private EventHandlers Handlers { get; set; }
 
@@ -291,6 +291,71 @@ namespace GejlonForExiledV2
             player.IsGodModeEnabled = true;
             yield return Timing.WaitForSeconds(duration);
             player.IsGodModeEnabled = false;
+        }
+
+        public ItemType UpgradeKeycard(ItemType initialKeycard)
+        {
+            switch (initialKeycard)
+            {
+                default:
+                    return initialKeycard;
+                case ItemType.KeycardJanitor:
+                    return ItemType.KeycardScientist;
+                case ItemType.KeycardScientist:
+                    return ItemType.KeycardResearchCoordinator;
+                case ItemType.KeycardZoneManager:
+                    return ItemType.KeycardFacilityManager;
+                case ItemType.KeycardResearchCoordinator:
+                    return ItemType.KeycardFacilityManager;
+                case ItemType.KeycardFacilityManager:
+                    return ItemType.KeycardO5;
+                case ItemType.KeycardGuard:
+                    return ItemType.KeycardMTFOperative;
+                case ItemType.KeycardMTFOperative:
+                    return ItemType.KeycardMTFCaptain;
+                case ItemType.KeycardMTFCaptain:
+                    return ItemType.KeycardO5;
+                case ItemType.KeycardChaosInsurgency:
+                    return ItemType.KeycardO5;
+            }
+        }
+
+        public ItemType DowngradeKeycard(ItemType initialKeycard)
+        {
+            switch (initialKeycard)
+            {
+                default:
+                    return initialKeycard;
+                case ItemType.KeycardJanitor:
+                    return ItemType.KeycardJanitor;
+                case ItemType.KeycardScientist:
+                    return ItemType.KeycardJanitor;
+                case ItemType.KeycardZoneManager:
+                    return ItemType.KeycardScientist;
+                case ItemType.KeycardResearchCoordinator:
+                    return ItemType.KeycardScientist;
+                case ItemType.KeycardGuard:
+                    return ItemType.KeycardScientist;
+                case ItemType.KeycardMTFOperative:
+                    return ItemType.KeycardGuard;
+                case ItemType.KeycardMTFCaptain:
+                    return ItemType.KeycardMTFOperative;
+                case ItemType.KeycardFacilityManager:
+                    return ItemType.KeycardMTFCaptain;
+                case ItemType.KeycardChaosInsurgency:
+                    return ItemType.KeycardMTFOperative;
+                case ItemType.KeycardO5:
+                    int card = Random.Range(0, 2);
+
+                    if (card == 0)
+                    {
+                        return ItemType.KeycardFacilityManager;
+                    }
+                    else
+                    {
+                        return ItemType.KeycardMTFCaptain;
+                    }
+            }
         }
     }
 }

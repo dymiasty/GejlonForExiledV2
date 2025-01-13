@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using PlayerRoles;
 using Exiled.API.Enums;
+using UnityEngine;
 
 namespace GejlonForExiledV2
 {
@@ -53,13 +54,12 @@ namespace GejlonForExiledV2
                     }
                 }
             }
+
+            Room.Get(RoomType.Lcz914).Color = new Color(1f, 0f, 1f, 1f);
         }
 
         public void OnPlayerCoinFlipping(FlippingCoinEventArgs ev)
         {
-            // bad luck protection
-            
-
             int tickets = Random.Range(0, 101);
 
             if (armageddonOn) tickets = 100;

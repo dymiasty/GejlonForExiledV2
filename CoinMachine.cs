@@ -55,8 +55,9 @@ namespace GejlonForExiledV2
             typeof(InventorySwap), // 39
             typeof(RandomRole), // 40
             typeof(PosistionSwap), // 41
-            typeof(LifeSwap) // 42
-
+            typeof(LifeSwap), // 42
+            typeof(UpgradeKeycards), // 43
+            typeof(DowngradeKeycards) // 44
         };
 
         /// <returns>
