@@ -1,6 +1,9 @@
 ﻿using GejlonForExiledV2.CoinPossibilities;
+using CommandSystem;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Exiled.API.Features;
 
 
 namespace GejlonForExiledV2
@@ -70,6 +73,50 @@ namespace GejlonForExiledV2
         public CoinPossibility GetPossibility(int possibilityNumericId)
         {
             return (CoinPossibility)Activator.CreateInstance(CoinPossibilityTypes[possibilityNumericId]);
+        }
+
+        /// <summary>
+        /// A debug command made for testing
+        /// coin flipping possibilities
+        /// </summary>
+        [CommandHandler(typeof(RemoteAdminCommandHandler))]
+        public class CoinDebugCommand : ICommand
+        {
+            public string Command => "coin";
+
+            public string[] Aliases => null;
+
+            public string Description => "Coin testing";
+
+            public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+            {
+                Player player = Player.Get(sender);
+                Log.Info(player.Nickname + " użył komendy testującej monety z parametrem " + arguments.ElementAt(0) + ".");
+                int tickets = 100;
+                bool canExecute;
+                int wynik = Int32.Parse(arguments.ElementAt(0));
+                CoinPossibility possibility = Plugin.Instance.CoinMachine.GetPossibility(wynik);
+                Log.Info(player.Nickname + " rzucił monetą i trafił " + possibility.Id);
+
+                canExecute = possibility.CanExecute(player);
+
+                if (tickets < possibility.RequiredTickets)
+                    canExecute = false;
+
+                if (!canExecute)
+                {
+                    player.ShowHint("Nic się nie stało...", 3f);
+                    response = "done.";
+                    return true;
+                }
+
+                possibility.Execute(player);
+                player.ShowHint(possibility.Hint, possibility.HintDuration);
+
+
+                response = "done.";
+                return true;
+            }
         }
     }
 }

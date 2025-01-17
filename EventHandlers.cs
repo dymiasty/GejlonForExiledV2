@@ -3,8 +3,6 @@ using Exiled.API.Features.Items;
 using Exiled.Events.EventArgs.Player;
 using Random = UnityEngine.Random;
 using GejlonForExiledV2.CoinPossibilities;
-using CommandSystem;
-using System;
 using System.Linq;
 using PlayerRoles;
 using Exiled.API.Enums;
@@ -56,6 +54,8 @@ namespace GejlonForExiledV2
             }
 
             Room.Get(RoomType.Lcz914).Color = new Color(1f, 0f, 1f, 1f);
+
+            Warhead.DeadmanSwitchEnabled = false;
         }
 
         public void OnPlayerCoinFlipping(FlippingCoinEventArgs ev)
@@ -147,46 +147,6 @@ namespace GejlonForExiledV2
                 ev.Player.AddAmmo(ev.Firearm.AmmoType, (ushort)ammoCount);
                 ev.Player.ShowHint("Twoja broń się zacięła!\nMusisz ją przeładować!", 5f);
             }
-        }
-    }
-
-    [CommandHandler(typeof(RemoteAdminCommandHandler))]
-    public class CoinDebugCommand : ICommand
-    {
-        public string Command => "coin";
-
-        public string[] Aliases => null;
-
-        public string Description => "Coin testing";
-
-        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
-        {
-            Player player = Player.Get(sender);
-            Log.Info(player.Nickname + " użył komendy testującej monety z parametrem " + arguments.ElementAt(0) + ".");
-            int tickets = 100;
-            bool canExecute;
-            int wynik = Int32.Parse(arguments.ElementAt(0));
-            CoinPossibility possibility = Plugin.Instance.CoinMachine.GetPossibility(wynik);
-            Log.Info(player.Nickname + " rzucił monetą i trafił " + possibility.Id);
-
-            canExecute = possibility.CanExecute(player);
-
-            if (tickets < possibility.RequiredTickets)
-                canExecute = false;
-
-            if (!canExecute)
-            {
-                player.ShowHint("Nic się nie stało...", 3f);
-                response = "done.";
-                return true;
-            }
-
-            possibility.Execute(player);
-            player.ShowHint(possibility.Hint, possibility.HintDuration);
-
-
-            response = "done.";
-            return true;
         }
     }
 }
