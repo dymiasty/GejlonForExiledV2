@@ -23,6 +23,14 @@ namespace GejlonForExiledV2.CoinPossibilities
                 roleToSet = Plugin.Instance.RandomRole();
             }
 
+            if (Plugin.Instance.GetLivingSCPs().Count == 0)
+            {
+                while (roleToSet == RoleTypeId.Scp079)
+                {
+                    roleToSet = Plugin.Instance.RandomRole();
+                }
+            }
+
             player.Role.Set(roleToSet, SpawnReason.ItemUsage, RoleSpawnFlags.AssignInventory);
         }
     }

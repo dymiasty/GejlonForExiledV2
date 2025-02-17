@@ -12,7 +12,7 @@ namespace GejlonForExiledV2
     {
         /// <summary>
         /// List of all <seealso cref="CoinPossibility">Coin Possibilities</seealso>
-        /// that flipping a coin can generate
+        /// that flipping a coin can generate.
         /// </summary>
         public List<Type> CoinPossibilityTypes = new List<Type>
         {
@@ -64,7 +64,7 @@ namespace GejlonForExiledV2
         };
 
         /// <returns>
-        /// Possibility of numeric id from <paramref name="possibilityNumericId"/>
+        /// Possibility of numeric id from <paramref name="possibilityNumericId"/>.
         /// </returns>
         /// <param name="possibilityNumericId">Numeric Id corresponding
         /// to a possibility in the <see cref="CoinPossibilityTypes"/> list.
@@ -77,7 +77,10 @@ namespace GejlonForExiledV2
 
         /// <summary>
         /// A debug command made for testing
-        /// coin flipping possibilities
+        /// coin flipping possibilities.
+        /// 
+        /// The only parameter it takes is numeric id corresponding
+        /// to a possibility in the <see cref="CoinPossibilityTypes"/> list.
         /// </summary>
         [CommandHandler(typeof(RemoteAdminCommandHandler))]
         public class CoinDebugCommand : ICommand
@@ -105,7 +108,7 @@ namespace GejlonForExiledV2
 
                 if (!canExecute)
                 {
-                    player.ShowHint("Nic się nie stało...", 3f);
+                    player.ShowHint("Nic się nie stało...", 5f);
                     response = "done.";
                     return true;
                 }

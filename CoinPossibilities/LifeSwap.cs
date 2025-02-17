@@ -79,7 +79,7 @@ namespace GejlonForExiledV2.CoinPossibilities
                 player.AddItem(item);
             }
 
-            randomPlayer.ShowHint("Gracz " + player.Nickname + " zamienił się z tobą");
+            randomPlayer.ShowHint("Gracz " + player.Nickname + " zamienił się z tobą.", 5f);
         }
 
 

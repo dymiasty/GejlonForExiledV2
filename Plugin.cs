@@ -23,9 +23,9 @@ namespace GejlonForExiledV2
         public static Plugin Instance { get; private set; }
         public override string Name => "GejlonForExiledV2";
         public override string Prefix => "GFEV2";
-        public override Version RequiredExiledVersion => new Version(9, 2, 2);
+        public override Version RequiredExiledVersion => new Version(9, 5, 0);
         public override string Author => "dymiasty";
-        public override Version Version => new Version(0, 2, 0);
+        public override Version Version => new Version(0, 2, 2);
 
         private EventHandlers Handlers { get; set; }
 
@@ -41,11 +41,15 @@ namespace GejlonForExiledV2
             // Server events
             Server.WaitingForPlayers += Handlers.OnWaitingForPlayers;
             Server.RoundStarted += Handlers.OnRoundStarted;
+            
 
             // Player events
             Player.FlippingCoin += Handlers.OnPlayerCoinFlipping;
             Player.Spawned += Handlers.OnPlayerSpawned;
             Player.Shooting += Handlers.OnPlayerShooting;
+            Player.UsingItemCompleted += Handlers.OnCompletedUsingItem;
+
+            Warhead.DeadmanSwitchEnabled = false;
 
             base.OnEnabled();
         }
@@ -62,6 +66,7 @@ namespace GejlonForExiledV2
             Player.FlippingCoin -= Handlers.OnPlayerCoinFlipping;
             Player.Spawned -= Handlers.OnPlayerSpawned;
             Player.Shooting -= Handlers.OnPlayerShooting;
+            Player.UsingItemCompleted -= Handlers.OnCompletedUsingItem;
 
             Handlers = null;
             CoinMachine = null;
@@ -151,11 +156,11 @@ namespace GejlonForExiledV2
         {
             RoleTypeId role;
 
-            role = (RoleTypeId)Random.Range(0, 28);
+            role = (RoleTypeId)Random.Range(0, 25);
 
             while (new RoleTypeId[] { (RoleTypeId)2, (RoleTypeId)14, (RoleTypeId)17, (RoleTypeId)21, (RoleTypeId)22, (RoleTypeId)23, (RoleTypeId)24 }.Contains(role))
             {
-                role = (RoleTypeId)Random.Range(0, 28);
+                role = (RoleTypeId)Random.Range(0, 25);
             }
 
             return role;
@@ -201,15 +206,15 @@ namespace GejlonForExiledV2
                 default:
                     return ItemType.Coal;
                 case 1:
-                        return ItemType.ParticleDisruptor;
+                    return ItemType.ParticleDisruptor;
                 case 2:
-                        return ItemType.GunCom45;
+                    return ItemType.GunCom45;
                 case 3:
-                        return ItemType.Jailbird;
+                    return ItemType.Jailbird;
                 case 4:
-                        return ItemType.MicroHID;
+                    return ItemType.MicroHID;
                 case 5:
-                        return ItemType.GunA7;
+                    return ItemType.GunA7;
             }
         }
 

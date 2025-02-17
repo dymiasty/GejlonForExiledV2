@@ -15,15 +15,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExMod.Exiled" Version="9.4.0" />
+    <PackageReference Include="ExMod.Exiled" Version="9.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>C:\Users\Krzysztof\AppData\Roaming\EXILED\Plugins\dependencies\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\Programy\Steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>..\Programy\Steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
@@ -94,7 +91,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;E:\GejlonForExiledV2\bin\Debug\net4.8\GejlonForExiledV2.dll&quot; &quot;C:\Users\Krzysztof\AppData\Roaming\EXILED\Plugins&quot; /Y /K" />
+    <Exec Command="echo &quot;Kopiowanie $(TargetPath) do folderu Plugins...&quot;&#xD;&#xA;xcopy &quot;$(TargetPath)&quot; &quot;C:\Users\Krzysztof\AppData\Roaming\EXILED\Plugins&quot; /Y /K" />
   </Target>
 
 </Project>

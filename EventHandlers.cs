@@ -78,7 +78,7 @@ namespace GejlonForExiledV2
 
             if (!canExecute)
             {
-                ev.Player.ShowHint("Nic się nie stało...", 3f);
+                ev.Player.ShowHint("Nic się nie stało...", 5f);
                 return;
             }
 
@@ -109,7 +109,7 @@ namespace GejlonForExiledV2
                     ev.Player.AddItem(ItemType.KeycardO5);
                     ev.Player.AddItem(ItemType.SCP500);
 
-                    ev.Player.ShowHint("Jesteś członkiem <color=#323633>Rady O5</color>.\n-Zaczynasz grę z lepszymi przedmiotami.");
+                    ev.Player.ShowHint("Jesteś członkiem <color=#323633>Rady O5</color>.\n-Zaczynasz grę z lepszymi przedmiotami.", 5f);
                 }
             }
 
@@ -133,7 +133,7 @@ namespace GejlonForExiledV2
                     ev.Player.AddItem(ItemType.KeycardZoneManager);
                     ev.Player.AddItem(ItemType.Painkillers);
 
-                    ev.Player.ShowHint("Jesteś <color=#38634a>Przemytnikiem</color>.\n-Zaczynasz grę z przyzwoitymi przedmiotami.");
+                    ev.Player.ShowHint("Jesteś <color=#38634a>Przemytnikiem</color>.\n-Zaczynasz grę z przyzwoitymi przedmiotami.", 5f);
                 }
             }
         }
@@ -146,6 +146,18 @@ namespace GejlonForExiledV2
                 ev.Firearm.MagazineAmmo = 0;
                 ev.Player.AddAmmo(ev.Firearm.AmmoType, (ushort)ammoCount);
                 ev.Player.ShowHint("Twoja broń się zacięła!\nMusisz ją przeładować!", 5f);
+            }
+        }
+
+        public void OnCompletedUsingItem(UsingItemCompletedEventArgs ev)
+        {
+            if (ev.Item.Type.Equals(ItemType.SCP500) && ev.Player.IsNTF)
+            {
+                if (Random.Range(0, 101) > 50)
+                {
+                    ev.Player.Role.Set(RoleTypeId.ChaosRifleman, SpawnReason.ItemUsage, RoleSpawnFlags.None);
+                    ev.Player.ShowHint("Czujesz nagłą potrzebę zdradzenia swoich sojuszników.", 5f);
+                }
             }
         }
     }
