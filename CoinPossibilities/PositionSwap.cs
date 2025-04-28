@@ -1,6 +1,6 @@
 ﻿using Exiled.API.Features;
-using Exiled.API.Enums;
 using UnityEngine;
+using System.Linq;
 
 namespace GejlonForExiledV2.CoinPossibilities
 {
@@ -10,7 +10,21 @@ namespace GejlonForExiledV2.CoinPossibilities
 
         public PosistionSwap() : base("posSwap", 20, _hint, PossibilityType.Mid) { }
 
-        public override bool CanExecute(Player player) {  return true; }
+        public override bool CanExecute(Player player) 
+        {
+            int alivePlayers = 0;
+
+            foreach (Player playerr in Player.List.ToList())
+            {
+                if (playerr.IsAlive)
+                    alivePlayers++;
+            }
+
+            if (alivePlayers <= 1)
+                return false;
+
+            return true;
+        }
 
         public override void Execute(Player player)
         {

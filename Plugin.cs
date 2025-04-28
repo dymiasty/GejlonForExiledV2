@@ -49,8 +49,6 @@ namespace GejlonForExiledV2
             Player.Shooting += Handlers.OnPlayerShooting;
             Player.UsingItemCompleted += Handlers.OnCompletedUsingItem;
 
-            Warhead.DeadmanSwitchEnabled = false;
-
             base.OnEnabled();
         }
 

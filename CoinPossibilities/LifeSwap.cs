@@ -14,7 +14,21 @@ namespace GejlonForExiledV2.CoinPossibilities
 
         public LifeSwap() : base("lifeSwap", 20, _hint, PossibilityType.Mid) { }
 
-        public override bool CanExecute(Player player) {  return true; }
+        public override bool CanExecute(Player player)
+        {
+            int alivePlayers = 0;
+
+            foreach (Player playerr in Player.List.ToList())
+            {
+                if (playerr.IsAlive)
+                    alivePlayers++;
+            }
+
+            if (alivePlayers <= 1)
+                return false;
+
+            return true;
+        }
 
         public override void Execute(Player player)
         {
@@ -51,7 +65,6 @@ namespace GejlonForExiledV2.CoinPossibilities
             player.ClearInventory(false);
 
             //----------------------------------------------------------------
-
 
             randomPlayer.Role.Set(player.Role, SpawnReason.ItemUsage, RoleSpawnFlags.None);
             randomPlayer.Position = player.Position;

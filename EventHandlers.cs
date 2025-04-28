@@ -105,7 +105,7 @@ namespace GejlonForExiledV2
                     }
 
                     ev.Player.AddItem(ItemType.GunCOM15);
-                    ev.Player.AddAmmo(Exiled.API.Enums.AmmoType.Nato9, 24);
+                    ev.Player.AddAmmo(AmmoType.Nato9, 24);
                     ev.Player.AddItem(ItemType.KeycardO5);
                     ev.Player.AddItem(ItemType.SCP500);
 
@@ -128,7 +128,7 @@ namespace GejlonForExiledV2
                     }
 
                     ev.Player.AddItem(ItemType.GunCOM15);
-                    ev.Player.AddAmmo(Exiled.API.Enums.AmmoType.Nato9, 6);
+                    ev.Player.AddAmmo(AmmoType.Nato9, 6);
                     ev.Player.AddItem(ItemType.KeycardScientist);
                     ev.Player.AddItem(ItemType.KeycardZoneManager);
                     ev.Player.AddItem(ItemType.Painkillers);
