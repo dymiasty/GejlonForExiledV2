@@ -10,6 +10,7 @@ using Exiled.API.Enums;
 using Player = Exiled.API.Features.Player;
 using Exiled.Events.EventArgs.Server;
 using UnityEngine;
+using JetBrains.Annotations;
 
 namespace GejlonForExiledV2.RespawnSystem
 {
@@ -529,6 +530,13 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public void OnGeneratorUnlocked(UnlockingGeneratorEventArgs ev)
         {
+            if (ev.Player.CurrentItem.IsKeycard)
+            {
+                Keycard card = ev.Player.CurrentItem as Keycard;
+                if (card.Permissions != KeycardPermissions.ArmoryLevelTwo)
+                    return;
+            }
+
             Core.AddNineTailedFoxTokens(0.5f);
             Log.Info("Odblokowano Generator - NTF +0.5");
             Core.LogTickets();

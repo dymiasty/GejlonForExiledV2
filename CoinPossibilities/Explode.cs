@@ -8,7 +8,7 @@ namespace GejlonForExiledV2.CoinPossibilities
     {
         private static readonly string _hint = string.Empty;
 
-        public Explode() : base("explode", 20, _hint, PossibilityType.Negative) { }
+        public Explode() : base("explode", 25, _hint, PossibilityType.Negative) { }
 
         public override bool CanExecute(Player player) { return true; }
 

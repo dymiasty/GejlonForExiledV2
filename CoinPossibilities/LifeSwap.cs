@@ -10,7 +10,7 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class LifeSwap : CoinPossibility
     {
-        private static readonly string _hint = "Zamieniłeś się miejscami z losowym graczem.";
+        private static readonly string _hint = "Zamieniłeś się życiami z losowym graczem.";
 
         public LifeSwap() : base("lifeSwap", 20, _hint, PossibilityType.Mid) { }
 
