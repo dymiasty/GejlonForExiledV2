@@ -10,6 +10,7 @@ using InventorySystem.Items.Usables.Scp330;
 using MEC;
 using System.Linq;
 using PlayerRoles;
+using GejlonForExiledV2.RespawnSystem;
 
 namespace GejlonForExiledV2
 {
@@ -25,21 +26,27 @@ namespace GejlonForExiledV2
         public override string Prefix => "GFEV2";
         public override Version RequiredExiledVersion => new Version(9, 5, 0);
         public override string Author => "dymiasty";
-        public override Version Version => new Version(0, 2, 2);
+        public override Version Version => new Version(0, 2, 3);
 
         private EventHandlers Handlers { get; set; }
 
+        public RespawnSystemCore RespawnSystemCore { get; set; }
+
         public CoinMachine CoinMachine { get; set; }
+
+
 
         public override void OnEnabled()
         {
-            Log.Info("Plugin GejlonForExiledV2 w wersji " + Version + " został uruchomiony.");
+            Log.Info($"Plugin GejlonForExiledV2 w wersji {Version} został uruchomiony.");
 
             Handlers = new EventHandlers();
             CoinMachine = new CoinMachine();
+            RespawnSystemCore = new RespawnSystemCore();
 
             // Server events
             Server.WaitingForPlayers += Handlers.OnWaitingForPlayers;
+            Server.RoundStarted += Handlers.OnRoundStarted;
             Server.RoundStarted += Handlers.OnRoundStarted;
             
 
@@ -48,6 +55,11 @@ namespace GejlonForExiledV2
             Player.Spawned += Handlers.OnPlayerSpawned;
             Player.Shooting += Handlers.OnPlayerShooting;
             Player.UsingItemCompleted += Handlers.OnCompletedUsingItem;
+
+
+            // Respawn System
+            RespawnSystemCore.SubscribeEvents();
+
 
             base.OnEnabled();
         }
@@ -66,8 +78,12 @@ namespace GejlonForExiledV2
             Player.Shooting -= Handlers.OnPlayerShooting;
             Player.UsingItemCompleted -= Handlers.OnCompletedUsingItem;
 
+            // Respawn System
+            RespawnSystemCore.UnsubscribeEvents();
+
             Handlers = null;
             CoinMachine = null;
+            RespawnSystemCore = null;
 
             base.OnDisabled();
         }

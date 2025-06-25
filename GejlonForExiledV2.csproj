@@ -15,15 +15,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExMod.Exiled" Version="9.5.2" />
+    <PackageReference Include="ExMod.Exiled" Version="9.6.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>C:\Users\Krzysztof\AppData\Roaming\EXILED\Plugins\dependencies\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\Programy\Steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>..\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="Exiled.API">
       <HintPath>C:\Users\Krzysztof\AppData\Roaming\SCP Secret Laboratory\PluginAPI\plugins\global\dependencies\Exiled.API.dll</HintPath>
@@ -41,22 +38,22 @@
       <HintPath>C:\Users\Krzysztof\AppData\Roaming\EXILED\Plugins\Exiled.Events.dll</HintPath>
     </Reference>
     <Reference Include="Mirror">
-      <HintPath>..\Programy\Steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Mirror.dll</HintPath>
+      <HintPath>..\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Mirror.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Posix">
-      <HintPath>C:\Users\Krzysztof\AppData\Roaming\SCP Secret Laboratory\PluginAPI\plugins\global\dependencies\Mono.Posix.dll</HintPath>
+      <HintPath>C:\Users\Krzysztof\AppData\Roaming\SCP Secret Laboratory\LabAPI\dependencies\global\Mono.Posix.dll</HintPath>
     </Reference>
     <Reference Include="SemanticVersioning">
-      <HintPath>C:\Users\Krzysztof\AppData\Roaming\SCP Secret Laboratory\PluginAPI\plugins\global\dependencies\SemanticVersioning.dll</HintPath>
+      <HintPath>C:\Users\Krzysztof\AppData\Roaming\SCP Secret Laboratory\LabAPI\dependencies\global\SemanticVersioning.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\Programy\Unity Editors\6000.0.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
+      <HintPath>..\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\Programy\Unity Editors\6000.0.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>..\Programy\Unity Editors\6000.0.24f1\Editor\Data\Managed\UnityEngine\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>..\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="YamlDotNet">
       <HintPath>C:\Users\Krzysztof\AppData\Roaming\SCP Secret Laboratory\PluginAPI\plugins\global\dependencies\YamlDotNet.dll</HintPath>

@@ -1,8 +1,6 @@
 ﻿using Exiled.API.Features;
 using Exiled.API.Features.Items;
-using System.Linq;
-using Random = UnityEngine.Random;
-
+using PlayerRoles;
 
 namespace GejlonForExiledV2.CoinPossibilities
 {
@@ -20,7 +18,14 @@ namespace GejlonForExiledV2.CoinPossibilities
             grenade.FuseTime = 0.001f;
             grenade.ScpDamageMultiplier = 25;
             grenade.ConcussDuration = 30f;
-            grenade.SpawnActive(Plugin.Instance.RandomAlivePlayer().Position);
+
+            Player playerToExplode = Plugin.Instance.RandomAlivePlayer();
+
+            while (playerToExplode.Role == RoleTypeId.Scp079) {
+                playerToExplode = Plugin.Instance.RandomAlivePlayer();
+            }
+
+            grenade.SpawnActive(playerToExplode.Position);
         }
     }
 }

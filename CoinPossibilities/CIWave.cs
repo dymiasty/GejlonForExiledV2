@@ -1,4 +1,7 @@
-﻿using Exiled.API.Features;
+﻿using Exiled.API.Enums;
+using Exiled.API.Features;
+using MEC;
+using System.Collections.Generic;
 
 
 namespace GejlonForExiledV2.CoinPossibilities
@@ -13,7 +16,7 @@ namespace GejlonForExiledV2.CoinPossibilities
 
         public override void Execute(Player player)
         {
-            Respawn.ForceWave(PlayerRoles.Faction.FoundationEnemy);
+            Timing.RunCoroutine(Plugin.Instance.RespawnSystemCore.SpawnCI());
         }
     }
 }
