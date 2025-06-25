@@ -669,14 +669,33 @@ namespace GejlonForExiledV2.RespawnSystem
 
             if (ev.Wave.TargetFaction == Faction.FoundationStaff)
             {
+                foreach (Player player in Player.List.ToList())
+                {
+                    if (player.Role == RoleTypeId.Spectator)
+                    {
+                        player.Role.Set(RoleTypeId.NtfSergeant, SpawnReason.Respawn, RoleSpawnFlags.All);
+                        tokensToRemove++;
+                    }
+                }
+
                 Core.AddChaosTokens(tokensToRemove);
                 Log.Info($"NTF się zrespił - Chaos +{tokensToRemove}");
                 Core.LogTickets();
+
                 return;
             }
 
             if (ev.Wave.TargetFaction == Faction.FoundationEnemy)
             {
+                foreach (Player player in Player.List.ToList())
+                {
+                    if (player.Role == RoleTypeId.Spectator)
+                    {
+                        player.Role.Set(RoleTypeId.ChaosRifleman, SpawnReason.Respawn, RoleSpawnFlags.All);
+                        tokensToRemove++;
+                    }
+                }
+
                 Core.AddNineTailedFoxTokens(tokensToRemove);
                 Log.Info($"Chaos się zrespił - NTF +{tokensToRemove}");
                 Core.LogTickets();
