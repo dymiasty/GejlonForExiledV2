@@ -26,6 +26,7 @@ namespace GejlonForExiledV2.RespawnSystem
             ServerEvents.RoundStarted += Events.OnRoundStarted;
             ServerEvents.SelectingRespawnTeam += Events.OnSelectingRespawnTeam;
             ServerEvents.RespawnedTeam += Events.OnRespawnWave;
+            ServerEvents.RoundEnded += Events.OnRoundEnded;
 
             PlayerEvents.Dying += Events.OnPlayerDying;
             PlayerEvents.Escaping += Events.OnPlayerEscaping;
@@ -49,6 +50,7 @@ namespace GejlonForExiledV2.RespawnSystem
             ServerEvents.RoundStarted -= Events.OnRoundStarted;
             ServerEvents.SelectingRespawnTeam -= Events.OnSelectingRespawnTeam;
             ServerEvents.RespawnedTeam -= Events.OnRespawnWave;
+            ServerEvents.RoundEnded -= Events.OnRoundEnded;
 
             PlayerEvents.Dying -= Events.OnPlayerDying;
             PlayerEvents.Escaping -= Events.OnPlayerEscaping;
@@ -105,17 +107,27 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public IEnumerator<float> SpawnCI()
         {
+            if (Plugin.Instance.IsRespawning)
+                yield break;
+
+            Plugin.Instance.IsRespawning = true;
             Respawn.SummonChaosInsurgencyVan();
             yield return Timing.WaitForSeconds(10f);
             Respawn.ForceWave(SpawnableFaction.ChaosWave);
+            Plugin.Instance.IsRespawning = false;
             WavesAmount++;
         }
 
         public IEnumerator<float> SpawnNTF()
         {
+            if (Plugin.Instance.IsRespawning)
+                yield break;
+
+            Plugin.Instance.IsRespawning = true;
             Respawn.SummonNtfChopper();
             yield return Timing.WaitForSeconds(18.8f);
             Respawn.ForceWave(SpawnableFaction.NtfWave);
+            Plugin.Instance.IsRespawning = false;
             WavesAmount++;
         }
     }

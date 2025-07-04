@@ -16,7 +16,7 @@ namespace GejlonForExiledV2.CoinPossibilities
         {
             ExplosiveGrenade grenade = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, player);
             grenade.FuseTime = 0.001f;
-            grenade.ScpDamageMultiplier = 25;
+            grenade.ScpDamageMultiplier = 25f;
             grenade.ConcussDuration = 30f;
             grenade.SpawnActive(player.Position);
         }

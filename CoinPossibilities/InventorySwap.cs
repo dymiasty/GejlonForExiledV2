@@ -87,7 +87,7 @@ namespace GejlonForExiledV2.CoinPossibilities
                 player.AddItem(item);
             }
 
-            randomPlayer.ShowHint("Ktoś zamienił się z tobą ekwipunkiem.", 5f);
+            randomPlayer.ShowHint("Ktoś zamienił się z tobą ekwipunkiem.", 6f);
 
             randomPlayer = null;
         }

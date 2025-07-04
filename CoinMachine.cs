@@ -60,7 +60,7 @@ namespace GejlonForExiledV2
             typeof(PosistionSwap), // 41
             typeof(LifeSwap), // 42
             typeof(UpgradeKeycards), // 43
-            typeof(DowngradeKeycards) // 44
+            typeof(DowngradeKeycards), // 44
         };
 
         /// <returns>
@@ -108,7 +108,7 @@ namespace GejlonForExiledV2
 
                 if (!canExecute)
                 {
-                    player.ShowHint("Nic się nie stało...", 5f);
+                    player.ShowHint("Nic się nie stało...", 6f);
                     response = "done.";
                     return true;
                 }

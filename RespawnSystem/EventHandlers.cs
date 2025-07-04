@@ -10,7 +10,6 @@ using Exiled.API.Enums;
 using Player = Exiled.API.Features.Player;
 using Exiled.Events.EventArgs.Server;
 using UnityEngine;
-using JetBrains.Annotations;
 
 namespace GejlonForExiledV2.RespawnSystem
 {
@@ -26,6 +25,7 @@ namespace GejlonForExiledV2.RespawnSystem
         private bool _scp244aUsed = false;
         private bool _scp244bUsed = false;
         private bool _scp268Used = false;
+        private bool _warheadUnlocked = false;
 
         private Team _warheadStartedBy;
 
@@ -530,7 +530,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public void OnGeneratorUnlocked(UnlockingGeneratorEventArgs ev)
         {
-            if (ev.Player.CurrentItem.IsKeycard)
+            if (ev.Player.IsHuman && ev.IsAllowed && ev.Player.CurrentItem.IsKeycard && ev.Player.CurrentItem != null)
             {
                 Keycard card = ev.Player.CurrentItem as Keycard;
                 if (card.Permissions != KeycardPermissions.ArmoryLevelTwo)
@@ -557,14 +557,6 @@ namespace GejlonForExiledV2.RespawnSystem
             if (!_civilliansReachedHeavy.ContainsKey(ev.Player))
                 return;
 
-            if (ev.Player.Role != RoleTypeId.ClassD || ev.Player.Role != RoleTypeId.Scientist)
-            {
-                _civilliansReachedHeavy.Remove(ev.Player);
-                _civilliansReachedEntrance.Remove(ev.Player);
-                _civilliansReachedSurface.Remove(ev.Player);
-                return;
-            }
-
             // civillian reaching HCZ
             if (ev.Player.Zone == ZoneType.HeavyContainment)
             {
@@ -572,7 +564,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     if (_civilliansReachedHeavy.TryGetValue(ev.Player, out bool value) && value == false)
                     {
                         _civilliansReachedHeavy[ev.Player] = true;
-                        Timing.RunCoroutine(HeavyCheckCoroutine(ev.Player));
+                        Timing.RunCoroutine(HeavyCheckCoroutine(ev.Player), "zoneCheck");
                     }
             }
 
@@ -583,7 +575,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     if (_civilliansReachedEntrance.TryGetValue(ev.Player, out bool value) && value == false)
                     {
                         _civilliansReachedEntrance[ev.Player] = true;
-                        Timing.RunCoroutine(EntranceCheckCoroutine(ev.Player));
+                        Timing.RunCoroutine(EntranceCheckCoroutine(ev.Player), "zoneCheck");
                     }
             }
 
@@ -594,18 +586,22 @@ namespace GejlonForExiledV2.RespawnSystem
                     if (_civilliansReachedSurface.TryGetValue(ev.Player, out bool value) && value == false)
                     {
                         _civilliansReachedSurface[ev.Player] = true;
-                        Timing.RunCoroutine(SurfaceCheckCoroutine(ev.Player));
+                        Timing.RunCoroutine(SurfaceCheckCoroutine(ev.Player), "zoneCheck");
                     }
             }
         }
 
         public void OnWarheadUnlock(ActivatingWarheadPanelEventArgs ev)
         {
+            if (_warheadUnlocked)
+                return;
+
             if (ev.Player.Role.Team == Team.FoundationForces || ev.Player.Role == RoleTypeId.Scientist)
             {
                 Core.AddNineTailedFoxTokens(1f);
                 Log.Info("NTF odblokował przycisk Warheadu - NTF +1");
                 Core.LogTickets();
+                _warheadUnlocked = true;
                 return;
             }
             else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
@@ -613,6 +609,7 @@ namespace GejlonForExiledV2.RespawnSystem
                 Core.AddChaosTokens(1f);
                 Log.Info("Chaos odblokował przycisk Warheadu - Chaos +1");
                 Core.LogTickets();
+                _warheadUnlocked = true;
                 return;
             }
         }
@@ -669,6 +666,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
             if (ev.Wave.TargetFaction == Faction.FoundationStaff)
             {
+                // making sure everyone spawns
                 foreach (Player player in Player.List.ToList())
                 {
                     if (player.Role == RoleTypeId.Spectator)
@@ -687,6 +685,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
             if (ev.Wave.TargetFaction == Faction.FoundationEnemy)
             {
+                // making sure everyone spawns
                 foreach (Player player in Player.List.ToList())
                 {
                     if (player.Role == RoleTypeId.Spectator)
@@ -703,10 +702,16 @@ namespace GejlonForExiledV2.RespawnSystem
             }
         }
 
+        public void OnRoundEnded(RoundEndedEventArgs ev)
+        {
+            Timing.RunCoroutine(RestartGameCoroutine());
+        }
+
 
 
         private IEnumerator<float> HeavyCheckCoroutine(Player player)
         {
+            Log.Info($"Rozpoczęto odliczanie HCZ dla gracza {player.Nickname}.");
             yield return Timing.WaitForSeconds(10f);
             if (player.Zone == ZoneType.HeavyContainment)
             {
@@ -749,6 +754,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
         private IEnumerator<float> EntranceCheckCoroutine(Player player)
         {
+            Log.Info($"Rozpoczęto odliczanie HCZ dla gracza {player.Nickname}.");
             yield return Timing.WaitForSeconds(10f);
             if (player.Zone == ZoneType.Entrance)
             {
@@ -791,6 +797,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
         private IEnumerator<float> SurfaceCheckCoroutine(Player player)
         {
+            Log.Info($"Rozpoczęto odliczanie HCZ dla gracza {player.Nickname}.");
             yield return Timing.WaitForSeconds(10f);
             if (player.Zone == ZoneType.Surface)
             {
@@ -829,6 +836,12 @@ namespace GejlonForExiledV2.RespawnSystem
             {
                 _civilliansReachedSurface[player] = false;
             }
+        }
+
+        private IEnumerator<float> RestartGameCoroutine()
+        {
+            yield return Timing.WaitForSeconds(7f);
+            Server.Restart();
         }
     }
 }

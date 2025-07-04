@@ -19,7 +19,7 @@ namespace GejlonForExiledV2.CoinPossibilities
         /// Duration of the Hint that will be shown to player
         /// about the effects, when Execute() method executes
         /// </summary>
-        public float HintDuration = 3f;
+        public float HintDuration = 6f;
 
         /// <summary>
         /// Tickets required for Execute() method

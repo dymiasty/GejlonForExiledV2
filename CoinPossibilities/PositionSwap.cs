@@ -40,7 +40,7 @@ namespace GejlonForExiledV2.CoinPossibilities
             randomPlayer.Position = player.Position;
             player.Position = randomPlayerPos;
 
-            randomPlayer.ShowHint("Ktoś zamienił się z tobą miejscem.", 5f);
+            randomPlayer.ShowHint("Ktoś zamienił się z tobą miejscem.", 6f);
         }
     }
 }

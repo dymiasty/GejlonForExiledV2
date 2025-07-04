@@ -1,7 +1,7 @@
 ﻿using Exiled.API.Features;
-using Exiled.API.Features.Roles;
 using Exiled.API.Enums;
 using PlayerRoles;
+using Exiled.API.Extensions;
 
 
 namespace GejlonForExiledV2.CoinPossibilities
@@ -32,6 +32,11 @@ namespace GejlonForExiledV2.CoinPossibilities
             }
 
             player.Role.Set(roleToSet, SpawnReason.ItemUsage, RoleSpawnFlags.AssignInventory);
+
+            if (roleToSet.IsScp())
+            {
+                player.MaxHealth /= 2;
+            }
         }
     }
 }

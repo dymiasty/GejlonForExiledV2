@@ -11,7 +11,13 @@ namespace GejlonForExiledV2.CoinPossibilities
 
         public NTFWave() : base("NTFWave", 15, _hint, PossibilityType.Mid) { }
 
-        public override bool CanExecute(Player player) { return true; }
+        public override bool CanExecute(Player player)
+        {
+            if (Plugin.Instance.IsRespawning)
+                return false;
+
+            return true;
+        }
 
         public override void Execute(Player player)
         {

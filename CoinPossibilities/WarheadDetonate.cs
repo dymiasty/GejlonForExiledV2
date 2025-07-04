@@ -7,7 +7,7 @@ namespace GejlonForExiledV2.CoinPossibilities
     {
         private static readonly string _hint = "<color=#b8541a>Wysadziłeś placówkę</color>.";
 
-        public WarheadDetonate() : base("warheadDetonate", 35, _hint, PossibilityType.Mid) { }
+        public WarheadDetonate() : base("warheadDetonate", 60, _hint, PossibilityType.Mid) { }
 
         public override bool CanExecute(Player player) { return true; }
 

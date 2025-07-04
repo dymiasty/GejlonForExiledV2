@@ -31,6 +31,7 @@ namespace GejlonForExiledV2
         private EventHandlers Handlers { get; set; }
 
         public RespawnSystemCore RespawnSystemCore { get; set; }
+        public bool IsRespawning = false;
 
         public CoinMachine CoinMachine { get; set; }
 
