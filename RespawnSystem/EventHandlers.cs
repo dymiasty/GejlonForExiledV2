@@ -10,6 +10,8 @@ using Exiled.API.Enums;
 using Player = Exiled.API.Features.Player;
 using Exiled.Events.EventArgs.Server;
 using UnityEngine;
+using System.Runtime.Remoting.Messaging;
+using Exiled.API.Extensions;
 
 namespace GejlonForExiledV2.RespawnSystem
 {
@@ -26,6 +28,7 @@ namespace GejlonForExiledV2.RespawnSystem
         private bool _scp244bUsed = false;
         private bool _scp268Used = false;
         private bool _warheadUnlocked = false;
+        private bool _lastScpStanding = false;
 
         private Team _warheadStartedBy;
 
@@ -35,6 +38,9 @@ namespace GejlonForExiledV2.RespawnSystem
 
             Core.NineTailedFoxTokens = 57.714285f;
             Core.ChaosTokens = 42.85715f;
+
+            if (Player.List.ToList().Count < 8)
+                _lastScpStanding = true;
         }
 
         public void OnItemPickedUp(ItemAddedEventArgs ev)
@@ -338,6 +344,15 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public void OnPlayerSpawned(SpawnedEventArgs ev)
         {
+            if (ev.Reason == SpawnReason.Revived && ev.Player.Role == RoleTypeId.Scp0492)
+                _lastScpStanding = false;
+
+            if (ev.Player.IsScp && _lastScpStanding)
+            {
+                ev.Player.ShowHint("Jesteś jedynym żywym <color=red>SCP</color>.\n"
+                    + "Zadawanie obrażeń cię leczy.", 10f);
+            }
+
             if (ev.Reason == SpawnReason.RoundStart)
                 if (ev.Player.Role == RoleTypeId.ClassD || ev.Player.Role == RoleTypeId.Scientist)
                 {
@@ -707,7 +722,35 @@ namespace GejlonForExiledV2.RespawnSystem
             Timing.RunCoroutine(RestartGameCoroutine());
         }
 
+        public void OnPlayerHurt(HurtEventArgs ev)
+        {
+            Log.Info("hurt");
 
+            if (_lastScpStanding && ev.Attacker.IsScp)
+            {
+                if (ev.Attacker.Role == RoleTypeId.Scp173)
+                {
+                    ev.Attacker.Heal(ev.Player.MaxHealth * 0.8f, false);
+                }
+                else
+                {
+                    ev.Attacker.Heal(ev.Amount * 0.8f, false);
+                }
+            }
+        }
+
+        public void OnPlayerDied(DiedEventArgs ev)
+        {
+            if (ev.Player.PreviousRole.IsScp() && Plugin.Instance.GetLivingSCPs().Count == 1)
+            {
+                if (Plugin.Instance.GetLivingSCPs()[0].Role == RoleTypeId.Scp079)
+                    return;
+
+                _lastScpStanding = true;
+                Plugin.Instance.GetLivingSCPs()[0].ShowHint("Jesteś jedynym żywym <color=red>SCP</color>.\n"
+                    + "Zadawanie obrażeń cię leczy.", 6f);
+            }
+        }
 
         private IEnumerator<float> HeavyCheckCoroutine(Player player)
         {
