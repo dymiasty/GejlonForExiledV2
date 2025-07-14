@@ -8,9 +8,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class RandomRole : CoinPossibility
     {
-        private static readonly string _hint = "Losowo zmieniono twoją rolę.";
+        public override string Id => "randomRole";
 
-        public RandomRole() : base("randomRole", 25, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Losowo zmieniono twoją rolę.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 75;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player) { return true; }
 

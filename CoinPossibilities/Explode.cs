@@ -6,9 +6,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class Explode : CoinPossibility
     {
-        private static readonly string _hint = string.Empty;
+        public override string Id => "explode";
 
-        public Explode() : base("explode", 25, _hint, PossibilityType.Negative) { }
+        public override string Hint => string.Empty;
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Negative;
 
         public override bool CanExecute(Player player) { return true; }
 

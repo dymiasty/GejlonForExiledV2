@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class RandomKeycard : CoinPossibility
     {
-        private static readonly string _hint = "Dostałeś <color=#fc03a9>losową kartę</color>.";
+        public override string Id => "randomKeycard";
 
-        public RandomKeycard() : base("randomKeycard", 25, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Dostałeś <color=#fc03a9>losową kartę</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 75;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

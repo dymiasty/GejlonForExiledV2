@@ -6,13 +6,17 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class RandomTeleport : CoinPossibility
     {
-        private static readonly string _hint = "Teleportowano cię do <color=#fc03a9>losowego pomieszczenia</color>.";
+        public override string Id => "randomRoomTeleport";
 
-        public RandomTeleport() : base("randomTeleport", 30, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Teleportowano cię do <color=#fc03a9>losowego pomieszczenia</color>.";
 
-        public override bool CanExecute(Player player) { return true; }
+        public override float HintDuration => 6f;
 
-        private List<string> _bannedRooms = new List<string> { 
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
+
+        private readonly List<string> _bannedRooms = new List<string> {
             "EZ_CollapsedTunnel(Clone)",
             "HCZ_Testroom(Clone)",
             "HCZ_Crossroom_Water(Clone)",
@@ -20,6 +24,8 @@ namespace GejlonForExiledV2.CoinPossibilities
             "EZ_Shelter(Clone)",
             "PocketWorld"
         };
+
+        public override bool CanExecute(Player player) { return true; }
 
         public override void Execute(Player player)
         {

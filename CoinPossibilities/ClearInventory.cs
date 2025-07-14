@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class ClearInventory : CoinPossibility
     {
-        private static readonly string _hint = "<color=#5c5c5b>Twój ekwipunek został wyczyszczony.</color>";
+        public override string Id => "clearInventory";
 
-        public ClearInventory() : base("clearInventory", 25, _hint, PossibilityType.Negative) { }
+        public override string Hint => "<color=#5c5c5b>Twój ekwipunek został wyczyszczony.</color>";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Negative;
 
         public override bool CanExecute(Player player) { return true; }
 

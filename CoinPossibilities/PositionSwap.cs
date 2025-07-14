@@ -6,9 +6,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class PosistionSwap : CoinPossibility
     {
-        private static readonly string _hint = "Zamieniłeś się miejscami z losowym graczem.";
+        public override string Id => "positionSwap";
 
-        public PosistionSwap() : base("posSwap", 20, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Zamieniłeś się miejscami z losowym graczem.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 65;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player) 
         {

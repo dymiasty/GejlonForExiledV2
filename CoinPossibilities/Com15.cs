@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class Com15 : CoinPossibility
     {
-        private static readonly string _hint = "Dostałeś <color=#898e8f>pistolet COM-15</color>.";
+        public override string Id => "com15";
 
-        public Com15() : base("com15", 25, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Dostałeś <color=#898e8f>pistolet COM-15</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 80;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

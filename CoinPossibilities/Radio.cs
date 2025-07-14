@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class Radio : CoinPossibility
     {
-        private static readonly string _hint = "Dostałeś <color=#b6fca7>radio</color>.";
+        public override string Id => "radio";
 
-        public Radio() : base("radio", 15, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Dostałeś <color=#b6fca7>radio</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 100;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

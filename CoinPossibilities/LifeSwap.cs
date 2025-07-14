@@ -10,9 +10,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class LifeSwap : CoinPossibility
     {
-        private static readonly string _hint = "Zamieniłeś się życiami z losowym graczem.";
+        public override string Id => "lifeSwap";
 
-        public LifeSwap() : base("lifeSwap", 20, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Zamieniłeś się życiami z losowym graczem.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player)
         {

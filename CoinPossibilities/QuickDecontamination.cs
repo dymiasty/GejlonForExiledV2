@@ -1,16 +1,21 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.API.Features.Doors;
-using System.Collections.Generic;
 
 
 namespace GejlonForExiledV2.CoinPossibilities
 {
     public class QuickDecontamination : CoinPossibility
     {
-        private static readonly string _hint = "Uruchomiłeś szybką <color=#e6f564>dekontaminację LCZ</color>.";
+        public override string Id => "quickDecontamination";
 
-        public QuickDecontamination() : base("quickDecon", 30, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Uruchomiłeś szybką <color=#e6f564>dekontaminację LCZ</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 75;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player)
         {

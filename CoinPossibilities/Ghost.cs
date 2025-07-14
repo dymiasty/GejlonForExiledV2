@@ -6,7 +6,10 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class Ghost : CoinPossibility
     {
-        private static readonly string _hint = "Stałeś się <color=#95baf5>duchem</color>." +
+        public override string Id => "ghost";
+
+        public override string Hint =>
+            "Stałeś się <color=#95baf5>duchem</color>." +
             "\n-Masz <color=#eef595>nieskończoną staminę</color>" +
             "\n-<color=#9af595>Szybciej</color> się poruszasz" +
             "\n-<color=#4c55cf>Możesz przechodzić przez drzwi</color>" +
@@ -14,7 +17,11 @@ namespace GejlonForExiledV2.CoinPossibilities
             "\n-<color=#e8828c>Nie możesz wykonywać żadnych interakcji</color>" +
             "\n-Efekt trwa <color=#ffc870>20</color> sekund.";
 
-        public Ghost() : base("ghost", 25, _hint, PossibilityType.Positive) { }
+        public override float HintDuration => 18f;
+
+        public override int Weight => 65;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player)
         {
@@ -28,8 +35,6 @@ namespace GejlonForExiledV2.CoinPossibilities
 
         public override void Execute(Player player)
         {
-            HintDuration = 20f;
-
             float EffectDuration = 20f;
 
             player.EnableEffect(EffectType.Invigorated, EffectDuration);

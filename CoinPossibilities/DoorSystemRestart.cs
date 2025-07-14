@@ -2,30 +2,45 @@
 using Exiled.API.Features.Doors;
 using MEC;
 using System.Collections.Generic;
+using Exiled.API.Enums;
+using System.Linq;
 
 
 namespace GejlonForExiledV2.CoinPossibilities
 {
     public class DoorSystemRestart : CoinPossibility
     {
-        private static readonly string _hint = "Zrestartowałeś system kontroli drzwi w placówce.";
+        public override string Id => "doorsr";
 
-        public DoorSystemRestart() : base("doorsr", 30, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Zrestartowałeś system kontroli drzwi w placówce.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player) { return true; }
 
         public override void Execute(Player player)
         {
-            Cassie.MessageTranslated(
-                "door control system malfunction detected . initializing repair", 
-                "Awaria systemu kontroli drzwi. Inicjowanie naprawy..."
-                );
-            Door.LockAll(25f, Exiled.API.Enums.DoorLockType.Regular079);
-            Timing.RunCoroutine(messageDelay());
+            Timing.RunCoroutine(DSRCoroutine());
         }
 
-        private IEnumerator<float> messageDelay()
+        private IEnumerator<float> DSRCoroutine()
         {
+            Cassie.MessageTranslated(
+                "door control system malfunction detected . initializing repair",
+                "Awaria systemu kontroli drzwi. Inicjowanie naprawy..."
+                );
+            foreach (Door door in Door.List.ToList())
+            {
+                if (door.Type != DoorType.Scp914Door && door.Type != DoorType.Airlock && !door.IsElevator)
+                {
+                    door.IsOpen = false;
+                    door.Lock(25f, DoorLockType.Regular079);
+                }
+            }
             yield return Timing.WaitForSeconds(25f);
             Cassie.MessageTranslated(
                 "door control system repair complete", 

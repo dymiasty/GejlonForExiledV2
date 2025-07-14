@@ -6,9 +6,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class RandomEffect : CoinPossibility
     {
-        private static readonly string _hint = "Otrzymałeś <color=#fc03a9>losowy efekt</color> na <color=#cafc03>5 sekund</color>.";
+        public override string Id => "randomEffect";
 
-        public RandomEffect() : base("randomEffect", 25, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Otrzymałeś <color=#fc03a9>losowy efekt</color> na <color=#cafc03>5 sekund</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 80;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player) { return true; }
 

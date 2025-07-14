@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class Flashbang : CoinPossibility
     {
-        private static readonly string _hint = "Dostałeś <color=#a0faf7>granat błyskowy</color>.";
+        public override string Id => "flashbang";
 
-        public Flashbang() : base("flashbang", 15, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Dostałeś <color=#a0faf7>granat błyskowy</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 85;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

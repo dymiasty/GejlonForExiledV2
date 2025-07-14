@@ -1,15 +1,19 @@
-﻿using Exiled.API.Enums;
-using Exiled.API.Features;
-using System.Collections.Generic;
+﻿using Exiled.API.Features;
 
 
 namespace GejlonForExiledV2.CoinPossibilities
 {
     public class ClearAmmo : CoinPossibility
     {
-        private static readonly string _hint = "Wyczyszczono ci amunicję.";
+        public override string Id => "clearAmmo";
 
-        public ClearAmmo() : base("clearAmmo", 30, _hint, PossibilityType.Negative) { }
+        public override string Hint => "Wyczyszczono ci amunicję.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 65;
+
+        public override PossibilityType possibilityType => PossibilityType.Negative;
 
         public override bool CanExecute(Player player)
         {

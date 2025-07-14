@@ -26,14 +26,14 @@ namespace GejlonForExiledV2
         public override string Prefix => "GFEV2";
         public override Version RequiredExiledVersion => new Version(9, 5, 0);
         public override string Author => "dymiasty";
-        public override Version Version => new Version(0, 2, 3);
+        public override Version Version => new Version(0, 2, 4);
 
         private EventHandlers Handlers { get; set; }
 
         public RespawnSystemCore RespawnSystemCore { get; set; }
         public bool IsRespawning = false;
 
-        public CoinMachine CoinMachine { get; set; }
+        public CoinSystemCore CoinSystemCore { get; set; }
 
 
 
@@ -42,7 +42,7 @@ namespace GejlonForExiledV2
             Log.Info($"Plugin GejlonForExiledV2 w wersji {Version} został uruchomiony.");
 
             Handlers = new EventHandlers();
-            CoinMachine = new CoinMachine();
+            CoinSystemCore = new CoinSystemCore();
             RespawnSystemCore = new RespawnSystemCore();
 
             // Server events
@@ -83,7 +83,7 @@ namespace GejlonForExiledV2
             RespawnSystemCore.UnsubscribeEvents();
 
             Handlers = null;
-            CoinMachine = null;
+            CoinSystemCore = null;
             RespawnSystemCore = null;
 
             base.OnDisabled();

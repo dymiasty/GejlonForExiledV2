@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class HandsSevered : CoinPossibility
     {
-        private static readonly string _hint = "Uciąłeś sobie ręce monetą.";
+        public override string Id => "handsSevered";
 
-        public HandsSevered() : base("handsSevered", 25, _hint, PossibilityType.Negative) { }
+        public override string Hint => "Uciąłeś sobie ręce monetą.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 65;
+
+        public override PossibilityType possibilityType => PossibilityType.Negative;
 
         public override bool CanExecute(Player player) { return true; }
 

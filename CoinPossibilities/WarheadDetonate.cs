@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class WarheadDetonate : CoinPossibility
     {
-        private static readonly string _hint = "<color=#b8541a>Wysadziłeś placówkę</color>.";
+        public override string Id => "warheadDetonate";
 
-        public WarheadDetonate() : base("warheadDetonate", 60, _hint, PossibilityType.Mid) { }
+        public override string Hint => "<color=#b8541a>Wysadziłeś placówkę</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 30;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player) { return true; }
 

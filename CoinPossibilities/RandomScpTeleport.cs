@@ -1,6 +1,5 @@
 ﻿using Exiled.API.Features;
 using PlayerRoles;
-using PlayerRoles.PlayableScps.Scp079.Map;
 using System.Collections.Generic;
 using System.Linq;
 using Random = UnityEngine.Random;
@@ -10,9 +9,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class RandomScpTeleport : CoinPossibility
     {
-        private static readonly string _hint = "Teleportowano cię do <color=#a30f0f>losowego SCP</color>.";
+        public override string Id => "randomScpTeleport";
 
-        public RandomScpTeleport() : base("randomScpTp", 30, _hint, PossibilityType.Negative) { }
+        public override string Hint => "Teleportowano cię do <color=#a30f0f>losowego SCP</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 60;
+
+        public override PossibilityType possibilityType => PossibilityType.Negative;
 
         public override bool CanExecute(Player player)
         {

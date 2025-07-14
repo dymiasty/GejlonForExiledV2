@@ -6,9 +6,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class Blackout : CoinPossibility
     {
-        private static readonly string _hint = "Wyłączyłeś <color=#fcfba7>światła</color> w placówce na 25 sekund.";
+        public override string Id => "blackout";
 
-        public Blackout() : base("blackout", 35, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Wyłączyłeś <color=#fcfba7>światła</color> w placówce na 25 sekund.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player) { return true; }
 

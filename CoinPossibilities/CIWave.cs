@@ -1,16 +1,20 @@
-﻿using Exiled.API.Enums;
-using Exiled.API.Features;
+﻿using Exiled.API.Features;
 using MEC;
-using System.Collections.Generic;
 
 
 namespace GejlonForExiledV2.CoinPossibilities
 {
     public class CIWave : CoinPossibility
     {
-        private static readonly string _hint = "Sforceowałeś spawn <color=#077516>Rebelii Chaosu</color>.";
+        public override string Id => "CIWave";
 
-        public CIWave() : base("CIWave", 20, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Sforceowałeś spawn <color=#077516>Rebelii Chaosu</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 85;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player)
         {

@@ -7,9 +7,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class NTFWave : CoinPossibility
     {
-        private static readonly string _hint = "Sforceowałeś spawn <color=#0048ff>NTFu</color>.";
+        public override string Id => "NTFWave";
 
-        public NTFWave() : base("NTFWave", 15, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Sforceowałeś spawn <color=#0048ff>NTFu</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 85;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player)
         {

@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class RandomSpecialWeapon : CoinPossibility
     {
-        private static readonly string _hint = "Dostałeś <color=#fc03a9>losową broń specjalną</color>.";
+        public override string Id => "randomSpecialWeapon";
 
-        public RandomSpecialWeapon() : base("randomSpecial", 35, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Dostałeś <color=#fc03a9>losową broń specjalną</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 75;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

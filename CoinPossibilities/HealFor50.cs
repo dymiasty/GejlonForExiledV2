@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class HealFor50 : CoinPossibility
     {
-        private static readonly string _hint = "Zostałeś uleczony o <color=green>50 HP</color>.";
+        public override string Id => "heal50";
 
-        public HealFor50() : base("heal50", 15, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Zostałeś uleczony o <color=green>50 HP</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 90;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

@@ -7,9 +7,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class WeaponExchange : CoinPossibility
     {
-        private static readonly string _hint = "Udałeś się do lombardu. Zamieniłeś wszystkie bronie na monety.";
+        public override string Id => "weaponExchange";
 
-        public WeaponExchange() : base("weaponExchange", 33, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Udałeś się do lombardu. Zamieniłeś wszystkie bronie na monety.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 80;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player)
         {
@@ -18,7 +24,6 @@ namespace GejlonForExiledV2.CoinPossibilities
                 if (item.IsWeapon)
                     return true;
             }
-
 
             return false;
         }

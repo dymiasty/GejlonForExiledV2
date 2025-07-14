@@ -6,9 +6,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class RandomPlayerExplode : CoinPossibility
     {
-        private static readonly string _hint = "Wysadziłeś losową osobę.";
+        public override string Id => "randomPlayerExplode";
 
-        public RandomPlayerExplode() : base("randomPlayerExplode", 25, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Wysadziłeś losową osobę.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 55;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
 
         public override bool CanExecute(Player player) { return true; }
 

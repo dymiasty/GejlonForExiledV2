@@ -1,7 +1,6 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.API.Features.Items;
-using PlayerRoles.PlayableScps.Scp079.Rewards;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,11 +9,17 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class InventorySwap : CoinPossibility
     {
+        public override string Id => "inventorySwap";
+
+        public override string Hint => "Zamieniłeś się ekwipunkiem z losowym graczem.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Mid;
+
         private Player randomPlayer;
-
-        private static readonly string _hint = "Zamieniłeś się ekwipunkiem z losowym graczem.";
-
-        public InventorySwap() : base("invSwap", 30, _hint, PossibilityType.Mid) { }
 
         public override bool CanExecute(Player player)
         {

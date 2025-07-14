@@ -7,9 +7,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class ClearKeycards : CoinPossibility
     {
-        private static readonly string _hint = "Zabrano ci wszystkie karty dostępu.";
+        public override string Id => "clearKeycards";
 
-        public ClearKeycards() : base("clearKeycards", 30, _hint, PossibilityType.Negative) { }
+        public override string Hint => "Zabrano ci wszystkie karty dostępu.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Negative;
 
         public override bool CanExecute(Player player)
         {

@@ -6,9 +6,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class Candy : CoinPossibility
     {
-        private static readonly string _hint = "Dostałeś <color=#ff96e1>cukierki</color>.";
+        public override string Id => "candy";
 
-        public Candy() : base("candy", 15, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Dostałeś <color=#ff96e1>cukierki</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

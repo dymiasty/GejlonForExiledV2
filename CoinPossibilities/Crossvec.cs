@@ -6,9 +6,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class Crossvec : CoinPossibility
     {
-        private static readonly string _hint = "Dostałeś pistolet maszynowy <color=#6c807f>Crossvec</color>.";
+        public override string Id => "crossvec";
 
-        public Crossvec() : base("crossvec", 20, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Dostałeś pistolet maszynowy <color=#6c807f>Crossvec</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 75;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

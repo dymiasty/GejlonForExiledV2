@@ -6,9 +6,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class EscapeTeleport : CoinPossibility
     {
-        private static readonly string _hint = "Zostałeś teleportowany do wyjścia z placówki.";
+        public override string Id => "escapeTeleport";
 
-        public EscapeTeleport() : base("escapeTeleport", 35, _hint, PossibilityType.Mid) { }
+        public override string Hint => "Zostałeś teleportowany do wyjścia z placówki.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

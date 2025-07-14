@@ -7,28 +7,23 @@ using System.Linq;
 using PlayerRoles;
 using Exiled.API.Enums;
 using UnityEngine;
+using System;
 
 namespace GejlonForExiledV2
 {
     public class EventHandlers
     {
-        public bool armageddonOn = false;
-
         public void OnWaitingForPlayers()
         {
             Log.Info("Oczekiwanie na rozpoczęcie gry...");
 
             Round.IsLobbyLocked = true;
+
+            Log.Info(CalculateChances());
         }
 
         public void OnRoundStarted()
         {
-            // armageddon
-            if (Random.Range(0, 101) >= 95) armageddonOn = true;
-
-            if (armageddonOn)
-                Map.Broadcast(5, "W tej rundzie <i>będzie <color=red>armagedon</i></color>", Broadcast.BroadcastFlags.Normal, true);
-
             foreach (Player player in Player.List)
             {
                 if (!player.IsNPC && !player.IsScp && !player.IsDead && !player.IsInventoryFull && Random.Range(0, 101) >= 50)
@@ -36,20 +31,6 @@ namespace GejlonForExiledV2
                     // free coin on the beggining
                     player.AddItem(ItemType.Coin);
                     player.Broadcast(5, "Dostałeś bonusową monetkę na start.");
-                }
-
-                if (armageddonOn)
-                {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        if (player.IsInventoryFull)
-                        {
-                            Item coin = Item.Create(ItemType.Coin);
-                            coin.CreatePickup(player.Position);
-                        }
-                        else
-                            player.AddItem(ItemType.Coin);
-                    }
                 }
             }
 
@@ -60,27 +41,26 @@ namespace GejlonForExiledV2
 
         public void OnPlayerCoinFlipping(FlippingCoinEventArgs ev)
         {
-            int tickets = Random.Range(0, 101);
-
-            if (armageddonOn) tickets = 100;
-
             bool canExecute;
-            int wynik = Random.Range(0, Plugin.Instance.CoinMachine.CoinPossibilityTypes.Count);
-            CoinPossibility possibility = Plugin.Instance.CoinMachine.GetPossibility(wynik);
+
+            int wynik = Random.Range(0, Plugin.Instance.CoinSystemCore.ValidCoinPossibilities.Count);
+            CoinPossibility possibility = Plugin.Instance.CoinSystemCore.GetPossibility(wynik);
+
+            canExecute = possibility.CanExecute(ev.Player);
+            
+            while (!canExecute)
+            {
+                Log.Info($"Gracz {ev.Player.Nickname} wylosował {possibility.Id} ale nie mogło się wykonać.");
+
+                wynik = Random.Range(0, Plugin.Instance.CoinSystemCore.ValidCoinPossibilities.Count);
+                possibility = Plugin.Instance.CoinSystemCore.GetPossibility(wynik);
+
+                canExecute = possibility.CanExecute(ev.Player);
+            }
+
             Log.Info(ev.Player.Nickname + " rzucił monetą i trafił " + possibility.Id);
 
             ev.Player.RemoveHeldItem();
-
-            canExecute = possibility.CanExecute(ev.Player);
-
-            if (tickets < possibility.RequiredTickets)
-                canExecute = false;
-
-            if (!canExecute)
-            {
-                ev.Player.ShowHint("Nic się nie stało...", 6f);
-                return;
-            }
 
             possibility.Execute(ev.Player);
             ev.Player.ShowHint(possibility.Hint, possibility.HintDuration);
@@ -136,6 +116,11 @@ namespace GejlonForExiledV2
                     ev.Player.ShowHint("Jesteś <color=#38634a>Przemytnikiem</color>.\n-Zaczynasz grę z przyzwoitymi przedmiotami.", 6f);
                 }
             }
+
+            if (ev.Reason == SpawnReason.RoundStart)
+            {
+                ev.Player.SendConsoleMessage(CalculateChances(), "green");
+            }
         }
 
         public void OnPlayerShooting(ShootingEventArgs ev)
@@ -159,6 +144,26 @@ namespace GejlonForExiledV2
                     ev.Player.ShowHint("Czujesz nagłą potrzebę zdradzenia swoich sojuszników.", 6f);
                 }
             }
+        }
+
+
+        private string CalculateChances()
+        {
+            // calculating weight sum of all valid coin possibilities
+            float weightSum = 0;
+            foreach (CoinPossibility possibility in Plugin.Instance.CoinSystemCore.ValidCoinPossibilities)
+            {
+                weightSum += possibility.Weight;
+            }
+
+            // logging all chances to console
+            string chances = "Lista szans wszystkich dostępnych opcji monet:\n";
+            foreach (CoinPossibility possibility in Plugin.Instance.CoinSystemCore.ValidCoinPossibilities)
+            {
+                chances += $"{possibility.Id} - (~{Math.Round(((float)possibility.Weight / weightSum) * 100f, 2)}%)\n";
+            }
+
+            return chances;
         }
     }
 }

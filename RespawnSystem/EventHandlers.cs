@@ -10,7 +10,6 @@ using Exiled.API.Enums;
 using Player = Exiled.API.Features.Player;
 using Exiled.Events.EventArgs.Server;
 using UnityEngine;
-using System.Runtime.Remoting.Messaging;
 using Exiled.API.Extensions;
 
 namespace GejlonForExiledV2.RespawnSystem
@@ -31,6 +30,8 @@ namespace GejlonForExiledV2.RespawnSystem
         private bool _lastScpStanding = false;
 
         private Team _warheadStartedBy;
+
+        private Player _lastScpPlayer;
 
         public void OnRoundStarted()
         {
@@ -300,7 +301,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     // NTF
                     if (ev.Player.Role.Team == Team.FoundationForces || ev.Player.Role == RoleTypeId.Scientist)
                     {
-                        Core.AddNineTailedFoxTokens(0.0005f * ev.Damage);
+                        Core.AddNineTailedFoxTokens(0.0005f * ev.Damage * 0.75f);
                         Log.Info("NTF zadał obrażenia SCP - NTF +");
                         Core.LogTickets();
                         return;
@@ -308,7 +309,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     // Chaos
                     else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
                     {
-                        Core.AddChaosTokens(0.0005f * ev.Damage);
+                        Core.AddChaosTokens(0.0005f * ev.Damage * 0.75f);
                         Log.Info("Chaos zadał obrażenia SCP - Chaos +");
                         Core.LogTickets();
                         return;
@@ -545,17 +546,26 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public void OnGeneratorUnlocked(UnlockingGeneratorEventArgs ev)
         {
-            if (ev.Player.IsHuman && ev.IsAllowed && ev.Player.CurrentItem.IsKeycard && ev.Player.CurrentItem != null)
+            bool canOpen = false;
+
+            if (ev.Player.CurrentItem !=  null && !ev.Generator.IsUnlocked)
             {
-                Keycard card = ev.Player.CurrentItem as Keycard;
-                if (card.Permissions != KeycardPermissions.ArmoryLevelTwo)
-                    return;
+                if (ev.Player.CurrentItem.Type == ItemType.KeycardMTFCaptain)
+                    canOpen = true;
+                else if (ev.Player.CurrentItem.Type == ItemType.KeycardMTFOperative)
+                    canOpen = true;
+                else if (ev.Player.CurrentItem.Type == ItemType.KeycardMTFPrivate)
+                    canOpen = true;
+                else if (ev.Player.CurrentItem.Type == ItemType.KeycardO5)
+                    canOpen = true;
             }
 
-            Core.AddNineTailedFoxTokens(0.5f);
-            Log.Info("Odblokowano Generator - NTF +0.5");
-            Core.LogTickets();
-            return;
+            if (canOpen)
+            {
+                Core.AddNineTailedFoxTokens(0.5f);
+                Log.Info("Odblokowano Generator - NTF +0.5");
+                Core.LogTickets();
+            }
         }
 
         public void OnGeneratorEngaged(GeneratorActivatingEventArgs ev)
@@ -724,17 +734,18 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public void OnPlayerHurt(HurtEventArgs ev)
         {
-            Log.Info("hurt");
+            if (ev.Attacker == null)
+                return;
 
             if (_lastScpStanding && ev.Attacker.IsScp)
             {
                 if (ev.Attacker.Role == RoleTypeId.Scp173)
                 {
-                    ev.Attacker.Heal(ev.Player.MaxHealth * 0.8f, false);
+                    ev.Attacker.Heal(ev.Player.MaxHealth * 0.85f, false);
                 }
                 else
                 {
-                    ev.Attacker.Heal(ev.Amount * 0.8f, false);
+                    ev.Attacker.Heal(ev.Amount * 0.85f, false);
                 }
             }
         }
@@ -743,13 +754,25 @@ namespace GejlonForExiledV2.RespawnSystem
         {
             if (ev.Player.PreviousRole.IsScp() && Plugin.Instance.GetLivingSCPs().Count == 1)
             {
-                if (Plugin.Instance.GetLivingSCPs()[0].Role == RoleTypeId.Scp079)
+                _lastScpPlayer = Plugin.Instance.GetLivingSCPs()[0];
+                if (_lastScpPlayer.Role == RoleTypeId.Scp079)
                     return;
 
+                
                 _lastScpStanding = true;
                 Plugin.Instance.GetLivingSCPs()[0].ShowHint("Jesteś jedynym żywym <color=red>SCP</color>.\n"
                     + "Zadawanie obrażeń cię leczy.", 6f);
             }
+        }
+
+        public void OnPlayerRoleChanged(ChangingRoleEventArgs ev)
+        {
+            if (_lastScpStanding && ev.Player.IsScp)
+            {
+                _lastScpPlayer.ShowHint("Nie jesteś już ostatnim SCP.\nNie będziesz już się leczył za zadawanie obrażeń.");
+                _lastScpPlayer = null;
+                _lastScpStanding = false;
+            } 
         }
 
         private IEnumerator<float> HeavyCheckCoroutine(Player player)
@@ -797,7 +820,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
         private IEnumerator<float> EntranceCheckCoroutine(Player player)
         {
-            Log.Info($"Rozpoczęto odliczanie HCZ dla gracza {player.Nickname}.");
+            Log.Info($"Rozpoczęto odliczanie Entrance dla gracza {player.Nickname}.");
             yield return Timing.WaitForSeconds(10f);
             if (player.Zone == ZoneType.Entrance)
             {
@@ -840,7 +863,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
         private IEnumerator<float> SurfaceCheckCoroutine(Player player)
         {
-            Log.Info($"Rozpoczęto odliczanie HCZ dla gracza {player.Nickname}.");
+            Log.Info($"Rozpoczęto odliczanie Surface dla gracza {player.Nickname}.");
             yield return Timing.WaitForSeconds(10f);
             if (player.Zone == ZoneType.Surface)
             {
@@ -855,7 +878,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     else
                     {
                         Core.AddChaosTokens(0.2f);
-                        Log.Info("Klasa D dotarła do na powierzchnię - Chaos +0.2");
+                        Log.Info("Klasa D dotarła na powierzchnię - Chaos +0.2");
                         Core.LogTickets();
                     }
                 }

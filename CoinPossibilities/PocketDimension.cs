@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class PocketDimension : CoinPossibility
     {
-        private static readonly string _hint = "Teleportowano cię do <color=#192619>wymiaru łuzowego</color>.";
+        public override string Id => "pocketDimension";
 
-        public PocketDimension() : base("pocketDim", 25, _hint, PossibilityType.Negative) { }
+        public override string Hint => "Teleportowano cię do <color=#192619>wymiaru łuzowego</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Negative;
 
         public override bool CanExecute(Player player) { return true; }
 

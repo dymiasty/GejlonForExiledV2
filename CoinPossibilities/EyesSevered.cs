@@ -5,11 +5,17 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class EyesSevered : CoinPossibility
     {
-        private static readonly string _hint = 
+        public override string Id => "eyesSevered";
+
+        public override string Hint =>
             "Wyobraziłeś sobie twarz Nei'a." +
             "\nTak cię wykręciło że wyrwałeś sobie oczy.";
 
-        public EyesSevered() : base("eyesSevered", 25, _hint, PossibilityType.Negative) { }
+        public override float HintDuration => 6f;
+
+        public override int Weight => 75;
+
+        public override PossibilityType possibilityType => PossibilityType.Negative;
 
         public override bool CanExecute(Player player) { return true; }
 

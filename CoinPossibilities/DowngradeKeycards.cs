@@ -7,11 +7,17 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class DowngradeKeycards : CoinPossibility
     {
-        private static readonly string _hint = 
+        public override string Id => "downgradeKeycards";
+
+        public override string Hint =>
             "Wszystkie twoje karty dostępu\n " +
             "zostały zdegradowane o 1 poziom.";
 
-        public DowngradeKeycards() : base("downgradeKeycard", 15, _hint, PossibilityType.Positive) { }
+        public override float HintDuration => 6f;
+
+        public override int Weight => 65;
+
+        public override PossibilityType possibilityType => PossibilityType.Negative;
 
         public override bool CanExecute(Player player)
         {

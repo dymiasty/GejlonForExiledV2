@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class Flashlight : CoinPossibility
     {
-        private static readonly string _hint = "Dostałeś <color=#fff896>latarkę</color>.";
+        public override string Id => "flashlight";
 
-        public Flashlight() : base("flashlight", 15, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Dostałeś <color=#fff896>latarkę</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 90;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

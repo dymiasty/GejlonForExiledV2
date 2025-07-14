@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class OneHp : CoinPossibility
     {
-        private static readonly string _hint = "Twoje <color=#fc0328>zdrowie</color> zostało zmniejszone do <color=#fc0328>1</color>.";
+        public override string Id => "oneHP";
 
-        public OneHp() : base("oneHP", 25, _hint, PossibilityType.Negative) { }
+        public override string Hint => "Twoje <color=#fc0328>zdrowie</color> zostało zmniejszone do <color=#fc0328>1</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 55;
+
+        public override PossibilityType possibilityType => PossibilityType.Negative;
 
         public override bool CanExecute(Player player) { return true; }
 

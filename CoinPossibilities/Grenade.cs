@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class Grenade : CoinPossibility
     {
-        private static readonly string _hint = "Dostałeś <color=#82c0c4>granat wybuchowy</color>.";
+        public override string Id => "grenade";
 
-        public Grenade() : base("grenade", 25, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Dostałeś <color=#82c0c4>granat wybuchowy</color>.";
+
+        public override float HintDuration => 6f;
+        
+        public override int Weight => 80;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

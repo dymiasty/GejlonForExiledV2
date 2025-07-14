@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class FRMG0 : CoinPossibility
     {
-        private static readonly string _hint = "Dostałeś <color=#4f72ff>FR-MG-0</color>.";
+        public override string Id => "frmg";
 
-        public FRMG0() : base("frmg", 25, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Dostałeś <color=#4f72ff>FR-MG-0</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 70;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 

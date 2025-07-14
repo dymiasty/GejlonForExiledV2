@@ -7,11 +7,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class UpgradeKeycards : CoinPossibility
     {
-        private static readonly string _hint = 
-            "Wszystkie twoje karty dostępu\n " +
-            "zostały ulepszone o 1 poziom.";
+        public override string Id => "upgradeKeycards";
 
-        public UpgradeKeycards() : base("upgradeKeycard", 15, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Wszystkie twoje karty dostępu\nzostały ulepszone o 1 poziom.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 60;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player)
         {

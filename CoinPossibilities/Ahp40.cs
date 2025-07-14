@@ -5,9 +5,15 @@ namespace GejlonForExiledV2.CoinPossibilities
 {
     public class Ahp40 : CoinPossibility
     {
-        private static readonly string _hint = "Dostałeś <color=#66fc03>40 AHP</color>.";
+        public override string Id => "ahp40";
 
-        public Ahp40() : base("ahp40", 25, _hint, PossibilityType.Positive) { }
+        public override string Hint => "Dostałeś <color=#66fc03>40 AHP</color>.";
+
+        public override float HintDuration => 6f;
+
+        public override int Weight => 75;
+
+        public override PossibilityType possibilityType => PossibilityType.Positive;
 
         public override bool CanExecute(Player player) { return true; }
 
