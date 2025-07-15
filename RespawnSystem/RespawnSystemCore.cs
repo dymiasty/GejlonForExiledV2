@@ -120,6 +120,8 @@ namespace GejlonForExiledV2.RespawnSystem
             Respawn.ForceWave(SpawnableFaction.ChaosWave);
             Plugin.Instance.IsRespawning = false;
             WavesAmount++;
+
+            Timing.KillCoroutines("mainRespawn");
         }
 
         public IEnumerator<float> SpawnNTF()
@@ -133,6 +135,8 @@ namespace GejlonForExiledV2.RespawnSystem
             Respawn.ForceWave(SpawnableFaction.NtfWave);
             Plugin.Instance.IsRespawning = false;
             WavesAmount++;
+
+            Timing.KillCoroutines("mainRespawn");
         }
     }
 }

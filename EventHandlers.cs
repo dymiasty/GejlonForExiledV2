@@ -24,16 +24,6 @@ namespace GejlonForExiledV2
 
         public void OnRoundStarted()
         {
-            foreach (Player player in Player.List)
-            {
-                if (!player.IsNPC && !player.IsScp && !player.IsDead && !player.IsInventoryFull && Random.Range(0, 101) >= 50)
-                {
-                    // free coin on the beggining
-                    player.AddItem(ItemType.Coin);
-                    player.Broadcast(5, "Dostałeś bonusową monetkę na start.");
-                }
-            }
-
             Room.Get(RoomType.Lcz914).Color = new Color(1f, 0f, 1f, 1f);
 
             Warhead.DeadmanSwitchEnabled = false;
@@ -149,14 +139,12 @@ namespace GejlonForExiledV2
 
         private string CalculateChances()
         {
-            // calculating weight sum of all valid coin possibilities
             float weightSum = 0;
             foreach (CoinPossibility possibility in Plugin.Instance.CoinSystemCore.ValidCoinPossibilities)
             {
                 weightSum += possibility.Weight;
             }
 
-            // logging all chances to console
             string chances = "Lista szans wszystkich dostępnych opcji monet:\n";
             foreach (CoinPossibility possibility in Plugin.Instance.CoinSystemCore.ValidCoinPossibilities)
             {

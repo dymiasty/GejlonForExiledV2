@@ -88,7 +88,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="echo &quot;Kopiowanie $(TargetPath) do folderu Plugins...&quot;&#xD;&#xA;xcopy &quot;$(TargetPath)&quot; &quot;C:\Users\Krzysztof\AppData\Roaming\EXILED\Plugins&quot; /Y /K" />
+    <Exec Command="echo &quot;Kopiowanie do folderu lokalnego...&quot;&#xD;&#xA;xcopy &quot;$(TargetPath)&quot; &quot;C:\Users\Krzysztof\AppData\Roaming\EXILED\Plugins&quot; /Y /K&#xD;&#xA;echo &quot;Suckes.&quot;&#xD;&#xA;if &quot;$(Configuration)&quot; == &quot;Release&quot; (&#xD;&#xA;    echo &quot;Wybrano konfigurację Release. Plugin jest kopiowany również na serwer.&quot;&#xD;&#xA;    xcopy &quot;$(TargetPath)&quot; &quot;Z:\.config\EXILED\Plugins&quot; /Y /K&#xD;&#xA;    echo &quot;Sukces.&quot;&#xD;&#xA;)" />
   </Target>
 
 </Project>
