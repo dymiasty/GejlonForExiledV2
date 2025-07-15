@@ -9,4 +9,4 @@ Plugin is only in polish, I am not planning on translating it or making it trans
 - Niespodziewane zdrady sojuszników!  
 
 **A plugin nadal nie jest skończony!**  
-* *Sugeruję nie korzystać bez wcześniejszego przejrzenia kodu i zmiany tego co może się nie pododobać bo dosłownie nic nie jest konfigurowalne :)* *
+*Sugeruję nie korzystać bez wcześniejszego przejrzenia kodu i zmiany tego co może się nie pododobać bo dosłownie nic nie jest konfigurowalne :)*
