@@ -345,9 +345,6 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public void OnPlayerSpawned(SpawnedEventArgs ev)
         {
-            if (ev.Reason == SpawnReason.Revived && ev.Player.Role == RoleTypeId.Scp0492)
-                _lastScpStanding = false;
-
             if (ev.Player.IsScp && _lastScpStanding)
             {
                 ev.Player.ShowHint("Jesteś jedynym żywym <color=red>SCP</color>.\n"
@@ -362,6 +359,21 @@ namespace GejlonForExiledV2.RespawnSystem
                     _civilliansReachedSurface.Add(ev.Player, false);
                     Log.Info($"Dodano gracza {ev.Player.Nickname} do słowników od stref.");
                 }
+
+            if (ev.Reason == SpawnReason.Revived && ev.Player.Role == RoleTypeId.Scp0492)
+            {
+                _lastScpStanding = false;
+
+                foreach (Player player in Player.List.ToList())
+                {
+                    if (player.Role == RoleTypeId.Spectator)
+                    {
+                        return;
+                    }
+                }
+
+                Timing.KillCoroutines("mainRespawn");
+            }
         }
 
         public void OnPlayerDying(DyingEventArgs ev)
@@ -750,26 +762,24 @@ namespace GejlonForExiledV2.RespawnSystem
             }
         }
 
-        public void OnPlayerDied(DiedEventArgs ev)
+        public void OnPlayerRoleChanged(ChangingRoleEventArgs ev)
         {
-            if (ev.Player.PreviousRole.IsScp() && Plugin.Instance.GetLivingSCPs().Count == 1)
+            if (ev.Player.Role == RoleTypeId.Spectator && ev.Player.PreviousRole.IsScp() && Plugin.Instance.GetLivingSCPs().Count == 1)
             {
                 _lastScpPlayer = Plugin.Instance.GetLivingSCPs()[0];
                 if (_lastScpPlayer.Role == RoleTypeId.Scp079)
                     return;
 
-                
+
                 _lastScpStanding = true;
                 Plugin.Instance.GetLivingSCPs()[0].ShowHint("Jesteś jedynym żywym <color=red>SCP</color>.\n"
                     + "Zadawanie obrażeń cię leczy.", 6f);
             }
-        }
 
-        public void OnPlayerRoleChanged(ChangingRoleEventArgs ev)
-        {
             if (_lastScpStanding && ev.Player.IsScp)
             {
-                _lastScpPlayer.ShowHint("Nie jesteś już ostatnim SCP.\nNie będziesz już się leczył za zadawanie obrażeń.");
+                _lastScpPlayer.ShowHint("Nie jesteś już ostatnim <color=red>SCP</color>.\n" +
+                    "Nie będziesz już się leczył za zadawanie obrażeń.");
                 _lastScpPlayer = null;
                 _lastScpStanding = false;
             } 

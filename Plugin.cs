@@ -3,9 +3,8 @@ using Exiled.API.Features;
 using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
-using Player = Exiled.Events.Handlers.Player;
-using Server = Exiled.Events.Handlers.Server;
-using APIPlayer = Exiled.API.Features.Player;
+using PlayerEvents = Exiled.Events.Handlers.Player;
+using ServerEvents = Exiled.Events.Handlers.Server;
 using InventorySystem.Items.Usables.Scp330;
 using MEC;
 using System.Linq;
@@ -26,7 +25,7 @@ namespace GejlonForExiledV2
         public override string Prefix => "GFEV2";
         public override Version RequiredExiledVersion => new Version(9, 5, 0);
         public override string Author => "dymiasty";
-        public override Version Version => new Version(0, 2, 5);
+        public override Version Version => new Version(0, 3, 0);
 
         private EventHandlers Handlers { get; set; }
 
@@ -46,16 +45,16 @@ namespace GejlonForExiledV2
             RespawnSystemCore = new RespawnSystemCore();
 
             // Server events
-            Server.WaitingForPlayers += Handlers.OnWaitingForPlayers;
-            Server.RoundStarted += Handlers.OnRoundStarted;
-            Server.RoundStarted += Handlers.OnRoundStarted;
+            ServerEvents.WaitingForPlayers += Handlers.OnWaitingForPlayers;
+            ServerEvents.RoundStarted += Handlers.OnRoundStarted;
+            ServerEvents.RoundStarted += Handlers.OnRoundStarted;
             
 
             // Player events
-            Player.FlippingCoin += Handlers.OnPlayerCoinFlipping;
-            Player.Spawned += Handlers.OnPlayerSpawned;
-            Player.Shooting += Handlers.OnPlayerShooting;
-            Player.UsingItemCompleted += Handlers.OnCompletedUsingItem;
+            PlayerEvents.FlippingCoin += Handlers.OnPlayerCoinFlipping;
+            PlayerEvents.Spawned += Handlers.OnPlayerSpawned;
+            PlayerEvents.Shooting += Handlers.OnPlayerShooting;
+            PlayerEvents.UsingItemCompleted += Handlers.OnCompletedUsingItem;
 
 
             // Respawn System
@@ -70,14 +69,14 @@ namespace GejlonForExiledV2
             Log.Info("Plugin GejlonForExiledV2 został wyłączony.");
 
             // Server events
-            Server.WaitingForPlayers -= Handlers.OnWaitingForPlayers;
-            Server.RoundStarted -= Handlers.OnRoundStarted;
+            ServerEvents.WaitingForPlayers -= Handlers.OnWaitingForPlayers;
+            ServerEvents.RoundStarted -= Handlers.OnRoundStarted;
 
             // Player events
-            Player.FlippingCoin -= Handlers.OnPlayerCoinFlipping;
-            Player.Spawned -= Handlers.OnPlayerSpawned;
-            Player.Shooting -= Handlers.OnPlayerShooting;
-            Player.UsingItemCompleted -= Handlers.OnCompletedUsingItem;
+            PlayerEvents.FlippingCoin -= Handlers.OnPlayerCoinFlipping;
+            PlayerEvents.Spawned -= Handlers.OnPlayerSpawned;
+            PlayerEvents.Shooting -= Handlers.OnPlayerShooting;
+            PlayerEvents.UsingItemCompleted -= Handlers.OnCompletedUsingItem;
 
             // Respawn System
             RespawnSystemCore.UnsubscribeEvents();
@@ -89,13 +88,13 @@ namespace GejlonForExiledV2
             base.OnDisabled();
         }
 
-        public List<APIPlayer> GetPeopleInLCZ()
+        public List<Player> GetPeopleInLCZ()
         {
-            List<APIPlayer> peopleInLCZ = new List<APIPlayer>();
+            List<Player> peopleInLCZ = new List<Player>();
 
-            foreach (APIPlayer player in APIPlayer.List)
+            foreach (Player player in Player.List)
             {
-                foreach (APIPlayer playerr in peopleInLCZ)
+                foreach (Player playerr in peopleInLCZ)
                 {
                     if (playerr.IsDead)
                     {
@@ -114,13 +113,13 @@ namespace GejlonForExiledV2
             return peopleInLCZ;
         }
 
-        public List<APIPlayer> GetLivingSCPs()
+        public List<Player> GetLivingSCPs()
         {
-            List<APIPlayer> livingSCPs = new List<APIPlayer>();
+            List<Player> livingSCPs = new List<Player>();
 
-            foreach (APIPlayer player in APIPlayer.List)
+            foreach (Player player in Player.List)
             {
-                foreach (APIPlayer playerr in livingSCPs)
+                foreach (Player playerr in livingSCPs)
                 {
                     if (playerr.IsDead)
                     {
@@ -139,23 +138,23 @@ namespace GejlonForExiledV2
             return livingSCPs;
         }
 
-        public APIPlayer RandomAlivePlayer()
+        public Player RandomAlivePlayer()
         {
-            APIPlayer randomPlayer;
+            Player randomPlayer;
 
-            randomPlayer = APIPlayer.List.ToList()[Random.Range(0, APIPlayer.List.ToList().Count)];
+            randomPlayer = Player.List.ToList()[Random.Range(0, Player.List.ToList().Count)];
 
             while (randomPlayer.IsDead || randomPlayer.IsNPC)
             {
-                randomPlayer = APIPlayer.List.ToList()[Random.Range(0, APIPlayer.List.ToList().Count)];
+                randomPlayer = Player.List.ToList()[Random.Range(0, Player.List.ToList().Count)];
             }
 
             return randomPlayer;
         }
 
-        public APIPlayer RandomHumanPlayer()
+        public Player RandomHumanPlayer()
         {
-            APIPlayer randomPlayer;
+            Player randomPlayer;
 
             randomPlayer = RandomAlivePlayer();
 
@@ -308,7 +307,7 @@ namespace GejlonForExiledV2
             }
         }
 
-        public IEnumerator<float> GodPlayer(APIPlayer player, float duration)
+        public IEnumerator<float> GodPlayer(Player player, float duration)
         {
             player.IsGodModeEnabled = true;
             yield return Timing.WaitForSeconds(duration);

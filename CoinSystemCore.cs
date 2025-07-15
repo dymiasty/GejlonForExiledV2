@@ -75,6 +75,28 @@ namespace GejlonForExiledV2
             return ValidCoinPossibilities[possibilityNumericId];
         }
 
+        /// <returns>
+        /// A really long string containing
+        /// a list of every possibility and its chance
+        /// example: possibilityId - (percentageChance%)
+        /// </returns>
+        public static string CalculateChances()
+        {
+            float weightSum = 0;
+            foreach (CoinPossibility possibility in Plugin.Instance.CoinSystemCore.ValidCoinPossibilities)
+            {
+                weightSum += possibility.Weight;
+            }
+
+            string chances = "Lista szans wszystkich dostępnych opcji monet:\n";
+            foreach (CoinPossibility possibility in Plugin.Instance.CoinSystemCore.ValidCoinPossibilities)
+            {
+                chances += $"{possibility.Id} - (~{Math.Round(((float)possibility.Weight / weightSum) * 100f, 2)}%)\n";
+            }
+
+            return chances;
+        }
+
         /// <summary>
         /// A debug command made for testing
         /// coin flipping possibilities.

@@ -1,13 +1,10 @@
 ﻿using Exiled.API.Features;
-using Exiled.API.Features.Items;
 using Exiled.Events.EventArgs.Player;
 using Random = UnityEngine.Random;
 using GejlonForExiledV2.CoinPossibilities;
-using System.Linq;
 using PlayerRoles;
 using Exiled.API.Enums;
 using UnityEngine;
-using System;
 
 namespace GejlonForExiledV2
 {
@@ -19,7 +16,7 @@ namespace GejlonForExiledV2
 
             Round.IsLobbyLocked = true;
 
-            Log.Info(CalculateChances());
+            Log.Info(CoinSystemCore.CalculateChances());
         }
 
         public void OnRoundStarted()
@@ -60,20 +57,12 @@ namespace GejlonForExiledV2
 
         public void OnPlayerSpawned(SpawnedEventArgs ev)
         {
-            if (ev.Player.Role == RoleTypeId.Scientist && ev.Reason != SpawnReason.ItemUsage)
+            if (ev.Player.Role == RoleTypeId.Scientist && ev.Reason == SpawnReason.RoundStart)
             {
                 int O5chance = 95;
 
                 if (Random.Range(0, 101) > O5chance)
                 {
-                    foreach (Item item in ev.Player.Items.ToList())
-                    {
-                        if (item.Type != ItemType.Coin)
-                        {
-                            ev.Player.RemoveItem(item);
-                        }
-                    }
-
                     ev.Player.AddItem(ItemType.GunCOM15);
                     ev.Player.AddAmmo(AmmoType.Nato9, 24);
                     ev.Player.AddItem(ItemType.KeycardO5);
@@ -83,20 +72,12 @@ namespace GejlonForExiledV2
                 }
             }
 
-            if (ev.Player.Role == RoleTypeId.ClassD && ev.Reason != SpawnReason.ItemUsage)
+            if (ev.Player.Role == RoleTypeId.ClassD && ev.Reason == SpawnReason.RoundStart)
             {
                 int smugglerNegativeChance = 95;
 
                 if (Random.Range(0, 101) > smugglerNegativeChance)
                 {
-                    foreach (Item item in ev.Player.Items)
-                    {
-                        if (item.Type != ItemType.Coin)
-                        {
-                            ev.Player.RemoveItem(item);
-                        }
-                    }
-
                     ev.Player.AddItem(ItemType.GunCOM15);
                     ev.Player.AddAmmo(AmmoType.Nato9, 6);
                     ev.Player.AddItem(ItemType.KeycardScientist);
@@ -109,7 +90,7 @@ namespace GejlonForExiledV2
 
             if (ev.Reason == SpawnReason.RoundStart)
             {
-                ev.Player.SendConsoleMessage(CalculateChances(), "green");
+                ev.Player.SendConsoleMessage(CoinSystemCore.CalculateChances(), "green");
             }
         }
 
@@ -134,24 +115,6 @@ namespace GejlonForExiledV2
                     ev.Player.ShowHint("Czujesz nagłą potrzebę zdradzenia swoich sojuszników.", 6f);
                 }
             }
-        }
-
-
-        private string CalculateChances()
-        {
-            float weightSum = 0;
-            foreach (CoinPossibility possibility in Plugin.Instance.CoinSystemCore.ValidCoinPossibilities)
-            {
-                weightSum += possibility.Weight;
-            }
-
-            string chances = "Lista szans wszystkich dostępnych opcji monet:\n";
-            foreach (CoinPossibility possibility in Plugin.Instance.CoinSystemCore.ValidCoinPossibilities)
-            {
-                chances += $"{possibility.Id} - (~{Math.Round(((float)possibility.Weight / weightSum) * 100f, 2)}%)\n";
-            }
-
-            return chances;
         }
     }
 }
