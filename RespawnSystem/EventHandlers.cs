@@ -768,7 +768,10 @@ namespace GejlonForExiledV2.RespawnSystem
             {
                 _lastScpPlayer = Plugin.Instance.GetLivingSCPs()[0];
                 if (_lastScpPlayer.Role == RoleTypeId.Scp079)
+                {
+                    _lastScpPlayer = null;
                     return;
+                }
 
 
                 _lastScpStanding = true;

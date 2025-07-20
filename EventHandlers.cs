@@ -5,6 +5,9 @@ using GejlonForExiledV2.CoinPossibilities;
 using PlayerRoles;
 using Exiled.API.Enums;
 using UnityEngine;
+using System.Collections.Generic;
+using MEC;
+using System.Linq;
 
 namespace GejlonForExiledV2
 {
@@ -15,8 +18,6 @@ namespace GejlonForExiledV2
             Log.Info("Oczekiwanie na rozpoczęcie gry...");
 
             Round.IsLobbyLocked = true;
-
-            Log.Info(CoinSystemCore.CalculateChances());
         }
 
         public void OnRoundStarted()
@@ -24,6 +25,8 @@ namespace GejlonForExiledV2
             Room.Get(RoomType.Lcz914).Color = new Color(1f, 0f, 1f, 1f);
 
             Warhead.DeadmanSwitchEnabled = false;
+
+            Timing.RunCoroutine(_warheadDetonateCoroutine());
         }
 
         public void OnPlayerCoinFlipping(FlippingCoinEventArgs ev)
@@ -115,6 +118,12 @@ namespace GejlonForExiledV2
                     ev.Player.ShowHint("Czujesz nagłą potrzebę zdradzenia swoich sojuszników.", 6f);
                 }
             }
+        }
+
+        private IEnumerator<float> _warheadDetonateCoroutine()
+        {
+            yield return Timing.WaitForSeconds(330);
+            Plugin.Instance.CoinSystemCore.ValidCoinPossibilities.OfType<WarheadDetonate>().FirstOrDefault().CanDetonate = true;
         }
     }
 }

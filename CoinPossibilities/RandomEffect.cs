@@ -12,7 +12,7 @@ namespace GejlonForExiledV2.CoinPossibilities
 
         public override float HintDuration => 6f;
 
-        public override int Weight => 80;
+        public override int Weight => 75;
 
         public override PossibilityType possibilityType => PossibilityType.Mid;
 

@@ -16,7 +16,7 @@ namespace GejlonForExiledV2.CoinPossibilities
 
         public override float HintDuration => 6f;
 
-        public override int Weight => 70;
+        public override int Weight => 50;
 
         public override PossibilityType possibilityType => PossibilityType.Mid;
 
@@ -38,7 +38,7 @@ namespace GejlonForExiledV2.CoinPossibilities
                 if (door.Type != DoorType.Scp914Door && door.Type != DoorType.Airlock && !door.IsElevator)
                 {
                     door.IsOpen = false;
-                    door.Lock(25f, DoorLockType.Regular079);
+                    door.Lock(25f, DoorLockType.NoPower);
                 }
             }
             yield return Timing.WaitForSeconds(25f);

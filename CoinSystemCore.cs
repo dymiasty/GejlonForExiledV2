@@ -10,6 +10,7 @@ namespace GejlonForExiledV2
 {
     public class CoinSystemCore
     {
+
         /// <summary>
         /// List of all <seealso cref="CoinPossibility">Coin Possibilities</seealso>
         /// that flipping a coin can generate.
