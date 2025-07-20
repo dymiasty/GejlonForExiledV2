@@ -45,7 +45,7 @@ namespace GejlonForExiledV2
             new PocketDimension(), // 25
             new QuickDecontamination(), // 26
             new Radio(), // 27
-            new RandomEffect(), // 28
+            new RandomPositiveEffect(), // 28
             new RandomKeycard(), // 29
             new RandomPlayerExplode(), // 30
             new RandomScpItem(), // 31
