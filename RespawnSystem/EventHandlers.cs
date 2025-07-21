@@ -18,9 +18,9 @@ namespace GejlonForExiledV2.RespawnSystem
     {
         private RespawnSystemCore Core;
 
-        private Dictionary<Player, bool> _civilliansReachedHeavy = new Dictionary<Player, bool>();
-        private Dictionary<Player, bool> _civilliansReachedEntrance = new Dictionary<Player, bool>();
-        private Dictionary<Player, bool> _civilliansReachedSurface = new Dictionary<Player, bool>();
+        private readonly Dictionary<Player, bool> _civilliansReachedHeavy = new Dictionary<Player, bool>();
+        private readonly Dictionary<Player, bool> _civilliansReachedEntrance = new Dictionary<Player, bool>();
+        private readonly Dictionary<Player, bool> _civilliansReachedSurface = new Dictionary<Player, bool>();
 
         private bool _microHIDpickedUp = false;
         private bool _scp244aUsed = false;
@@ -54,14 +54,14 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddNineTailedFoxTokens(1f);
                     Log.Info("NTF pierwszy podniósł MicroHIDa - NTF +1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
                 {
                     Core.AddChaosTokens(1f);
                     Log.Info("Chaos pierwszy podniósł MicroHIDa - Chaos +1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -73,14 +73,14 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddChaosTokens(0.4f);
                     Log.Info("Klasa D podniosła broń - Chaos +0.4");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role == RoleTypeId.Scientist)
                 {
                     Core.AddNineTailedFoxTokens(0.4f);
                     Log.Info("Naukowiec podniósł broń - NTF +0.4");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -95,14 +95,14 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddNineTailedFoxTokens(0.4f);
                     Log.Info("Klasa D upuściła broń - NTF +0.4");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role == RoleTypeId.Scientist)
                 {
                     Core.AddChaosTokens(0.4f);
                     Log.Info("Naukowiec upuścił broń - Chaos +0.4");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -117,14 +117,14 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddNineTailedFoxTokens(1f);
                     Log.Info("NTF użył SCP018 - NTF +1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
                 {
                     Core.AddChaosTokens(1f);
                     Log.Info("Chaos użył SCP018 - Chaos +1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -137,7 +137,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     _scp268Used = true;
                     Core.AddNineTailedFoxTokens(1f);
                     Log.Info("NTF użył SCP268 - NTF +1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
@@ -145,7 +145,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     _scp268Used = true;
                     Core.AddChaosTokens(1f);
                     Log.Info("Chaos użył SCP268 - Chaos +1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -157,14 +157,14 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddNineTailedFoxTokens(0.7f);
                     Log.Info("NTF użył SCP207 - NTF +0.7");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
                 {
                     Core.AddChaosTokens(0.7f);
                     Log.Info("Chaos użył SCP207 - Chaos +0.7");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -177,7 +177,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     _scp244aUsed = true;
                     Core.AddNineTailedFoxTokens(0.7f);
                     Log.Info("NTF użył SCP244A - NTF +1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
@@ -185,7 +185,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     _scp244aUsed = true;
                     Core.AddChaosTokens(0.7f);
                     Log.Info("Chaos użył SCP244A - Chaos +1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -198,7 +198,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     _scp244bUsed = true;
                     Core.AddNineTailedFoxTokens(0.7f);
                     Log.Info("NTF użył SCP244B - NTF +1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
@@ -206,7 +206,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     _scp244bUsed = true;
                     Core.AddChaosTokens(0.7f);
                     Log.Info("Chaos użył SCP244B - Chaos +1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -218,14 +218,14 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddNineTailedFoxTokens(0.7f);
                     Log.Info("NTF użył SCP1853 - NTF +0.7");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
                 {
                     Core.AddChaosTokens(0.7f);
                     Log.Info("Chaos użył SCP1853 - Chaos +0.7");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -237,14 +237,14 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddNineTailedFoxTokens(0.7f);
                     Log.Info("NTF użył SCP2176 - NTF +0.7");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
                 {
                     Core.AddChaosTokens(0.7f);
                     Log.Info("Chaos użył SCP2176 - Chaos +0.7");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -256,14 +256,14 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddNineTailedFoxTokens(0.4f);
                     Log.Info("NTF użył SCP500 - NTF +0.4");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
                 {
                     Core.AddChaosTokens(0.4f);
                     Log.Info("Chaos użył SCP500 - Chaos +0.4");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -275,14 +275,14 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddNineTailedFoxTokens(0.1f);
                     Log.Info("NTF użył SCP330 - NTF +0.1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Player.Role.Team == Team.ChaosInsurgency || ev.Player.Role == RoleTypeId.ClassD)
                 {
                     Core.AddChaosTokens(0.1f);
                     Log.Info("Chaos użył SCP207 - Chaos +0.1");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -303,7 +303,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddNineTailedFoxTokens(0.0005f * ev.Damage * 0.75f);
                         Log.Info("NTF zadał obrażenia SCP - NTF +");
-                        Core.LogTickets();
+                        Core.LogTokens();
                         return;
                     }
                     // Chaos
@@ -311,7 +311,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddChaosTokens(0.0005f * ev.Damage * 0.75f);
                         Log.Info("Chaos zadał obrażenia SCP - Chaos +");
-                        Core.LogTickets();
+                        Core.LogTokens();
                         return;
                     }
                 }
@@ -323,7 +323,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddNineTailedFoxTokens(ev.Damage/ev.Target.MaxHealth * 100f * 0.4f * 0.1f);
                         Log.Info("NTF zadał obrażenia SCP - NTF +");
-                        Core.LogTickets();
+                        Core.LogTokens();
                         return;
                     }
                     // Chaos
@@ -331,7 +331,7 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddChaosTokens(ev.Damage / ev.Target.MaxHealth * 100f * 0.4f * 0.1f);
                         Log.Info("Chaos zadał obrażenia SCP - Chaos +");
-                        Core.LogTickets();
+                        Core.LogTokens();
                         return;
                     }
                 }
@@ -393,14 +393,14 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddNineTailedFoxTokens(1.2f);
                         Log.Info("CI umarł - NTF +1.2");
-                        Core.LogTickets();
+                        Core.LogTokens();
                         return;
                     }
                     else
                     {
                         Core.AddNineTailedFoxTokens(1.2f * Core.WavesAmount);
                         Log.Info($"CI umarł - NTF +{1.2f * Core.WavesAmount}");
-                        Core.LogTickets();
+                        Core.LogTokens();
                         return;
                     }
 
@@ -410,14 +410,14 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddChaosTokens(1.2f);
                         Log.Info("NTF umarł - Chaos +1.2");
-                        Core.LogTickets();
+                        Core.LogTokens();
                         return;
                     }
                     else
                     {
                         Core.AddChaosTokens(1.2f * Core.WavesAmount);
                         Log.Info($"NTF umarł - Chaos +{1.2f * Core.WavesAmount}");
-                        Core.LogTickets();
+                        Core.LogTokens();
                         return;
                     }
                 
@@ -436,7 +436,7 @@ namespace GejlonForExiledV2.RespawnSystem
                         Core.AddNineTailedFoxTokens(1.5f);
                         Log.Info($"BONUS za użycie MicroHIDa - NTF +1.5");
                     }
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
                 else if (ev.Attacker.Role.Team == Team.ChaosInsurgency || ev.Attacker.Role == RoleTypeId.ClassD)
@@ -448,7 +448,7 @@ namespace GejlonForExiledV2.RespawnSystem
                         Core.AddChaosTokens(1.5f);
                         Log.Info($"BONUS za użycie MicroHIDa - Chaos +1.5");
                     }
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -459,7 +459,7 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddNineTailedFoxTokens(1.5f);
                     Log.Info("NTF zabił CI - NTF +1.5");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
 
@@ -481,7 +481,7 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddNineTailedFoxTokens(0.5f);
                     Log.Info("Ochroniarz zabił uzbrojoną Klasę D - NTF +1.5");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
             }
@@ -492,7 +492,7 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddChaosTokens(2f);
                     Log.Info("Klasa D zabiła NTF - Chaos +2");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
 
@@ -502,7 +502,7 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddChaosTokens(1.4f);
                     Log.Info("Klasa D lub Chaos zabili Naukowca - Chaos +1.4");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
 
@@ -512,7 +512,7 @@ namespace GejlonForExiledV2.RespawnSystem
                 {
                     Core.AddChaosTokens(1.5f);
                     Log.Info("Chaos zabił NTF - Chaos +1.5");
-                    Core.LogTickets();
+                    Core.LogTokens();
                     return;
                 }
         }
@@ -524,7 +524,7 @@ namespace GejlonForExiledV2.RespawnSystem
             {
                 Core.AddNineTailedFoxTokens(3f);
                 Log.Info("Naukowiec uciekł - NTF +3");
-                Core.LogTickets();
+                Core.LogTokens();
                 return;
             }
 
@@ -533,7 +533,7 @@ namespace GejlonForExiledV2.RespawnSystem
             {
                 Core.AddNineTailedFoxTokens(3f);
                 Log.Info("Związana Klasa D uciekła - NTF +3");
-                Core.LogTickets();
+                Core.LogTokens();
                 return;
             }
 
@@ -542,7 +542,7 @@ namespace GejlonForExiledV2.RespawnSystem
             {
                 Core.AddChaosTokens(4f);
                 Log.Info("Klasa D uciekła - Chaos +4");
-                Core.LogTickets();
+                Core.LogTokens();
                 return;
             }
             
@@ -551,7 +551,7 @@ namespace GejlonForExiledV2.RespawnSystem
             {
                 Core.AddChaosTokens(4f);
                 Log.Info("Związany Naukowiec uciekł - Chaos +4");
-                Core.LogTickets();
+                Core.LogTokens();
                 return;
             }
         }
@@ -576,7 +576,7 @@ namespace GejlonForExiledV2.RespawnSystem
             {
                 Core.AddNineTailedFoxTokens(0.5f);
                 Log.Info("Odblokowano Generator - NTF +0.5");
-                Core.LogTickets();
+                Core.LogTokens();
             }
         }
 
@@ -584,7 +584,7 @@ namespace GejlonForExiledV2.RespawnSystem
         {
             Core.AddNineTailedFoxTokens(1f);
             Log.Info("Uruchomiono Generator - NTF +1");
-            Core.LogTickets();
+            Core.LogTokens();
             return;
         }
 
@@ -637,7 +637,7 @@ namespace GejlonForExiledV2.RespawnSystem
             {
                 Core.AddNineTailedFoxTokens(1f);
                 Log.Info("NTF odblokował przycisk Warheadu - NTF +1");
-                Core.LogTickets();
+                Core.LogTokens();
                 _warheadUnlocked = true;
                 return;
             }
@@ -645,7 +645,7 @@ namespace GejlonForExiledV2.RespawnSystem
             {
                 Core.AddChaosTokens(1f);
                 Log.Info("Chaos odblokował przycisk Warheadu - Chaos +1");
-                Core.LogTickets();
+                Core.LogTokens();
                 _warheadUnlocked = true;
                 return;
             }
@@ -673,7 +673,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
                 Core.AddNineTailedFoxTokens(6f);
                 Log.Info("NTF zdetonował Warheada - NTF +6");
-                Core.LogTickets();
+                Core.LogTokens();
                 return;
             }
             else if (_warheadStartedBy == Team.ChaosInsurgency || _warheadStartedBy == Team.ClassD)
@@ -686,7 +686,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
                 Core.AddChaosTokens(6f);
                 Log.Info("Chaos zdetonował Warheada - Chaos +6");
-                Core.LogTickets();
+                Core.LogTokens();
                 return;
             }
         }
@@ -715,7 +715,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
                 Core.AddChaosTokens(tokensToRemove);
                 Log.Info($"NTF się zrespił - Chaos +{tokensToRemove}");
-                Core.LogTickets();
+                Core.LogTokens();
 
                 return;
             }
@@ -734,7 +734,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
                 Core.AddNineTailedFoxTokens(tokensToRemove);
                 Log.Info($"Chaos się zrespił - NTF +{tokensToRemove}");
-                Core.LogTickets();
+                Core.LogTokens();
                 return;
             }
         }
@@ -800,13 +800,13 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddNineTailedFoxTokens(0.1f);
                         Log.Info("Naukowiec dotarł do HCZ - NTF +0.1");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                     else
                     {
                         Core.AddChaosTokens(0.1f);
                         Log.Info("Klasa D dotarła do HCZ - Chaos +0.1");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                 }
                 else
@@ -815,13 +815,13 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddChaosTokens(0.1f);
                         Log.Info("Skuty Naukowiec dotarł do HCZ - Chaos +0.1");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                     else
                     {
                         Core.AddNineTailedFoxTokens(0.1f);
                         Log.Info("Skuta Klasa D dotarła do HCZ - NTF +0.1");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                 }
             }
@@ -843,13 +843,13 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddNineTailedFoxTokens(0.15f);
                         Log.Info("Naukowiec dotarł do EZ - NTF +0.15");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                     else
                     {
                         Core.AddChaosTokens(0.15f);
                         Log.Info("Klasa D dotarła do EZ - Chaos +0.15");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                 }
                 else
@@ -858,13 +858,13 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddChaosTokens(0.15f);
                         Log.Info("Skuty Naukowiec dotarł do EZ - Chaos +0.15");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                     else
                     {
                         Core.AddNineTailedFoxTokens(0.15f);
                         Log.Info("Skuta Klasa D dotarła do EZ - NTF +0.15");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                 }
             }
@@ -886,13 +886,13 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddNineTailedFoxTokens(0.2f);
                         Log.Info("Naukowiec dotarł na powierzchnię - NTF +0.2");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                     else
                     {
                         Core.AddChaosTokens(0.2f);
                         Log.Info("Klasa D dotarła na powierzchnię - Chaos +0.2");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                 }
                 else
@@ -901,13 +901,13 @@ namespace GejlonForExiledV2.RespawnSystem
                     {
                         Core.AddChaosTokens(0.2f);
                         Log.Info("Skuty Naukowiec dotarł na powierzchnię - Chaos +0.2");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                     else
                     {
                         Core.AddNineTailedFoxTokens(0.2f);
                         Log.Info("Skuta Klasa D dotarła na powierzchnię - NTF +0.2");
-                        Core.LogTickets();
+                        Core.LogTokens();
                     }
                 }
             }

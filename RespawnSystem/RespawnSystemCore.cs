@@ -18,6 +18,8 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public int WavesAmount = 0;
 
+        public bool IsRespawning = false;
+
         public void SubscribeEvents()
         {
             Events = new EventHandlers();
@@ -84,12 +86,7 @@ namespace GejlonForExiledV2.RespawnSystem
             ChaosTokens -= amount;
         }
 
-        private void _enabledMessage()
-        {
-            Log.Info("Old Respawn System BETA enabled.");
-        }
-
-        public void LogTickets()
+        public void LogTokens()
         {
             Log.Info($"\nStan tokenów: \n" +
                 $"Nine-Tailed Fox: {NineTailedFoxTokens}\n" +
@@ -106,17 +103,16 @@ namespace GejlonForExiledV2.RespawnSystem
                 Timing.RunCoroutine(SpawnCI());
         }
 
-
         public IEnumerator<float> SpawnCI()
         {
-            if (Plugin.Instance.IsRespawning)
+            if (IsRespawning)
                 yield break;
 
-            Plugin.Instance.IsRespawning = true;
+            IsRespawning = true;
             Respawn.SummonChaosInsurgencyVan();
             yield return Timing.WaitForSeconds(10f);
             Respawn.ForceWave(SpawnableFaction.ChaosWave);
-            Plugin.Instance.IsRespawning = false;
+            IsRespawning = false;
             WavesAmount++;
 
             Timing.KillCoroutines("mainRespawn");
@@ -124,17 +120,23 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public IEnumerator<float> SpawnNTF()
         {
-            if (Plugin.Instance.IsRespawning)
+            if (IsRespawning)
                 yield break;
 
-            Plugin.Instance.IsRespawning = true;
+            IsRespawning = true;
             Respawn.SummonNtfChopper();
             yield return Timing.WaitForSeconds(18.8f);
             Respawn.ForceWave(SpawnableFaction.NtfWave);
-            Plugin.Instance.IsRespawning = false;
+            IsRespawning = false;
             WavesAmount++;
 
             Timing.KillCoroutines("mainRespawn");
+        }
+        
+        
+        private void _enabledMessage()
+        {
+            Log.Info("Old Respawn System BETA enabled.");
         }
     }
 }

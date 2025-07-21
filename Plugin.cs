@@ -10,6 +10,8 @@ using MEC;
 using System.Linq;
 using PlayerRoles;
 using GejlonForExiledV2.RespawnSystem;
+using GejlonForExiledV2.BadLuckProtection;
+using GejlonForExiledV2.CoinSystem;
 
 namespace GejlonForExiledV2
 {
@@ -23,41 +25,31 @@ namespace GejlonForExiledV2
         public static Plugin Instance { get; private set; }
         public override string Name => "GejlonForExiledV2";
         public override string Prefix => "GFEV2";
-        public override Version RequiredExiledVersion => new Version(9, 5, 0);
+        public override Version RequiredExiledVersion => new Version(9, 6, 3);
         public override string Author => "dymiasty";
-        public override Version Version => new Version(0, 3, 0);
+        public override Version Version => new Version(0, 3, 1);
 
-        private EventHandlers Handlers { get; set; }
+        private EventHandlers MainHandlers { get; set; }
 
-        public RespawnSystemCore RespawnSystemCore { get; set; }
-        public bool IsRespawning = false;
+        public RespawnSystemCore RespawnSystemCore { get; private set; }
 
-        public CoinSystemCore CoinSystemCore { get; set; }
+        public CoinSystemCore CoinSystemCore { get; private set; }
 
+        public BadLuckProtectionCore BadLuckProtectionCore { get; private set; }
 
 
         public override void OnEnabled()
         {
             Log.Info($"Plugin GejlonForExiledV2 w wersji {Version} został uruchomiony.");
 
-            Handlers = new EventHandlers();
+            MainHandlers = new EventHandlers();
             CoinSystemCore = new CoinSystemCore();
             RespawnSystemCore = new RespawnSystemCore();
 
-            // Server events
-            ServerEvents.WaitingForPlayers += Handlers.OnWaitingForPlayers;
-            ServerEvents.RoundStarted += Handlers.OnRoundStarted;
-            ServerEvents.RoundStarted += Handlers.OnRoundStarted;
+            BadLuckProtectionCore = new BadLuckProtectionCore();
             
-
-            // Player events
-            PlayerEvents.FlippingCoin += Handlers.OnPlayerCoinFlipping;
-            PlayerEvents.Spawned += Handlers.OnPlayerSpawned;
-            PlayerEvents.Shooting += Handlers.OnPlayerShooting;
-            PlayerEvents.UsingItemCompleted += Handlers.OnCompletedUsingItem;
-
-
-            // Respawn System
+            SubscribeEvents();
+            CoinSystemCore.SubscribeEvents();
             RespawnSystemCore.SubscribeEvents();
 
 
@@ -66,26 +58,39 @@ namespace GejlonForExiledV2
 
         public override void OnDisabled()
         {
-            Log.Info("Plugin GejlonForExiledV2 został wyłączony.");
-
-            // Server events
-            ServerEvents.WaitingForPlayers -= Handlers.OnWaitingForPlayers;
-            ServerEvents.RoundStarted -= Handlers.OnRoundStarted;
-
-            // Player events
-            PlayerEvents.FlippingCoin -= Handlers.OnPlayerCoinFlipping;
-            PlayerEvents.Spawned -= Handlers.OnPlayerSpawned;
-            PlayerEvents.Shooting -= Handlers.OnPlayerShooting;
-            PlayerEvents.UsingItemCompleted -= Handlers.OnCompletedUsingItem;
-
-            // Respawn System
             RespawnSystemCore.UnsubscribeEvents();
+            CoinSystemCore.UnsubscribeEvents();
+            UnsubscribeEvents();
 
-            Handlers = null;
-            CoinSystemCore = null;
+            BadLuckProtectionCore = null;
+
             RespawnSystemCore = null;
+            CoinSystemCore = null;
+            MainHandlers = null;
 
             base.OnDisabled();
+        }
+
+        private void SubscribeEvents()
+        {
+            // Server events
+            ServerEvents.WaitingForPlayers += MainHandlers.OnWaitingForPlayers;
+            ServerEvents.RoundStarted += MainHandlers.OnRoundStarted;
+
+            // Player events
+            PlayerEvents.Spawned += MainHandlers.OnPlayerSpawned;
+            PlayerEvents.Shooting += MainHandlers.OnPlayerShooting;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            // Server events
+            ServerEvents.WaitingForPlayers -= MainHandlers.OnWaitingForPlayers;
+            ServerEvents.RoundStarted -= MainHandlers.OnRoundStarted;
+
+            // Player events
+            PlayerEvents.Spawned -= MainHandlers.OnPlayerSpawned;
+            PlayerEvents.Shooting -= MainHandlers.OnPlayerShooting;
         }
 
         public List<Player> GetPeopleInLCZ()
