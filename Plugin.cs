@@ -12,6 +12,7 @@ using PlayerRoles;
 using GejlonForExiledV2.RespawnSystem;
 using GejlonForExiledV2.BadLuckProtection;
 using GejlonForExiledV2.CoinSystem;
+using GejlonForExiledV2.RespawnSystem.RespawnTimer;
 
 namespace GejlonForExiledV2
 {
@@ -27,7 +28,7 @@ namespace GejlonForExiledV2
         public override string Prefix => "GFEV2";
         public override Version RequiredExiledVersion => new Version(9, 6, 3);
         public override string Author => "dymiasty";
-        public override Version Version => new Version(0, 3, 1);
+        public override Version Version => new Version(0, 3, 2);
 
         private EventHandlers MainHandlers { get; set; }
 
@@ -37,6 +38,8 @@ namespace GejlonForExiledV2
 
         public BadLuckProtectionCore BadLuckProtectionCore { get; private set; }
 
+        public RespawnTimerCore RespawnTimerCore { get; private set; }
+
 
         public override void OnEnabled()
         {
@@ -45,12 +48,14 @@ namespace GejlonForExiledV2
             MainHandlers = new EventHandlers();
             CoinSystemCore = new CoinSystemCore();
             RespawnSystemCore = new RespawnSystemCore();
+            RespawnTimerCore = new RespawnTimerCore();
 
             BadLuckProtectionCore = new BadLuckProtectionCore();
             
             SubscribeEvents();
             CoinSystemCore.SubscribeEvents();
             RespawnSystemCore.SubscribeEvents();
+            RespawnTimerCore.SubscribeEvents();
 
 
             base.OnEnabled();
@@ -58,12 +63,14 @@ namespace GejlonForExiledV2
 
         public override void OnDisabled()
         {
+            RespawnTimerCore.UnsubscribeEvents();
             RespawnSystemCore.UnsubscribeEvents();
             CoinSystemCore.UnsubscribeEvents();
             UnsubscribeEvents();
 
             BadLuckProtectionCore = null;
 
+            RespawnTimerCore = null;
             RespawnSystemCore = null;
             CoinSystemCore = null;
             MainHandlers = null;

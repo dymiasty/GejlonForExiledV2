@@ -1,5 +1,6 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
+using GejlonForExiledV2.RespawnSystem.RespawnTimer;
 using MEC;
 using System.Collections.Generic;
 using PlayerEvents = Exiled.Events.Handlers.Player;
@@ -125,7 +126,7 @@ namespace GejlonForExiledV2.RespawnSystem
 
             IsRespawning = true;
             Respawn.SummonNtfChopper();
-            yield return Timing.WaitForSeconds(18.8f);
+            yield return Timing.WaitForSeconds(19f);
             Respawn.ForceWave(SpawnableFaction.NtfWave);
             IsRespawning = false;
             WavesAmount++;

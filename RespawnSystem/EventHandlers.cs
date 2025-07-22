@@ -11,12 +11,15 @@ using Player = Exiled.API.Features.Player;
 using Exiled.Events.EventArgs.Server;
 using UnityEngine;
 using Exiled.API.Extensions;
+using GejlonForExiledV2.RespawnSystem.RespawnTimer;
 
 namespace GejlonForExiledV2.RespawnSystem
 {
     internal class EventHandlers
     {
         private RespawnSystemCore Core;
+
+        private RespawnTimerCore Timer;
 
         private readonly Dictionary<Player, bool> _civilliansReachedHeavy = new Dictionary<Player, bool>();
         private readonly Dictionary<Player, bool> _civilliansReachedEntrance = new Dictionary<Player, bool>();
@@ -36,6 +39,7 @@ namespace GejlonForExiledV2.RespawnSystem
         public void OnRoundStarted()
         {
             Core = Plugin.Instance.RespawnSystemCore;
+            Timer = Plugin.Instance.RespawnTimerCore;
 
             Core.NineTailedFoxTokens = 57.714285f;
             Core.ChaosTokens = 42.85715f;
@@ -380,7 +384,14 @@ namespace GejlonForExiledV2.RespawnSystem
         {
             if (Core.MainCountdownStarted == false)
             {
-                Timing.RunCoroutine(Core.EnqueueSpawn(Random.Range(280f, 350f)), "mainRespawn");
+                int spawnDelay = Random.Range(280, 351);
+                Timer.TimeLeft = spawnDelay;
+
+                Timing.RunCoroutine(Core.EnqueueSpawn(spawnDelay), "mainRespawn");
+
+
+                Timing.RunCoroutine(Timer.CounterCoroutine(), "respawnTimer");
+
                 Log.Info("Wystartowano główny timer respawnu.");
                 Core.MainCountdownStarted = true;
             }
