@@ -15,11 +15,14 @@ namespace GejlonForExiledV2.CoinSystem
 
         public void SubscribeEvents()
         {
-            Events = new EventHandlers();
+            Events = new EventHandlers
+            {
+                CoinCore = Plugin.Instance.CoinSystemCore,
+                BadLuckCore = Plugin.Instance.BadLuckProtectionCore
+            };
 
             PlayerEvents.FlippingCoin += Events.OnPlayerCoinFlipping;
             
-            ServerEvents.RoundStarted += Events.OnRoundStarted;
             ServerEvents.RestartingRound += Events.OnServerRestarting;
         }
 
@@ -27,7 +30,6 @@ namespace GejlonForExiledV2.CoinSystem
         {
             PlayerEvents.FlippingCoin -= Events.OnPlayerCoinFlipping;
 
-            ServerEvents.RoundStarted -= Events.OnRoundStarted;
             ServerEvents.RestartingRound -= Events.OnServerRestarting;
 
             Events = null;

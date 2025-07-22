@@ -53,9 +53,9 @@ namespace GejlonForExiledV2
             BadLuckProtectionCore = new BadLuckProtectionCore();
             
             SubscribeEvents();
-            CoinSystemCore.SubscribeEvents();
             RespawnSystemCore.SubscribeEvents();
             RespawnTimerCore.SubscribeEvents();
+            CoinSystemCore.SubscribeEvents();
 
 
             base.OnEnabled();
@@ -63,9 +63,9 @@ namespace GejlonForExiledV2
 
         public override void OnDisabled()
         {
+            CoinSystemCore.UnsubscribeEvents();
             RespawnTimerCore.UnsubscribeEvents();
             RespawnSystemCore.UnsubscribeEvents();
-            CoinSystemCore.UnsubscribeEvents();
             UnsubscribeEvents();
 
             BadLuckProtectionCore = null;

@@ -20,6 +20,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
         public override void Execute(Player player)
         {
             player.EnableEffect(EffectType.SeveredEyes);
+            player.EnableEffect(EffectType.Blinded, 30);
         }
     }
 }

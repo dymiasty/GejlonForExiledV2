@@ -10,30 +10,33 @@ namespace GejlonForExiledV2.CoinSystem
 {
     public class EventHandlers
     {
-        private CoinSystemCore CoinCore;
-        private BadLuckProtectionCore BadLuckCore;
-
-        public void OnRoundStarted()
-        {
-            CoinCore = Plugin.Instance.CoinSystemCore;
-            BadLuckCore = Plugin.Instance.BadLuckProtectionCore;
-        }
+        public CoinSystemCore CoinCore;
+        public BadLuckProtectionCore BadLuckCore;
 
         public void OnPlayerCoinFlipping(FlippingCoinEventArgs ev)
         {
             bool canExecute = false;
 
             CoinPossibility possibility = null;
+            
+            PlayerCoinData coinData;
 
-            PlayerCoinData playerCoinData;
+            bool dictionaryHadPlayer = BadLuckCore.DataDictionary.TryGetValue(ev.Player.UserId, out PlayerCoinData data);
 
-            bool dictionaryHadPlayer = BadLuckCore.DataDictionary.TryGetValue(ev.Player.UserId, out playerCoinData);
+            if (dictionaryHadPlayer)
+            {
+                coinData = data;
+            }
+            else
+            {
+                coinData = new PlayerCoinData();
+            }
 
             List<(CoinPossibility, float)> weightedList = new List<(CoinPossibility possibility, float finalWeight)>();
 
             foreach (CoinPossibility option in CoinCore.ValidCoinPossibilities)
             {
-                float multiplier = BadLuckCore.CalculateWeightMultiplier(playerCoinData, option.Type);
+                float multiplier = BadLuckCore.CalculateWeightMultiplier(coinData, option.Type);
                 weightedList.Add((option, option.Weight * multiplier));
             }
 
@@ -78,28 +81,28 @@ namespace GejlonForExiledV2.CoinSystem
             possibility.Execute(ev.Player);
             ev.Player.ShowHint(possibility.Hint, possibility.HintDuration);
 
-            playerCoinData.TotalRolls++;
+            coinData.TotalRolls++;
 
             if (possibility.Type == PossibilityType.Negative)
             {
-                playerCoinData.NegativeRolls++;
-                playerCoinData.NegativeStreak++;
-                playerCoinData.PositiveSinceLastNegative = 0;
+                coinData.NegativeRolls++;
+                coinData.NegativeStreak++;
+                coinData.PositiveSinceLastNegative = 0;
             }
             else if (possibility.Type == PossibilityType.Positive)
             {
-                playerCoinData.NegativeStreak = 0;
-                playerCoinData.PositiveSinceLastNegative++;
-                playerCoinData.PositiveRolls++;
+                coinData.NegativeStreak = 0;
+                coinData.PositiveSinceLastNegative++;
+                coinData.PositiveRolls++;
             }
 
             if (dictionaryHadPlayer)
             {
-                BadLuckCore.DataDictionary[ev.Player.UserId] = playerCoinData;
+                BadLuckCore.DataDictionary[ev.Player.UserId] = coinData;
             }
             else
             {
-                BadLuckCore.DataDictionary.Add(ev.Player.UserId, playerCoinData);
+                BadLuckCore.DataDictionary.Add(ev.Player.UserId, coinData);
             }
 
             return;
