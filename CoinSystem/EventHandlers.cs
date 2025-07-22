@@ -25,24 +25,15 @@ namespace GejlonForExiledV2.CoinSystem
 
             CoinPossibility possibility = null;
 
-            PlayerCoinData coinData;
+            PlayerCoinData playerCoinData;
 
-            bool dictionaryHadPlayer = BadLuckCore.DataDictionary.TryGetValue(ev.Player.UserId, out PlayerCoinData data);
-            
-            if (dictionaryHadPlayer)
-            {
-                coinData = data;
-            }
-            else
-            {
-                coinData = new PlayerCoinData();
-            }
+            bool dictionaryHadPlayer = BadLuckCore.DataDictionary.TryGetValue(ev.Player.UserId, out playerCoinData);
 
             List<(CoinPossibility, float)> weightedList = new List<(CoinPossibility possibility, float finalWeight)>();
 
             foreach (CoinPossibility option in CoinCore.ValidCoinPossibilities)
             {
-                float multiplier = BadLuckCore.CalculateWeightMultiplier(coinData, option.Type);
+                float multiplier = BadLuckCore.CalculateWeightMultiplier(playerCoinData, option.Type);
                 weightedList.Add((option, option.Weight * multiplier));
             }
 
@@ -87,29 +78,28 @@ namespace GejlonForExiledV2.CoinSystem
             possibility.Execute(ev.Player);
             ev.Player.ShowHint(possibility.Hint, possibility.HintDuration);
 
-            // Bad luck handling
-            coinData.TotalRolls++;
+            playerCoinData.TotalRolls++;
 
             if (possibility.Type == PossibilityType.Negative)
             {
-                coinData.NegativeRolls++;
-                coinData.NegativeStreak++;
-                coinData.PositiveSinceLastNegative = 0;
+                playerCoinData.NegativeRolls++;
+                playerCoinData.NegativeStreak++;
+                playerCoinData.PositiveSinceLastNegative = 0;
             }
             else if (possibility.Type == PossibilityType.Positive)
             {
-                coinData.NegativeStreak = 0;
-                coinData.PositiveSinceLastNegative++;
-                coinData.PositiveRolls++;
+                playerCoinData.NegativeStreak = 0;
+                playerCoinData.PositiveSinceLastNegative++;
+                playerCoinData.PositiveRolls++;
             }
 
             if (dictionaryHadPlayer)
             {
-                BadLuckCore.DataDictionary[ev.Player.UserId] = coinData;
+                BadLuckCore.DataDictionary[ev.Player.UserId] = playerCoinData;
             }
             else
             {
-                BadLuckCore.DataDictionary.Add(ev.Player.UserId, coinData);
+                BadLuckCore.DataDictionary.Add(ev.Player.UserId, playerCoinData);
             }
 
             return;
