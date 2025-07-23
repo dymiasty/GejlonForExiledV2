@@ -1,5 +1,4 @@
 ﻿using Exiled.Events.EventArgs.Player;
-using PlayerRoles;
 namespace GejlonForExiledV2.RespawnSystem.RespawnTimer
 {
     public class EventHandlers
@@ -8,10 +7,7 @@ namespace GejlonForExiledV2.RespawnSystem.RespawnTimer
 
         public void OnPlayerDied(DiedEventArgs ev)
         {
-            if (!ev.Player.IsNPC && ev.Player.Role != RoleTypeId.Overwatch)
-            {
                 Core.Spectators.Add(ev.Player);
-            }
         }
 
         public void OnPlayerSpawned(SpawnedEventArgs ev)

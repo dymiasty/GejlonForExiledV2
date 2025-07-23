@@ -29,7 +29,6 @@ namespace GejlonForExiledV2.RespawnSystem
             ServerEvents.RoundStarted += Events.OnRoundStarted;
             ServerEvents.SelectingRespawnTeam += Events.OnSelectingRespawnTeam;
             ServerEvents.RespawnedTeam += Events.OnRespawnWave;
-            ServerEvents.RoundEnded += Events.OnRoundEnded;
 
             PlayerEvents.Dying += Events.OnPlayerDying;
             PlayerEvents.Escaping += Events.OnPlayerEscaping;
@@ -54,7 +53,6 @@ namespace GejlonForExiledV2.RespawnSystem
             ServerEvents.RoundStarted -= Events.OnRoundStarted;
             ServerEvents.SelectingRespawnTeam -= Events.OnSelectingRespawnTeam;
             ServerEvents.RespawnedTeam -= Events.OnRespawnWave;
-            ServerEvents.RoundEnded -= Events.OnRoundEnded;
 
             PlayerEvents.Dying -= Events.OnPlayerDying;
             PlayerEvents.Escaping -= Events.OnPlayerEscaping;

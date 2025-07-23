@@ -61,7 +61,7 @@ namespace GejlonForExiledV2.RespawnSystem.RespawnTimer
 
             if (Plugin.Instance.RespawnSystemCore.NineTailedFoxTokens > Plugin.Instance.RespawnSystemCore.ChaosTokens)
             {
-                spawnAnimationLength = 18;
+                spawnAnimationLength = 12;
                 while (spawnAnimationLength > 0)
                 {
                     yield return Timing.WaitForSeconds(1f);

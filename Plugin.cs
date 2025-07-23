@@ -83,6 +83,7 @@ namespace GejlonForExiledV2
             // Server events
             ServerEvents.WaitingForPlayers += MainHandlers.OnWaitingForPlayers;
             ServerEvents.RoundStarted += MainHandlers.OnRoundStarted;
+            ServerEvents.RoundEnded += MainHandlers.OnRoundEnded;
 
             // Player events
             PlayerEvents.Spawned += MainHandlers.OnPlayerSpawned;
@@ -94,6 +95,7 @@ namespace GejlonForExiledV2
             // Server events
             ServerEvents.WaitingForPlayers -= MainHandlers.OnWaitingForPlayers;
             ServerEvents.RoundStarted -= MainHandlers.OnRoundStarted;
+            ServerEvents.RoundEnded -= MainHandlers.OnRoundEnded;
 
             // Player events
             PlayerEvents.Spawned -= MainHandlers.OnPlayerSpawned;
@@ -225,7 +227,7 @@ namespace GejlonForExiledV2
 
         public ItemType GenerateRandomSpecialWeapon()
         {
-            int specialItemGenerated = Random.Range(1, 6);
+            int specialItemGenerated = Random.Range(1, 7);
 
             switch (specialItemGenerated)
             {
@@ -241,6 +243,8 @@ namespace GejlonForExiledV2
                     return ItemType.MicroHID;
                 case 5:
                     return ItemType.GunA7;
+                case 6:
+                    return ItemType.GunSCP127;
             }
         }
 

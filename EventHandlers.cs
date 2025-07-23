@@ -1,6 +1,7 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
+using Exiled.Events.EventArgs.Server;
 using GejlonForExiledV2.CoinSystem;
 using GejlonForExiledV2.CoinSystem.CoinPossibilities;
 using MEC;
@@ -50,10 +51,21 @@ namespace GejlonForExiledV2
             }
         }
 
+        public void OnRoundEnded(RoundEndedEventArgs ev)
+        {
+            Timing.RunCoroutine(RestartGameCoroutine());
+        }
+
         private IEnumerator<float> _warheadDetonateCoroutine()
         {
             yield return Timing.WaitForSeconds(330);
             Plugin.Instance.CoinSystemCore.ValidCoinPossibilities.OfType<WarheadDetonate>().FirstOrDefault().CanDetonate = true;
+        }
+
+        private IEnumerator<float> RestartGameCoroutine()
+        {
+            yield return Timing.WaitForSeconds(7f);
+            Server.Restart();
         }
     }
 }

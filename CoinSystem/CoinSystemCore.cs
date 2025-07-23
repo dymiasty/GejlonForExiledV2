@@ -88,6 +88,10 @@ namespace GejlonForExiledV2.CoinSystem
             new DowngradeKeycards(), // 44
             new MaxHealthIncrease(), // 45
             new SizeReduce(), // 46
+            new WallHack(), // 47
+            new Defecate(), // 48
+            new WidthIncrease(), // 49
+            new RandomEffectForRandomPlayer(), // 50
         };
 
         /// <returns>

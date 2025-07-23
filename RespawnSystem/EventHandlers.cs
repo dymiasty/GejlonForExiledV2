@@ -364,9 +364,10 @@ namespace GejlonForExiledV2.RespawnSystem
                     Log.Info($"Dodano gracza {ev.Player.Nickname} do słowników od stref.");
                 }
 
-            if (ev.Reason == SpawnReason.Revived && ev.Player.Role == RoleTypeId.Scp0492)
+            if (ev.Reason == SpawnReason.Revived)
             {
-                _lastScpStanding = false;
+                if (_lastScpStanding)
+                    _lastScpStanding = false;
 
                 foreach (Player player in Player.List.ToList())
                 {
@@ -377,6 +378,7 @@ namespace GejlonForExiledV2.RespawnSystem
                 }
 
                 Timing.KillCoroutines("mainRespawn");
+                Log.Info("Zabito korutynę od spawnu ze względu na brak martwych graczy.");
             }
         }
 
@@ -750,11 +752,6 @@ namespace GejlonForExiledV2.RespawnSystem
             }
         }
 
-        public void OnRoundEnded(RoundEndedEventArgs ev)
-        {
-            Timing.RunCoroutine(RestartGameCoroutine());
-        }
-
         public void OnPlayerHurt(HurtEventArgs ev)
         {
             if (ev.Attacker == null)
@@ -926,12 +923,6 @@ namespace GejlonForExiledV2.RespawnSystem
             {
                 _civilliansReachedSurface[player] = false;
             }
-        }
-
-        private IEnumerator<float> RestartGameCoroutine()
-        {
-            yield return Timing.WaitForSeconds(7f);
-            Server.Restart();
         }
     }
 }
