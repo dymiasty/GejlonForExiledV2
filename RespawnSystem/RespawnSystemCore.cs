@@ -23,7 +23,11 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public void SubscribeEvents()
         {
-            Events = new EventHandlers();
+            Events = new EventHandlers()
+            {
+                Core = Plugin.Instance.RespawnSystemCore,
+                Timer = Plugin.Instance.RespawnTimerCore
+            };
 
             ServerEvents.WaitingForPlayers += _enabledMessage;
             ServerEvents.RoundStarted += Events.OnRoundStarted;

@@ -17,9 +17,9 @@ namespace GejlonForExiledV2.RespawnSystem
 {
     internal class EventHandlers
     {
-        private RespawnSystemCore Core;
+        public RespawnSystemCore Core;
 
-        private RespawnTimerCore Timer;
+        public RespawnTimerCore Timer;
 
         private readonly Dictionary<Player, bool> _civilliansReachedHeavy = new Dictionary<Player, bool>();
         private readonly Dictionary<Player, bool> _civilliansReachedEntrance = new Dictionary<Player, bool>();
@@ -38,9 +38,6 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public void OnRoundStarted()
         {
-            Core = Plugin.Instance.RespawnSystemCore;
-            Timer = Plugin.Instance.RespawnTimerCore;
-
             Core.NineTailedFoxTokens = 57.714285f;
             Core.ChaosTokens = 42.85715f;
 
