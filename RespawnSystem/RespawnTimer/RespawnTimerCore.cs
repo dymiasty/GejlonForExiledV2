@@ -15,9 +15,10 @@ namespace GejlonForExiledV2.RespawnSystem.RespawnTimer
 
         public void SubscribeEvents()
         {
-            Events = new EventHandlers();
-
-            Events.Core = Plugin.Instance.RespawnTimerCore;
+            Events = new EventHandlers
+            {
+                Core = Plugin.Instance.RespawnTimerCore
+            };
 
             PlayerEvents.Died += Events.OnPlayerDied;
             PlayerEvents.Spawned += Events.OnPlayerSpawned;
@@ -27,8 +28,6 @@ namespace GejlonForExiledV2.RespawnSystem.RespawnTimer
         {
             PlayerEvents.Died -= Events.OnPlayerDied;
             PlayerEvents.Spawned -= Events.OnPlayerSpawned;
-
-            Events.Core = null;
 
             Events = null;
         }

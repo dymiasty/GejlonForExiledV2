@@ -13,6 +13,7 @@ using GejlonForExiledV2.RespawnSystem;
 using GejlonForExiledV2.BadLuckProtection;
 using GejlonForExiledV2.CoinSystem;
 using GejlonForExiledV2.RespawnSystem.RespawnTimer;
+using GejlonForExiledV2.ReviveSystem;
 
 namespace GejlonForExiledV2
 {
@@ -40,6 +41,8 @@ namespace GejlonForExiledV2
 
         public RespawnTimerCore RespawnTimerCore { get; private set; }
 
+        public ReviveSystemCore ReviveSystemCore { get; private set; }
+
 
         public override void OnEnabled()
         {
@@ -49,13 +52,15 @@ namespace GejlonForExiledV2
             CoinSystemCore = new CoinSystemCore();
             RespawnSystemCore = new RespawnSystemCore();
             RespawnTimerCore = new RespawnTimerCore();
-
+            ReviveSystemCore = new ReviveSystemCore();
+            
             BadLuckProtectionCore = new BadLuckProtectionCore();
             
             SubscribeEvents();
             RespawnSystemCore.SubscribeEvents();
             RespawnTimerCore.SubscribeEvents();
             CoinSystemCore.SubscribeEvents();
+            ReviveSystemCore.SubscribeEvents();
 
 
             base.OnEnabled();
@@ -63,6 +68,7 @@ namespace GejlonForExiledV2
 
         public override void OnDisabled()
         {
+            ReviveSystemCore.UnsubscribeEvents();
             CoinSystemCore.UnsubscribeEvents();
             RespawnTimerCore.UnsubscribeEvents();
             RespawnSystemCore.UnsubscribeEvents();

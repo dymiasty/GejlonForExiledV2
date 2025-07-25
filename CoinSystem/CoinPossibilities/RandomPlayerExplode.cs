@@ -22,7 +22,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
         {
             ExplosiveGrenade grenade = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE, player);
             grenade.FuseTime = 0.001f;
-            grenade.ScpDamageMultiplier = 25;
+            grenade.ScpDamageMultiplier = 500f;
             grenade.ConcussDuration = 30f;
 
             Player playerToExplode = Plugin.Instance.RandomAlivePlayer();

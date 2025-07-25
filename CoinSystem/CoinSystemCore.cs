@@ -90,8 +90,7 @@ namespace GejlonForExiledV2.CoinSystem
             new SizeReduce(), // 46
             new WallHack(), // 47
             new Defecate(), // 48
-            new WidthIncrease(), // 49
-            new RandomEffectForRandomPlayer(), // 50
+            new RandomEffectForRandomPlayer(), // 49
         };
 
         /// <returns>
