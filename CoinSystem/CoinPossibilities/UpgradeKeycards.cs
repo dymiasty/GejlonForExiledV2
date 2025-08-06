@@ -35,7 +35,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
             {
                 if (item.IsKeycard)
                 {
-                    ItemType newKeycard = Plugin.Instance.UpgradeKeycard(item.Type);
+                    ItemType newKeycard = Util.UpgradeKeycard(item.Type);
                     player.RemoveItem(item);
                     player.AddItem(newKeycard);
                 }

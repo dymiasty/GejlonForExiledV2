@@ -42,7 +42,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
             player.EnableEffect(EffectType.Invisible, EffectDuration);
             player.EnableEffect(EffectType.MovementBoost, 100, EffectDuration);
             player.EnableEffect(EffectType.SilentWalk, 10, EffectDuration);
-            Timing.RunCoroutine(Plugin.Instance.GodPlayer(player, EffectDuration));
+            Timing.RunCoroutine(Util.GodPlayer(player, EffectDuration));
             player.EnableEffect(EffectType.SeveredHands, EffectDuration - 0.1f);
         }   
     }

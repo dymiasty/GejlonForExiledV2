@@ -22,7 +22,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override bool CanExecute(Player player)
         {
-            int humanPlayers = 0;
+            /* int humanPlayers = 0;
 
             foreach (Player playr in Player.List.ToList())
             {
@@ -37,16 +37,18 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
                 }
             }
 
-            return false;
+            return false; */
+
+            return true;
         }
 
         public override void Execute(Player player)
         {
-            randomPlayer = Plugin.Instance.RandomHumanPlayer();
+            randomPlayer = Util.RandomHumanPlayer();
             
             while (randomPlayer == player)
             {
-                randomPlayer = Plugin.Instance.RandomHumanPlayer();
+                randomPlayer = Util.RandomHumanPlayer();
             }
 
             List<Item> randomPlayerItems = new List<Item>();

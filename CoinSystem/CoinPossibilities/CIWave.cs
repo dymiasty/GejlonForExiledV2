@@ -26,7 +26,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override void Execute(Player player)
         {
-            Timing.RunCoroutine(Plugin.Instance.RespawnSystemCore.SpawnCI());
+            Timing.RunCoroutine(Plugin.Instance.RespawnSystemCore.SpawnCI(), "spawning");
 
             Timing.RunCoroutine(TimerCoroutine(player));
         }

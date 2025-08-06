@@ -38,11 +38,11 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override void Execute(Player player)
         {
-            Player randomPlayer = Plugin.Instance.RandomAlivePlayer();
+            Player randomPlayer = Util.RandomAlivePlayer();
 
             while (randomPlayer == player)
             {
-                randomPlayer = Plugin.Instance.RandomAlivePlayer();
+                randomPlayer = Util.RandomAlivePlayer();
             }
 
             Vector3 randomPlayerPos = new Vector3(randomPlayer.Position.x, randomPlayer.Position.y, randomPlayer.Position.z);

@@ -43,7 +43,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
                         continue;
                     }
                     
-                    ItemType newKeycard = Plugin.Instance.DowngradeKeycard(item.Type);
+                    ItemType newKeycard = Util.DowngradeKeycard(item.Type);
                     player.RemoveItem(item);
                     player.AddItem(newKeycard);
                 }

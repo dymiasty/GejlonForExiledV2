@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Exiled.API.Features;
 using PlayerEvents = Exiled.Events.Handlers.Player;
-using ServerEvents = Exiled.Events.Handlers.Server;
 
 namespace GejlonForExiledV2.CoinSystem
 {
@@ -22,15 +21,11 @@ namespace GejlonForExiledV2.CoinSystem
             };
 
             PlayerEvents.FlippingCoin += Events.OnPlayerCoinFlipping;
-            
-            ServerEvents.RestartingRound += Events.OnServerRestarting;
         }
 
         public void UnsubscribeEvents()
         {
             PlayerEvents.FlippingCoin -= Events.OnPlayerCoinFlipping;
-
-            ServerEvents.RestartingRound -= Events.OnServerRestarting;
 
             Events = null;
         }
@@ -91,6 +86,7 @@ namespace GejlonForExiledV2.CoinSystem
             new WallHack(), // 47
             new Defecate(), // 48
             new RandomEffectForRandomPlayer(), // 49
+            new Schizophrenia(), // 50
         };
 
         /// <returns>

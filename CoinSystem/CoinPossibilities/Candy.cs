@@ -1,9 +1,13 @@
 ﻿using Exiled.API.Features;
+using MEC;
+using System.Collections.Generic;
 
 namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 {
     public class Candy : CoinPossibility
     {
+        private const int CANDY_AMOUNT = 2;
+
         public override string Id => "candy";
 
         public override string Hint => "Dostałeś <color=#ff96e1>cukierki</color>.";
@@ -18,8 +22,16 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override void Execute(Player player)
         {
-            player.TryAddCandy(Plugin.Instance.GenerateRandomCandy());
-            player.TryAddCandy(Plugin.Instance.GenerateRandomCandy());
+            Timing.RunCoroutine(Main(player));
+        }
+
+        private IEnumerator<float> Main(Player player)
+        {
+            for (int i = 0; i < CANDY_AMOUNT; i++)
+            {
+                player.TryAddCandy(Util.GenerateRandomCandy());
+                yield return Timing.WaitForSeconds(0.1f);
+            }
         }
     }
 }

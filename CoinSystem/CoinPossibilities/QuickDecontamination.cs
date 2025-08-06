@@ -18,7 +18,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override bool CanExecute(Player player)
         {
-            if (Plugin.Instance.GetPeopleInLCZ().Count != 0)
+            if (Util.GetPeopleInLCZ().Count != 0)
                 return true;
 
             return false;
@@ -27,7 +27,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
         public override void Execute(Player player)
         {
             Map.Broadcast(5, "\n<mark=yellow><color=#ffffa1><b>DEKONTAMINACJA</b></color></mark>\n LCZ zostało zdekontaminowane.");
-            foreach (Player playerr in Plugin.Instance.GetPeopleInLCZ())
+            foreach (Player playerr in Util.GetPeopleInLCZ())
             {
                 playerr.EnableEffect(EffectType.Decontaminating, 5f);
             }

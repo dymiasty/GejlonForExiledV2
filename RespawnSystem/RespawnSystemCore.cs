@@ -29,7 +29,6 @@ namespace GejlonForExiledV2.RespawnSystem
                 Timer = Plugin.Instance.RespawnTimerCore
             };
 
-            ServerEvents.WaitingForPlayers += _enabledMessage;
             ServerEvents.RoundStarted += Events.OnRoundStarted;
             ServerEvents.SelectingRespawnTeam += Events.OnSelectingRespawnTeam;
             ServerEvents.RespawnedTeam += Events.OnRespawnWave;
@@ -53,7 +52,6 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public void UnsubscribeEvents()
         {
-            ServerEvents.WaitingForPlayers -= _enabledMessage;
             ServerEvents.RoundStarted -= Events.OnRoundStarted;
             ServerEvents.SelectingRespawnTeam -= Events.OnSelectingRespawnTeam;
             ServerEvents.RespawnedTeam -= Events.OnRespawnWave;
@@ -101,9 +99,9 @@ namespace GejlonForExiledV2.RespawnSystem
         {
             yield return Timing.WaitForSeconds(timeToSpawn);
             if (NineTailedFoxTokens >= ChaosTokens)
-                Timing.RunCoroutine(SpawnNTF());
+                Timing.RunCoroutine(SpawnNTF(), "spawning");
             else
-                Timing.RunCoroutine(SpawnCI());
+                Timing.RunCoroutine(SpawnCI(), "spawning");
         }
 
         public IEnumerator<float> SpawnCI()
@@ -134,12 +132,6 @@ namespace GejlonForExiledV2.RespawnSystem
             WavesAmount++;
 
             Timing.KillCoroutines("mainRespawn");
-        }
-        
-        
-        private void _enabledMessage()
-        {
-            Log.Info("Old Respawn System BETA enabled.");
         }
     }
 }

@@ -19,8 +19,6 @@ namespace GejlonForExiledV2
             Log.Info("Oczekiwanie na rozpoczęcie gry...");
 
             Round.IsLobbyLocked = true;
-
-            Plugin.Instance.BadLuckProtectionCore.LoadData();
         }
 
         public void OnRoundStarted()
@@ -35,9 +33,7 @@ namespace GejlonForExiledV2
         public void OnPlayerSpawned(SpawnedEventArgs ev)
         {
             if (ev.Reason == SpawnReason.RoundStart)
-            {
                 ev.Player.SendConsoleMessage(CoinSystemCore.CalculateChances(), "green");
-            }
         }
 
         public void OnPlayerShooting(ShootingEventArgs ev)

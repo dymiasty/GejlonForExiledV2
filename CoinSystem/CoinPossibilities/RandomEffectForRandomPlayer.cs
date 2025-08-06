@@ -19,14 +19,16 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override void Execute(Player player)
         {
-            Player randomPlayer = Plugin.Instance.RandomAlivePlayer();
+            Player randomPlayer = Util.RandomAlivePlayer();
 
             while (randomPlayer.Role == RoleTypeId.Scp079 || randomPlayer == player)
             {
-                randomPlayer = Plugin.Instance.RandomAlivePlayer();
+                randomPlayer = Util.RandomAlivePlayer();
             }
 
-            randomPlayer.ApplyRandomEffect(duration: 10f);
+            float duration = 10f;
+            randomPlayer.ApplyRandomEffect(duration: duration);
+            randomPlayer.ShowHint($"{player.Nickname} rzucił monetą.\nOtrzymałeś losowy efekt na {duration} sekund.");
         }
     }
 }

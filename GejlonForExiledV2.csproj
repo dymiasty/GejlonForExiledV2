@@ -4,6 +4,8 @@
     <TargetFramework>net4.8</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -15,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ExMod.Exiled" Version="9.6.3" />
+    <PackageReference Include="ExMod.Exiled" Version="9.7.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 

@@ -25,10 +25,10 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
             grenade.ScpDamageMultiplier = 500f;
             grenade.ConcussDuration = 30f;
 
-            Player playerToExplode = Plugin.Instance.RandomAlivePlayer();
+            Player playerToExplode = Util.RandomAlivePlayer();
 
             while (playerToExplode.Role == RoleTypeId.Scp079) {
-                playerToExplode = Plugin.Instance.RandomAlivePlayer();
+                playerToExplode = Util.RandomAlivePlayer();
             }
 
             grenade.SpawnActive(playerToExplode.Position);

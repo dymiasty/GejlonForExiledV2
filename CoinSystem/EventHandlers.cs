@@ -107,10 +107,5 @@ namespace GejlonForExiledV2.CoinSystem
 
             return;
         }
-
-        public void OnServerRestarting()
-        {
-            Plugin.Instance.BadLuckProtectionCore.SaveData();
-        }
     }
 }

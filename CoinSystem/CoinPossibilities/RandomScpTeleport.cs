@@ -20,10 +20,10 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override bool CanExecute(Player player)
         {
-            if (Plugin.Instance.GetLivingSCPs().Count != 0) 
+            if (Util.GetLivingSCPs().Count != 0) 
                 return true;
 
-            if (Plugin.Instance.GetLivingSCPs().Count == 1 && Plugin.Instance.GetLivingSCPs().ToList().ElementAt(0).Role == RoleTypeId.Scp079)
+            if (Util.GetLivingSCPs().Count == 1 && Util.GetLivingSCPs().ToList().ElementAt(0).Role == RoleTypeId.Scp079)
                 return false;
 
             return false;
@@ -31,7 +31,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override void Execute(Player player)
         {
-            List<Player> livingScps = Plugin.Instance.GetLivingSCPs();
+            List<Player> livingScps = Util.GetLivingSCPs();
 
             Player scp = livingScps.ElementAt(Random.Range(0, livingScps.Count));
 

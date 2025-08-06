@@ -21,18 +21,18 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override void Execute(Player player)
         {
-            RoleTypeId roleToSet = Plugin.Instance.RandomRole();
+            RoleTypeId roleToSet = Util.RandomRole();
 
             while (roleToSet == player.Role || roleToSet == RoleTypeId.Scp0492)
             {
-                roleToSet = Plugin.Instance.RandomRole();
+                roleToSet = Util.RandomRole();
             }
 
-            if (Plugin.Instance.GetLivingSCPs().Count == 0)
+            if (Util.GetLivingSCPs().Count == 0)
             {
                 while (roleToSet == RoleTypeId.Scp079)
                 {
-                    roleToSet = Plugin.Instance.RandomRole();
+                    roleToSet = Util.RandomRole();
                 }
             }
 

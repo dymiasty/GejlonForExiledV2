@@ -18,7 +18,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override void Execute(Player player)
         {
-            player.AddItem(Plugin.Instance.GenerateRandomScpItem());
+            player.AddItem(Util.GenerateRandomScpItem());
         }
     }
 }
