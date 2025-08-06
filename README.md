@@ -6,7 +6,7 @@ Plugin is only in polish, I am not planning on translating it or making it trans
 - (Prawie identyczny) Stary system fal respawnu NTFu i CI!  
 - Lifesteal dla ostatniego żywego SCP!  
 - Niesamowite mechaniki zacinania się broni podczas strzelania! (Absolutna immersja!)  
-- Niespodziewane zdrady sojuszników!  
+- Wskrzeszanie zmarłych za pomocą... apteczek? Kto to wymyślał 💀
 
 **A plugin nadal nie jest skończony!**  
 *Sugeruję nie korzystać bez wcześniejszego przejrzenia kodu i zmiany tego co może się nie pododobać bo dosłownie nic nie jest konfigurowalne :)*
