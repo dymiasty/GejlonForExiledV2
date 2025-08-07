@@ -1,4 +1,5 @@
 ﻿using Exiled.Events.EventArgs.Player;
+
 namespace GejlonForExiledV2.RespawnSystem.RespawnTimer
 {
     public class EventHandlers
@@ -16,6 +17,11 @@ namespace GejlonForExiledV2.RespawnSystem.RespawnTimer
             {
                 Core.Spectators.Remove(ev.Player);
             }
+        }
+
+        public void OnWarheadDetonating(Exiled.Events.EventArgs.Warhead.DetonatingEventArgs ev)
+        {
+            Core.TimeLeft = 240;
         }
     }
 }

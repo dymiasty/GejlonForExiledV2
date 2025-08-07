@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MEC;
 using PlayerEvents = Exiled.Events.Handlers.Player;
+using WarheadEvents = Exiled.Events.Handlers.Warhead;
 
 namespace GejlonForExiledV2.RespawnSystem.RespawnTimer
 {
@@ -22,12 +23,16 @@ namespace GejlonForExiledV2.RespawnSystem.RespawnTimer
 
             PlayerEvents.Died += Events.OnPlayerDied;
             PlayerEvents.Spawned += Events.OnPlayerSpawned;
+
+            WarheadEvents.Detonating += Events.OnWarheadDetonating;
         }
 
         public void UnsubscribeEvents()
         {
             PlayerEvents.Died -= Events.OnPlayerDied;
             PlayerEvents.Spawned -= Events.OnPlayerSpawned;
+
+            WarheadEvents.Detonating -= Events.OnWarheadDetonating;
 
             Events = null;
         }

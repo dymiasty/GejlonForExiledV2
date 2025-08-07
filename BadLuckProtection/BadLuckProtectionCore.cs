@@ -47,7 +47,7 @@ namespace GejlonForExiledV2.BadLuckProtection
         {
             Paths.Reload();
 
-            string jsonContent = JsonConvert.SerializeObject(DataDictionary);
+            string jsonContent = JsonConvert.SerializeObject(DataDictionary, Formatting.Indented);
 
             File.WriteAllText(filePath, jsonContent);
 

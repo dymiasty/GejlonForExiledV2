@@ -1,10 +1,11 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
-using GejlonForExiledV2.RespawnSystem.RespawnTimer;
 using MEC;
 using System.Collections.Generic;
 using PlayerEvents = Exiled.Events.Handlers.Player;
 using ServerEvents = Exiled.Events.Handlers.Server;
+using WarheadEvents = Exiled.Events.Handlers.Warhead;
+using MapEvents = Exiled.Events.Handlers.Map;
 
 namespace GejlonForExiledV2.RespawnSystem
 {
@@ -44,10 +45,10 @@ namespace GejlonForExiledV2.RespawnSystem
             PlayerEvents.ActivatingWarheadPanel += Events.OnWarheadUnlock;
             PlayerEvents.Hurt += Events.OnPlayerHurt;
 
-            Exiled.Events.Handlers.Warhead.Starting += Events.OnWarheadStarting;
-            Exiled.Events.Handlers.Warhead.Detonating += Events.OnWarheadDetonating;
+            WarheadEvents.Starting += Events.OnWarheadStarting;
+            WarheadEvents.Detonating += Events.OnWarheadDetonating;
 
-            Exiled.Events.Handlers.Map.GeneratorActivating += Events.OnGeneratorEngaged;
+            MapEvents.GeneratorActivating += Events.OnGeneratorEngaged;
         }
 
         public void UnsubscribeEvents()
@@ -67,10 +68,10 @@ namespace GejlonForExiledV2.RespawnSystem
             PlayerEvents.ActivatingWarheadPanel -= Events.OnWarheadUnlock;
             PlayerEvents.Hurt -= Events.OnPlayerHurt;
 
-            Exiled.Events.Handlers.Warhead.Starting -= Events.OnWarheadStarting;
-            Exiled.Events.Handlers.Warhead.Detonating -= Events.OnWarheadDetonating;
+            WarheadEvents.Starting -= Events.OnWarheadStarting;
+            WarheadEvents.Detonating -= Events.OnWarheadDetonating;
 
-            Exiled.Events.Handlers.Map.GeneratorActivating -= Events.OnGeneratorEngaged;
+            MapEvents.GeneratorActivating -= Events.OnGeneratorEngaged;
 
             Events = null;
         }
