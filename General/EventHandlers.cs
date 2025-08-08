@@ -73,7 +73,15 @@ namespace GejlonForExiledV2.General
         private IEnumerator<float> SCPSwap()
         {
             yield return Timing.WaitForSeconds(1.5f);
-            Player player = Util.GetLivingSCPs()[Random.Range(0, 2)];
+            List<Player> players = Util.GetLivingSCPs();
+            Player player = players[Random.Range(0, 2)];
+
+            foreach (Player p in players)
+            {
+                if (p.Role == RoleTypeId.Scp079)
+                    player = p;
+            }
+
             player.Role.Set(RoleTypeId.Scientist, SpawnReason.RoundStart, RoleSpawnFlags.All);
             player.ShowHint("Zmieniono cię z SCP w Naukowca\nze względu na ilość osób.");
         }
