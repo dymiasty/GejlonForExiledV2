@@ -2,6 +2,7 @@
 using Exiled.API.Enums;
 using PlayerRoles;
 using Exiled.API.Extensions;
+using GejlonForExiledV2.General;
 
 namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 {

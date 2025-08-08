@@ -1,5 +1,6 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
+using GejlonForExiledV2.General;
 
 namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 {

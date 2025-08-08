@@ -2,6 +2,7 @@
 using System;
 using PlayerEvents = Exiled.Events.Handlers.Player;
 using ServerEvents = Exiled.Events.Handlers.Server;
+using EventHandlers = GejlonForExiledV2.General.EventHandlers;
 using GejlonForExiledV2.RespawnSystem;
 using GejlonForExiledV2.BadLuckProtection;
 using GejlonForExiledV2.CoinSystem;

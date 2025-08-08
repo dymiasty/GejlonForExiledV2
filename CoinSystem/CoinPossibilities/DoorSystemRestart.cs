@@ -4,6 +4,7 @@ using MEC;
 using System.Collections.Generic;
 using Exiled.API.Enums;
 using System.Linq;
+using GejlonForExiledV2.General;
 
 namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 {

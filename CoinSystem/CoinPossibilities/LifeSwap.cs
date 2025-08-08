@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Exiled.API.Features.Items;
 using System.Linq;
 using PlayerRoles;
+using GejlonForExiledV2.General;
 
 namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 {

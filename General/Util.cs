@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 using InventorySystem.Items.Usables.Scp330;
 using MEC;
 
-namespace GejlonForExiledV2
+namespace GejlonForExiledV2.General
 {
     public static class Util
     {

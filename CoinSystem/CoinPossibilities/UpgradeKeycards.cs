@@ -1,5 +1,6 @@
 ﻿using Exiled.API.Features;
 using Exiled.API.Features.Items;
+using GejlonForExiledV2.General;
 using System.Linq;
 
 namespace GejlonForExiledV2.CoinSystem.CoinPossibilities

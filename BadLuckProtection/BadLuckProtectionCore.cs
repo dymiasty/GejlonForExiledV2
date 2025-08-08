@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using System;
+using GejlonForExiledV2.General;
 
 namespace GejlonForExiledV2.BadLuckProtection
 {

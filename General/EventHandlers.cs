@@ -9,8 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using PlayerRoles;
 
-namespace GejlonForExiledV2
+namespace GejlonForExiledV2.General
 {
     public class EventHandlers
     {
@@ -27,7 +28,12 @@ namespace GejlonForExiledV2
 
             Warhead.DeadmanSwitchEnabled = false;
 
-            Timing.RunCoroutine(_warheadDetonateCoroutine());
+            Timing.RunCoroutine(WarheadDetonateCoroutine());
+            
+            if (Player.List.ToList().Count == 8)
+            {
+                Timing.RunCoroutine(SCPSwap());
+            }
         }
 
         public void OnPlayerSpawned(SpawnedEventArgs ev)
@@ -52,7 +58,7 @@ namespace GejlonForExiledV2
             Timing.RunCoroutine(RestartGameCoroutine());
         }
 
-        private IEnumerator<float> _warheadDetonateCoroutine()
+        private IEnumerator<float> WarheadDetonateCoroutine()
         {
             yield return Timing.WaitForSeconds(330);
             Plugin.Instance.CoinSystemCore.ValidCoinPossibilities.OfType<WarheadDetonate>().FirstOrDefault().CanDetonate = true;
@@ -62,6 +68,14 @@ namespace GejlonForExiledV2
         {
             yield return Timing.WaitForSeconds(7f);
             Server.Restart();
+        }
+
+        private IEnumerator<float> SCPSwap()
+        {
+            yield return Timing.WaitForSeconds(1.5f);
+            Player player = Util.GetLivingSCPs()[Random.Range(0, 2)];
+            player.Role.Set(RoleTypeId.Scientist, SpawnReason.RoundStart, RoleSpawnFlags.All);
+            player.ShowHint("Zmieniono cię z SCP w Naukowca\nze względu na ilość osób.");
         }
     }
 }
