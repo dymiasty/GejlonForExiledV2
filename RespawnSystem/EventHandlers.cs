@@ -601,44 +601,55 @@ namespace GejlonForExiledV2.RespawnSystem
         {
             Core.MainCountdownStarted = false;
 
-            float tokensToRemove = 0;
-            foreach (Player player in ev.Players.ToList())
-            {
-                tokensToRemove++;
-            }
+            List<Player> respawnedPlayers = new List<Player>();
 
-            if (ev.Wave.TargetFaction == Faction.FoundationStaff)
+            respawnedPlayers.AddRange(ev.Players);
+
+            foreach (Player player in Player.List.ToList())
             {
-                // making sure everyone spawns
-                foreach (Player player in Player.List.ToList())
+                if (player.Role == RoleTypeId.Spectator)
                 {
-                    if (player.Role == RoleTypeId.Spectator)
+                    // making sure everyone spawns
+                    if (ev.Wave.TargetFaction == Faction.FoundationStaff)
                     {
-                        player.Role.Set(RoleTypeId.NtfSergeant, SpawnReason.Respawn, RoleSpawnFlags.All);
-                        tokensToRemove++;
+                        player.Role.Set(RoleTypeId.NtfPrivate, SpawnReason.Respawn, RoleSpawnFlags.All);
                     }
-                }
-
-                Core.AddChaosTokens(tokensToRemove);
-
-                return;
-            }
-
-            if (ev.Wave.TargetFaction == Faction.FoundationEnemy)
-            {
-                // making sure everyone spawns
-                foreach (Player player in Player.List.ToList())
-                {
-                    if (player.Role == RoleTypeId.Spectator)
+                    else if (ev.Wave.TargetFaction == Faction.FoundationEnemy)
                     {
                         player.Role.Set(RoleTypeId.ChaosRifleman, SpawnReason.Respawn, RoleSpawnFlags.All);
-                        tokensToRemove++;
                     }
+                    
+                    respawnedPlayers.Add(player);
                 }
-
-                Core.AddNineTailedFoxTokens(tokensToRemove);
-                return;
             }
+
+            // ci spy
+            if (Random.Range(0, 101) > 95)
+            {
+                Player ciSpy = respawnedPlayers[Random.Range(0, respawnedPlayers.Count)];
+
+                byte previousUnitId = ciSpy.UnitId;
+
+                ciSpy.Role.Set(RoleTypeId.ChaosConscript, SpawnReason.Respawn, RoleSpawnFlags.None);
+                ciSpy.ChangeAppearance(ciSpy.PreviousRole, true, previousUnitId);
+
+                Exiled.API.Features.Broadcast broadcast = new Exiled.API.Features.Broadcast();
+
+                broadcast.Duration = 15;
+                broadcast.Show = true;
+                broadcast.Type = Broadcast.BroadcastFlags.Normal;
+                broadcast.Content = "Jesteś <color=green>Szpiegiem Rebelii Chaosu</color>.\n" +
+                    "Inni gracze widzą cię jakbyś był z oddziału NTF, obowiązują cię\n" +
+                    "standardowe warunki wygranej Rebelii Chaosu.";
+
+                ciSpy.Broadcast(broadcast, true);
+            }
+
+
+            if (ev.Wave.TargetFaction == Faction.FoundationStaff)
+                Core.AddNineTailedFoxTokens(respawnedPlayers.Count);
+            else if (ev.Wave.TargetFaction == Faction.FoundationEnemy)
+                Core.AddChaosTokens(respawnedPlayers.Count);
         }
 
         public void OnPlayerHurt(HurtEventArgs ev)

@@ -83,7 +83,7 @@ namespace GejlonForExiledV2.General
             }
 
             player.Role.Set(RoleTypeId.Scientist, SpawnReason.RoundStart, RoleSpawnFlags.All);
-            player.ShowHint("Zmieniono cię z SCP w Naukowca\nze względu na ilość osób.");
+            player.ShowHint("Zmieniono cię z SCP w Naukowca\nze względu na małą ilość osób.", 6f);
         }
     }
 }

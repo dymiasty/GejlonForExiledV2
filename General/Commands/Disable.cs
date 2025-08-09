@@ -2,7 +2,7 @@
 using Exiled.API.Features;
 using System;
 
-namespace GejlonForExiledV2.Commands
+namespace GejlonForExiledV2.General.Commands
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     public class Disable : ICommand
