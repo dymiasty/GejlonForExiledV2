@@ -1,6 +1,8 @@
 ﻿using Exiled.API.Features;
 using Exiled.API.Enums;
 using GejlonForExiledV2.General;
+using MEC;
+using System.Collections.Generic;
 
 namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 {
@@ -20,7 +22,13 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override void Execute(Player player)
         {
+            Timing.RunCoroutine(SevereEyes(player));
+        }
+
+        private IEnumerator<float> SevereEyes(Player player)
+        {
             player.EnableEffect(EffectType.SeveredEyes);
+            yield return Timing.WaitForSeconds(0.1f);
             player.EnableEffect(EffectType.Blinded, 100f);
         }
     }
