@@ -29,12 +29,12 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
             {
                 if (playerr.IsAlive)
                     alivePlayers++;
+
+                if (alivePlayers > 1)
+                    return true;
             }
 
-            if (alivePlayers <= 1)
-                return false;
-
-            return true;
+            return false;
         }
 
         public override void Execute(Player player)
@@ -78,7 +78,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
             foreach (KeyValuePair<ItemType, ushort> ammo in mainPlayerAmmo)
             {
-                randomPlayer.AddAmmo(ItemToAmmo(ammo.Key), ammo.Value);
+                randomPlayer.AddAmmo(Util.ItemToAmmo(ammo.Key), ammo.Value);
             }
 
             foreach (Item item in mainPlayerItems)
@@ -91,7 +91,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
             foreach (KeyValuePair<ItemType, ushort> ammo in randomPlayerAmmo)
             {
-                player.AddAmmo(ItemToAmmo(ammo.Key), ammo.Value);
+                player.AddAmmo(Util.ItemToAmmo(ammo.Key), ammo.Value);
             }
 
             foreach (Item item in randomPlayerItems)
@@ -100,27 +100,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
             }
 
             randomPlayer.ShowHint("Gracz " + player.Nickname + " zamienił się z tobą.", 6f);
-        }
-
-
-        private AmmoType ItemToAmmo(ItemType item)
-        {
-            switch (item)
-            {
-                default:
-                    return AmmoType.None;
-
-                case ItemType.Ammo12gauge:
-                    return AmmoType.Ammo12Gauge;
-                case ItemType.Ammo556x45:
-                    return AmmoType.Nato556;
-                case ItemType.Ammo44cal:
-                    return AmmoType.Ammo44Cal;
-                case ItemType.Ammo762x39:
-                    return AmmoType.Nato762;
-                case ItemType.Ammo9x19:
-                    return AmmoType.Nato9;
-            }
         }
     }
 }

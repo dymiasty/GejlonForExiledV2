@@ -303,5 +303,25 @@ namespace GejlonForExiledV2.General
                     }
             }
         }
+
+        public static AmmoType ItemToAmmo(ItemType item)
+        {
+            switch (item)
+            {
+                default:
+                    return AmmoType.None;
+
+                case ItemType.Ammo12gauge:
+                    return AmmoType.Ammo12Gauge;
+                case ItemType.Ammo556x45:
+                    return AmmoType.Nato556;
+                case ItemType.Ammo44cal:
+                    return AmmoType.Ammo44Cal;
+                case ItemType.Ammo762x39:
+                    return AmmoType.Nato762;
+                case ItemType.Ammo9x19:
+                    return AmmoType.Nato9;
+            }
+        }
     }
 }

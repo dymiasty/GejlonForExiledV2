@@ -1,5 +1,4 @@
-﻿using Exiled.API.Enums;
-using Exiled.API.Features;
+﻿using Exiled.API.Features;
 using Exiled.API.Features.Items;
 using GejlonForExiledV2.General;
 using System.Collections.Generic;
@@ -23,11 +22,11 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override bool CanExecute(Player player)
         {
-            /* int humanPlayers = 0;
+            int humanPlayers = 0;
 
             foreach (Player playr in Player.List.ToList())
             {
-                if (!playr.IsNPC && playr.IsHuman)
+                if (playr.IsHuman)
                 {
                     humanPlayers++;
                 }
@@ -38,9 +37,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
                 }
             }
 
-            return false; */
-
-            return true;
+            return false;
         }
 
         public override void Execute(Player player)
@@ -76,12 +73,12 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
             foreach (KeyValuePair<ItemType, ushort> ammo in randomPlayerAmmo)
             {
-                player.AddAmmo(ItemToAmmo(ammo.Key), ammo.Value);
+                player.AddAmmo(Util.ItemToAmmo(ammo.Key), ammo.Value);
             }
 
             foreach (KeyValuePair<ItemType, ushort> ammo in mainPlayerAmmo)
             {
-                randomPlayer.AddAmmo(ItemToAmmo(ammo.Key), ammo.Value);
+                randomPlayer.AddAmmo(Util.ItemToAmmo(ammo.Key), ammo.Value);
             }
 
             foreach (Item item in mainPlayerItems)
@@ -97,26 +94,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
             randomPlayer.ShowHint("Ktoś zamienił się z tobą ekwipunkiem.", 6f);
 
             randomPlayer = null;
-        }
-
-        private AmmoType ItemToAmmo(ItemType item)
-        {
-            switch (item)
-            {
-                default:
-                    return AmmoType.None;
-
-                case ItemType.Ammo12gauge:
-                    return AmmoType.Ammo12Gauge;
-                case ItemType.Ammo556x45:
-                    return AmmoType.Nato556;
-                case ItemType.Ammo44cal:
-                    return AmmoType.Ammo44Cal;
-                case ItemType.Ammo762x39:
-                    return AmmoType.Nato762;
-                case ItemType.Ammo9x19:
-                    return AmmoType.Nato9;
-            }
         }
     }
 }
