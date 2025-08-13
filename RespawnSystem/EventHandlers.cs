@@ -41,7 +41,7 @@ namespace GejlonForExiledV2.RespawnSystem
             Core.NineTailedFoxTokens = 57.714285f;
             Core.ChaosTokens = 42.85715f;
 
-            if (Player.List.ToList().Count < 8)
+            if (Player.List.ToList().Count <= 8)
                 _lastScpStanding = true;
         }
 
@@ -624,7 +624,7 @@ namespace GejlonForExiledV2.RespawnSystem
             }
 
             // ci spy
-            if (Random.Range(0, 101) > 95)
+            if (Random.Range(1, 101) > 95)
             {
                 Player ciSpy = respawnedPlayers[Random.Range(0, respawnedPlayers.Count)];
 
@@ -633,14 +633,15 @@ namespace GejlonForExiledV2.RespawnSystem
                 ciSpy.Role.Set(RoleTypeId.ChaosConscript, SpawnReason.Respawn, RoleSpawnFlags.None);
                 ciSpy.ChangeAppearance(ciSpy.PreviousRole, true, previousUnitId);
 
-                Exiled.API.Features.Broadcast broadcast = new Exiled.API.Features.Broadcast();
-
-                broadcast.Duration = 15;
-                broadcast.Show = true;
-                broadcast.Type = Broadcast.BroadcastFlags.Normal;
-                broadcast.Content = "Jesteś <color=green>Szpiegiem Rebelii Chaosu</color>.\n" +
-                    "Inni gracze widzą cię jakbyś był z oddziału NTF, obowiązują cię\n" +
-                    "standardowe warunki wygranej Rebelii Chaosu.";
+                Exiled.API.Features.Broadcast broadcast = new Exiled.API.Features.Broadcast
+                {
+                    Duration = 15,
+                    Show = true,
+                    Type = Broadcast.BroadcastFlags.Normal,
+                    Content = "Jesteś <color=green>Szpiegiem Rebelii Chaosu</color>.\n" +
+                        "Inni gracze widzą cię jakbyś był z oddziału NTF, obowiązują cię\n" +
+                        "standardowe warunki wygranej Rebelii Chaosu."
+                };
 
                 ciSpy.Broadcast(broadcast, true);
             }
