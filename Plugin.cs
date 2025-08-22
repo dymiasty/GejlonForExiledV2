@@ -8,6 +8,7 @@ using GejlonForExiledV2.BadLuckProtection;
 using GejlonForExiledV2.CoinSystem;
 using GejlonForExiledV2.RespawnSystem.RespawnTimer;
 using GejlonForExiledV2.ReviveSystem;
+using GejlonForExiledV2.SCPLifesteal;
 
 namespace GejlonForExiledV2
 {
@@ -32,6 +33,8 @@ namespace GejlonForExiledV2
 
         public ReviveSystemCore ReviveSystemCore { get; private set; }
 
+        public SCPLifestealCore SCPLifestealCore { get; private set; }
+
 
         public override void OnEnabled()
         {
@@ -42,6 +45,7 @@ namespace GejlonForExiledV2
             RespawnSystemCore = new RespawnSystemCore();
             RespawnTimerCore = new RespawnTimerCore();
             ReviveSystemCore = new ReviveSystemCore();
+            SCPLifestealCore = new SCPLifestealCore();
             
             BadLuckProtectionCore = new BadLuckProtectionCore();
             BadLuckProtectionCore.LoadData();
@@ -51,6 +55,7 @@ namespace GejlonForExiledV2
             RespawnTimerCore.SubscribeEvents();
             CoinSystemCore.SubscribeEvents();
             ReviveSystemCore.SubscribeEvents();
+            SCPLifestealCore.SubscribeEvents();
 
 
             base.OnEnabled();
@@ -59,15 +64,17 @@ namespace GejlonForExiledV2
 
         public override void OnDisabled()
         {
+            SCPLifestealCore.UnsubscribeEvents();
             ReviveSystemCore.UnsubscribeEvents();
             CoinSystemCore.UnsubscribeEvents();
             RespawnTimerCore.UnsubscribeEvents();
             RespawnSystemCore.UnsubscribeEvents();
             UnsubscribeEvents();
 
-            BadLuckProtectionCore = null;
             BadLuckProtectionCore.SaveData();
+            BadLuckProtectionCore = null;
 
+            SCPLifestealCore = null;
             RespawnTimerCore = null;
             RespawnSystemCore = null;
             CoinSystemCore = null;

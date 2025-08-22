@@ -78,7 +78,7 @@ namespace GejlonForExiledV2.General
 
             foreach (Player p in players)
             {
-                if (p.Role == RoleTypeId.Scp079)
+                if (p.Role == RoleTypeId.Scp079 || p.Role == RoleTypeId.Scp096)
                     player = p;
             }
 

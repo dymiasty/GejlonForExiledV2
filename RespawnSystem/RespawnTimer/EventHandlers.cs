@@ -8,7 +8,7 @@ namespace GejlonForExiledV2.RespawnSystem.RespawnTimer
 
         public void OnPlayerDied(DiedEventArgs ev)
         {
-                Core.Spectators.Add(ev.Player);
+            Core.Spectators.Add(ev.Player);
         }
 
         public void OnPlayerSpawned(SpawnedEventArgs ev)

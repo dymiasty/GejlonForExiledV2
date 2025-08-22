@@ -30,19 +30,13 @@ namespace GejlonForExiledV2.RespawnSystem
         private bool _scp244bUsed = false;
         private bool _scp268Used = false;
         private bool _warheadUnlocked = false;
-        private bool _lastScpStanding = false;
 
         private Team _warheadStartedBy;
-
-        private Player _lastScpPlayer;
 
         public void OnRoundStarted()
         {
             Core.NineTailedFoxTokens = 57.714285f;
             Core.ChaosTokens = 42.85715f;
-
-            if (Player.List.ToList().Count <= 8)
-                _lastScpStanding = true;
         }
 
         public void OnItemPickedUp(ItemAddedEventArgs ev)
@@ -290,12 +284,6 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public void OnPlayerSpawned(SpawnedEventArgs ev)
         {
-            if (ev.Player.IsScp && _lastScpStanding)
-            {
-                ev.Player.ShowHint("Jesteś jedynym żywym <color=red>SCP</color>.\n"
-                    + "Zadawanie obrażeń cię leczy.", 10f);
-            }
-
             if (ev.Reason == SpawnReason.RoundStart)
                 if (ev.Player.Role == RoleTypeId.ClassD || ev.Player.Role == RoleTypeId.Scientist)
                 {
@@ -303,27 +291,11 @@ namespace GejlonForExiledV2.RespawnSystem
                     _civilliansReachedEntrance.Add(ev.Player, false);
                     _civilliansReachedSurface.Add(ev.Player, false);
                 }
-
-            if (ev.Reason == SpawnReason.Revived)
-            {
-                if (_lastScpStanding)
-                    _lastScpStanding = false;
-
-                foreach (Player player in Player.List.ToList())
-                {
-                    if (player.Role == RoleTypeId.Spectator)
-                    {
-                        return;
-                    }
-                }
-
-                Timing.KillCoroutines("mainRespawn");
-            }
         }
 
         public void OnPlayerDying(DyingEventArgs ev)
         {
-            if (Core.MainCountdownStarted == false)
+            if (!Core.MainCountdownStarted || !Core.IsRespawning)
             {
                 int spawnDelay = Random.Range(280, 351);
                 Timer.TimeLeft = spawnDelay;
@@ -651,50 +623,6 @@ namespace GejlonForExiledV2.RespawnSystem
                 Core.AddNineTailedFoxTokens(respawnedPlayers.Count);
             else if (ev.Wave.TargetFaction == Faction.FoundationEnemy)
                 Core.AddChaosTokens(respawnedPlayers.Count);
-        }
-
-        public void OnPlayerHurt(HurtEventArgs ev)
-        {
-            if (ev.Attacker == null)
-                return;
-
-            if (_lastScpStanding && ev.Attacker.IsScp)
-            {
-                if (ev.Attacker.Role == RoleTypeId.Scp173)
-                {
-                    ev.Attacker.Heal(ev.Player.MaxHealth * 0.85f, false);
-                }
-                else
-                {
-                    ev.Attacker.Heal(ev.Amount * 0.85f, false);
-                }
-            }
-        }
-
-        public void OnPlayerRoleChanged(ChangingRoleEventArgs ev)
-        {
-            if (ev.Player.Role == RoleTypeId.Spectator && ev.Player.PreviousRole.IsScp() && Util.GetLivingSCPs().Count == 1)
-            {
-                _lastScpPlayer = Util.GetLivingSCPs()[0];
-                if (_lastScpPlayer.Role == RoleTypeId.Scp079)
-                {
-                    _lastScpPlayer = null;
-                    return;
-                }
-
-
-                _lastScpStanding = true;
-                Util.GetLivingSCPs()[0].ShowHint("Jesteś jedynym żywym <color=red>SCP</color>.\n"
-                    + "Zadawanie obrażeń cię leczy.", 6f);
-            }
-
-            if (_lastScpStanding && ev.Player.IsScp)
-            {
-                _lastScpPlayer.ShowHint("Nie jesteś już ostatnim <color=red>SCP</color>.\n" +
-                    "Nie będziesz już się leczył za zadawanie obrażeń.");
-                _lastScpPlayer = null;
-                _lastScpStanding = false;
-            } 
         }
 
         private IEnumerator<float> HeavyCheckCoroutine(Player player)

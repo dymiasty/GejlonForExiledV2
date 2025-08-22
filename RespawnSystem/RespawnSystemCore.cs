@@ -43,7 +43,6 @@ namespace GejlonForExiledV2.RespawnSystem
             PlayerEvents.ItemAdded += Events.OnItemPickedUp;
             PlayerEvents.ItemRemoved += Events.OnItemDropped;
             PlayerEvents.ActivatingWarheadPanel += Events.OnWarheadUnlock;
-            PlayerEvents.Hurt += Events.OnPlayerHurt;
 
             WarheadEvents.Starting += Events.OnWarheadStarting;
             WarheadEvents.Detonating += Events.OnWarheadDetonating;
@@ -66,7 +65,6 @@ namespace GejlonForExiledV2.RespawnSystem
             PlayerEvents.ItemAdded -= Events.OnItemPickedUp;
             PlayerEvents.ItemRemoved -= Events.OnItemDropped;
             PlayerEvents.ActivatingWarheadPanel -= Events.OnWarheadUnlock;
-            PlayerEvents.Hurt -= Events.OnPlayerHurt;
 
             WarheadEvents.Starting -= Events.OnWarheadStarting;
             WarheadEvents.Detonating -= Events.OnWarheadDetonating;
