@@ -23,7 +23,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
         {
             if (player.Role is FpcRole role)
             {
-                role.Gravity = new Vector3(role.Gravity.x, role.Gravity.y*0.5f, role.Gravity.z);
+                role.Gravity = new Vector3(role.Gravity.x, role.Gravity.y*0.4f, role.Gravity.z);
             }
         }
     }
