@@ -2,9 +2,9 @@
 Plugin is only in polish, I am not planning on translating it or making it translatable in any way for now.
 
 ## Plugin do SCP:SL głównie z monetkami i kilkoma innymi pierdołami dla silnika [EXILED](https://github.com/ExMod-Team/EXILED)  
-- Absolutnie niesamowite rzucane monety generujące absolutnie nieprzewidywalne skutki (Ponad 40 różnych opcji!)  
-- (Prawie identyczny) Stary system fal respawnu NTFu i CI!  
-- Lifesteal dla ostatniego żywego SCP!  
+- Absolutnie niesamowite rzucane monety generujące absolutnie nieprzewidywalne skutki (Ponad 50 różnych opcji!)  
+- (Prawie identyczny) Stary system fal respawnu NTFu i CI (respawn timer w zestawie)!  
+- Lifesteal dla SCP!  
 - Niesamowite mechaniki zacinania się broni podczas strzelania! (Absolutna immersja!)  
 - Wskrzeszanie zmarłych za pomocą... apteczek? Kto to wymyślał 💀
 
