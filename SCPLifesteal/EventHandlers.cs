@@ -17,7 +17,7 @@ namespace GejlonForExiledV2.SCPLifesteal
 
         public void OnPlayerHurt(HurtEventArgs ev)
         {
-            if (ev.Attacker.IsScp && ev.Attacker.Role != RoleTypeId.Scp0492)
+            if (ev.Attacker != null && ev.Attacker.IsScp && ev.Attacker.Role != RoleTypeId.Scp0492)
             {
                 if (ev.Attacker.Role == RoleTypeId.Scp173)
                     ev.Attacker.Heal(ev.Player.MaxHealth * LIFESTEAL_MULTIPLIER);

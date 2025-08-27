@@ -87,6 +87,7 @@ namespace GejlonForExiledV2.CoinSystem
             new Defecate(), // 48
             new RandomEffectForRandomPlayer(), // 49
             new Schizophrenia(), // 50
+            new LowerGravity(), // 51
         };
 
         /// <returns>
