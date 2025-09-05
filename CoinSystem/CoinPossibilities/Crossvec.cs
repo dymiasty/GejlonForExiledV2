@@ -10,8 +10,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Dostałeś pistolet maszynowy <color=#6c807f>Crossvec</color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 75;
 
         public override PossibilityType Type => PossibilityType.Positive;

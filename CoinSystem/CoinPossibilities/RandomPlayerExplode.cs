@@ -9,9 +9,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "randomPlayerExplode";
 
-        public override string Hint => "Wysadziłeś losową osobę.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Wysadziłeś losową osobę.";        
 
         public override int Weight => 25;
 

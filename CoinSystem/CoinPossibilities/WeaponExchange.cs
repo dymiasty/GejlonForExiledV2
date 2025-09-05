@@ -11,8 +11,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Udałeś się do lombardu. Zamieniłeś wszystkie bronie na monety.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 70;
 
         public override PossibilityType Type => PossibilityType.Negative;

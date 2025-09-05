@@ -20,7 +20,7 @@ namespace GejlonForExiledV2.CoinSystem
         /// Duration of the Hint that will be shown to player
         /// about the effects, when Execute() method executes
         /// </summary>
-        public abstract float HintDuration { get; }
+        public virtual float HintDuration { get; } = 6f;
 
         /// <summary>
         /// Weight of the possibility - it dictates the chances

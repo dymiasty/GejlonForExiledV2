@@ -8,9 +8,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "handsSevered";
 
-        public override string Hint => "Uciąłeś sobie ręce monetą.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Uciąłeś sobie ręce monetą.";        
 
         public override int Weight => 50;
 

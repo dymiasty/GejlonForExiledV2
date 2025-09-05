@@ -7,9 +7,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "radio";
 
-        public override string Hint => "Dostałeś <color=#b6fca7>radio</color>.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Dostałeś <color=#b6fca7>radio</color>.";       
 
         public override int Weight => 105;
 

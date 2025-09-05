@@ -10,8 +10,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Wyłączyłeś <color=#fcfba7>światła</color> w placówce na 25 sekund.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 60;
 
         public override PossibilityType Type => PossibilityType.Negative;

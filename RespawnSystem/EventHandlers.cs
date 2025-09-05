@@ -295,14 +295,12 @@ namespace GejlonForExiledV2.RespawnSystem
 
         public void OnPlayerDying(DyingEventArgs ev)
         {
-            if (!Core.MainCountdownStarted || !Core.IsRespawning)
+            if (!Core.MainCountdownStarted && !Core.IsRespawning)
             {
                 int spawnDelay = Random.Range(280, 351);
                 Timer.TimeLeft = spawnDelay;
 
                 Timing.RunCoroutine(Core.EnqueueSpawn(spawnDelay), "mainRespawn");
-
-
                 Timing.RunCoroutine(Timer.CounterCoroutine(), "respawnTimer");
 
                 Core.MainCountdownStarted = true;

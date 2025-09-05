@@ -13,8 +13,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Teleportowano cię do <color=#a30f0f>losowego SCP</color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 50;
 
         public override PossibilityType Type => PossibilityType.Negative;

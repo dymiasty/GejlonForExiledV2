@@ -9,9 +9,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "lowerGravity";
 
-        public override string Hint => "Zmniejszono twoje\nprzyciąganie ziemskie.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Zmniejszono twoje\nprzyciąganie ziemskie.";        
 
         public override int Weight => 70;
 

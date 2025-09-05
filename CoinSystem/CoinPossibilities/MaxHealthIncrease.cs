@@ -7,13 +7,12 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "maxHealthIncrease";
 
-        public override string Hint => $"Zwiększono twoje maksymalne zdrowie o {(_multiplier - 1)*100}%.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => $"Zwiększono twoje maksymalne zdrowie o {(_multiplier - 1)*100}%.";        
 
         public override int Weight => 60;
 
         public override PossibilityType Type => PossibilityType.Positive;
+
 
         private const float _multiplier = 1.25f;
 

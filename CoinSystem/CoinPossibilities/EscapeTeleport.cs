@@ -10,8 +10,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Zostałeś teleportowany do wyjścia z placówki.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 60;
 
         public override PossibilityType Type => PossibilityType.Positive;

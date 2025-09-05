@@ -11,8 +11,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Sforceowałeś spawn <color=#077516>Rebelii Chaosu</color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 60;
 
         public override PossibilityType Type => PossibilityType.Mid;
@@ -28,6 +26,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
         public override void Execute(Player player)
         {
             Timing.KillCoroutines("mainRespawn");
+            Timing.KillCoroutines("respawnTimer");
             Timing.RunCoroutine(Plugin.Instance.RespawnSystemCore.SpawnCI(), "spawning");
 
             Timing.RunCoroutine(TimerCoroutine(player));
@@ -35,8 +34,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         private IEnumerator<float> TimerCoroutine(Player coinPlayer)
         {
-            Timing.KillCoroutines("respawnTimer");
-
             foreach (Player player in Plugin.Instance.RespawnTimerCore.Spectators)
                 player.CurrentHint.Content = string.Empty;
 

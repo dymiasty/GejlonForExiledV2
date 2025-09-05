@@ -7,9 +7,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "antiCola";
 
-        public override string Hint => "<color=#871060>D#?t%ł@ś c0^a-$#lę</color>.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "<color=#871060>D#?t%ł@ś c0^a-$#lę</color>.";    
 
         public override int Weight => 80;
 

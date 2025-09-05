@@ -14,8 +14,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Zrestartowałeś system kontroli drzwi w placówce.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 45;
 
         public override PossibilityType Type => PossibilityType.Negative;

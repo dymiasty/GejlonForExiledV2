@@ -9,9 +9,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "quickDecontamination";
 
-        public override string Hint => "Uruchomiłeś szybką <color=#e6f564>dekontaminację LCZ</color>.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Uruchomiłeś szybką <color=#e6f564>dekontaminację LCZ</color>.";        
 
         public override int Weight => 60;
 

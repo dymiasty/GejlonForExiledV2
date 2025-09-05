@@ -9,8 +9,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Zostałeś uleczony <color=green>do pełna</color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 85;
 
         public override PossibilityType Type => PossibilityType.Positive;

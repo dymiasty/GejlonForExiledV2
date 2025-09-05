@@ -116,6 +116,7 @@ namespace GejlonForExiledV2.RespawnSystem
             WavesAmount++;
 
             Timing.KillCoroutines("mainRespawn");
+            Timing.KillCoroutines("respawnTimer");
         }
 
         public IEnumerator<float> SpawnNTF()
@@ -131,6 +132,7 @@ namespace GejlonForExiledV2.RespawnSystem
             WavesAmount++;
 
             Timing.KillCoroutines("mainRespawn");
+            Timing.KillCoroutines("respawnTimer");
         }
     }
 }

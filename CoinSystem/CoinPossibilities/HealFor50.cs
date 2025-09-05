@@ -7,9 +7,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "heal50";
 
-        public override string Hint => "Zostałeś uleczony o <color=green>50 HP</color>.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Zostałeś uleczony o <color=green>50 HP</color>.";        
 
         public override int Weight => 100;
 

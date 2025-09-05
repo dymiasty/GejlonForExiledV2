@@ -10,8 +10,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Dostałeś efekt <color=#800515>SCP-1344</color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 60;
 
         public override PossibilityType Type => PossibilityType.Positive;

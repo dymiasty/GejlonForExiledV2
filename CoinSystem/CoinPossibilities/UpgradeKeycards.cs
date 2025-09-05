@@ -11,8 +11,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Wszystkie twoje karty dostępu\nzostały ulepszone o 1 poziom.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 65;
 
         public override PossibilityType Type => PossibilityType.Positive;

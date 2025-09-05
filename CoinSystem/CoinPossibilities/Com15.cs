@@ -10,8 +10,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Dostałeś <color=#898e8f>pistolet COM-15</color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 80;
 
         public override PossibilityType Type => PossibilityType.Positive;

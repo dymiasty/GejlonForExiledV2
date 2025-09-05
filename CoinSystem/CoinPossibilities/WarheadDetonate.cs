@@ -9,11 +9,10 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "<color=#b8541a>Wysadziłeś placówkę</color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 9;
 
         public override PossibilityType Type => PossibilityType.Negative;
+
 
         public bool CanDetonate = false;
 

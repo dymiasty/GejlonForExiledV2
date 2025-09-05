@@ -11,8 +11,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Zamieniłeś się miejscami z losowym graczem.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 40;
 
         public override PossibilityType Type => PossibilityType.Mid;

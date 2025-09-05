@@ -7,9 +7,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "O5Keycard";
 
-        public override string Hint => "Dostałeś kartę <color=#1c1c1b>rady O5</color>.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Dostałeś kartę <color=#1c1c1b>rady O5</color>.";        
 
         public override int Weight => 50;
 

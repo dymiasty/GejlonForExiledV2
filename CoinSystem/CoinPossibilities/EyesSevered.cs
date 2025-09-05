@@ -12,8 +12,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Wyrwałeś sobie oczy ze stresu.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 55;
 
         public override PossibilityType Type => PossibilityType.Negative;

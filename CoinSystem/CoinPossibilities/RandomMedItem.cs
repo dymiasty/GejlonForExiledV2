@@ -7,9 +7,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "randomMedicalItem";
 
-        public override string Hint => "Dostałeś <color=#fc03a9>losowy przedmiot leczący</color>.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Dostałeś <color=#fc03a9>losowy przedmiot leczący</color>.";        
 
         public override int Weight => 100;
 

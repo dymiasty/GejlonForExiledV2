@@ -8,9 +8,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "pocketDimension";
 
-        public override string Hint => "Teleportowano cię do <color=#192619>wymiaru łuzowego</color>.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Teleportowano cię do <color=#192619>wymiaru łuzowego</color>.";        
 
         public override int Weight => 40;
 

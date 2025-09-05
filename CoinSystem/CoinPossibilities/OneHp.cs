@@ -7,9 +7,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "oneHP";
 
-        public override string Hint => "Twoje <color=#fc0328>zdrowie</color> zostało zmniejszone do <color=#fc0328>1</color>.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Twoje <color=#fc0328>zdrowie</color> zostało zmniejszone do <color=#fc0328>1</color>.";        
 
         public override int Weight => 35;
 

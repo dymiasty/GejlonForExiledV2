@@ -41,18 +41,18 @@ namespace GejlonForExiledV2.CoinSystem
                 weightedList.Add((option, option.Weight * multiplier));
             }
 
-            int totalWeight = weightedList.Sum(x => (int)Math.Floor(x.Item2));
-            int rollValue = Random.Range(0, totalWeight);
+            float totalWeight = weightedList.Sum(x => (float)Math.Floor(x.Item2));
+            float rollValue = Random.Range(0, totalWeight);
 
             int cumulatedWeight = 0;
 
-            foreach (CoinPossibility coinPossibility in Plugin.Instance.CoinSystemCore.ValidCoinPossibilities)
+            foreach (var coinPossibility in weightedList.ToList())
             {
-                cumulatedWeight += coinPossibility.Weight;
+                cumulatedWeight += coinPossibility.Item1.Weight;
                 if (rollValue < cumulatedWeight)
                 {
-                    possibility = coinPossibility;
-                    canExecute = coinPossibility.CanExecute(ev.Player);
+                    possibility = coinPossibility.Item1;
+                    canExecute = coinPossibility.Item1.CanExecute(ev.Player);
                     break;
                 }
             }

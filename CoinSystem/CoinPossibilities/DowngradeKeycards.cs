@@ -13,8 +13,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
             "Wszystkie twoje karty dostępu\n " +
             "zostały zdegradowane o 1 poziom.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 50;
 
         public override PossibilityType Type => PossibilityType.Negative;

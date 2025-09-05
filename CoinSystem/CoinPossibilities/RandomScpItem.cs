@@ -7,9 +7,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "randomScpItem";
 
-        public override string Hint => "Dostałeś <color=#fc03a9>losowy przedmiot SCP</color>.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Dostałeś <color=#fc03a9>losowy przedmiot SCP</color>.";       
 
         public override int Weight => 80;
 

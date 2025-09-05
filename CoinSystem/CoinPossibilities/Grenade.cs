@@ -7,9 +7,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "grenade";
 
-        public override string Hint => "Dostałeś <color=#82c0c4>granat wybuchowy</color>.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Dostałeś <color=#82c0c4>granat wybuchowy</color>.";        
         
         public override int Weight => 80;
 

@@ -9,8 +9,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Przełączyłeś <color=yellow> Warhead </color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 30;
 
         public override PossibilityType Type => PossibilityType.Mid;

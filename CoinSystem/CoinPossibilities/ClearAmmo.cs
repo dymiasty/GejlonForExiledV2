@@ -9,8 +9,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Wyczyszczono ci amunicję.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 55;
 
         public override PossibilityType Type => PossibilityType.Negative;

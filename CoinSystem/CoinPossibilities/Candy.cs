@@ -13,8 +13,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Dostałeś <color=#ff96e1>cukierki</color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 70;
 
         public override PossibilityType Type => PossibilityType.Positive;

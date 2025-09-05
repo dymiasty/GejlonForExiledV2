@@ -9,8 +9,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Dostałeś <color=#66fc03>40 AHP</color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 75;
 
         public override PossibilityType Type => PossibilityType.Positive;

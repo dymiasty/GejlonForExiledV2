@@ -10,11 +10,10 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Teleportowano cię do <color=#fc03a9>losowego pomieszczenia</color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 45;
 
         public override PossibilityType Type => PossibilityType.Mid;
+
 
         private readonly List<string> _bannedRooms = new List<string> {
             "EZ_CollapsedTunnel(Clone)",

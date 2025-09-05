@@ -9,8 +9,6 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
 
         public override string Hint => "Dostałeś <color=#fc03a9>losową broń specjalną</color>.";
 
-        public override float HintDuration => 6f;
-
         public override int Weight => 80;
 
         public override PossibilityType Type => PossibilityType.Positive;

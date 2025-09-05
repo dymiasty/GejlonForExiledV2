@@ -19,7 +19,7 @@ namespace GejlonForExiledV2
         public override string Prefix => "GFEV2";
         public override Version RequiredExiledVersion => new Version(9, 8, 1);
         public override string Author => "dymiasty";
-        public override Version Version => new Version(0, 3, 4);
+        public override Version Version => new Version(0, 3, 5);
 
         private EventHandlers MainHandlers { get; set; }
 

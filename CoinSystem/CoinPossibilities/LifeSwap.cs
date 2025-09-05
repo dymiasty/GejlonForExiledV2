@@ -13,9 +13,7 @@ namespace GejlonForExiledV2.CoinSystem.CoinPossibilities
     {
         public override string Id => "lifeSwap";
 
-        public override string Hint => "Zamieniłeś się życiami z losowym graczem.";
-
-        public override float HintDuration => 6f;
+        public override string Hint => "Zamieniłeś się życiami z losowym graczem.";        
 
         public override int Weight => 40;
 
