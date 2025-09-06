@@ -63,13 +63,13 @@ namespace GejlonForExiledV2.CoinSystem
 
                 cumulatedWeight = 0;
 
-                foreach (CoinPossibility coinPossibility in Plugin.Instance.CoinSystemCore.ValidCoinPossibilities)
+                foreach (var coinPossibility in weightedList.ToList())
                 {
-                    cumulatedWeight += coinPossibility.Weight;
+                    cumulatedWeight += coinPossibility.Item1.Weight;
                     if (rollValue < cumulatedWeight)
                     {
-                        possibility = coinPossibility;
-                        canExecute = coinPossibility.CanExecute(ev.Player);
+                        possibility = coinPossibility.Item1;
+                        canExecute = coinPossibility.Item1.CanExecute(ev.Player);
                         break;
                     }
                 }
