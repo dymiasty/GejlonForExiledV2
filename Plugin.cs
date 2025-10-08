@@ -17,11 +17,11 @@ namespace GejlonForExiledV2
         public static Plugin Instance { get; private set; }
         public override string Name => "GejlonForExiledV2";
         public override string Prefix => "GFEV2";
-        public override Version RequiredExiledVersion => new Version(9, 8, 1);
+        public override Version RequiredExiledVersion => new Version(9, 9, 2);
         public override string Author => "dymiasty";
-        public override Version Version => new Version(0, 3, 5);
+        public override Version Version => new Version(0, 3, 6);
 
-        private EventHandlers MainHandlers { get; set; }
+        private EventHandlers GeneralHandlers { get; set; }
 
         public RespawnSystemCore RespawnSystemCore { get; private set; }
 
@@ -40,7 +40,7 @@ namespace GejlonForExiledV2
         {
             Instance = this;
 
-            MainHandlers = new EventHandlers();
+            GeneralHandlers = new EventHandlers();
             CoinSystemCore = new CoinSystemCore();
             RespawnSystemCore = new RespawnSystemCore();
             RespawnTimerCore = new RespawnTimerCore();
@@ -48,14 +48,28 @@ namespace GejlonForExiledV2
             SCPLifestealCore = new SCPLifestealCore();
             
             BadLuckProtectionCore = new BadLuckProtectionCore();
-            BadLuckProtectionCore.LoadData();
             
             SubscribeEvents();
-            RespawnSystemCore.SubscribeEvents();
-            RespawnTimerCore.SubscribeEvents();
-            CoinSystemCore.SubscribeEvents();
-            ReviveSystemCore.SubscribeEvents();
-            SCPLifestealCore.SubscribeEvents();
+
+            if (Config.CoinsEnabled)
+            {
+                BadLuckProtectionCore.LoadData();
+                CoinSystemCore.SubscribeEvents();
+            }
+            
+            if (Config.OldRespawnSystemEnabled)
+            {
+                RespawnSystemCore.SubscribeEvents();
+
+                if (Config.RespawnTimer)
+                    RespawnTimerCore.SubscribeEvents();
+            }
+
+            if (Config.RevivingEnabled)
+                ReviveSystemCore.SubscribeEvents();
+
+            if (Config.SCPLifestealEnabled)
+                SCPLifestealCore.SubscribeEvents();
 
 
             base.OnEnabled();
@@ -71,14 +85,16 @@ namespace GejlonForExiledV2
             RespawnSystemCore.UnsubscribeEvents();
             UnsubscribeEvents();
 
-            BadLuckProtectionCore.SaveData();
+            if (Config.CoinsEnabled)
+                BadLuckProtectionCore.SaveData();
+
             BadLuckProtectionCore = null;
 
             SCPLifestealCore = null;
             RespawnTimerCore = null;
             RespawnSystemCore = null;
             CoinSystemCore = null;
-            MainHandlers = null;
+            GeneralHandlers = null;
 
             Instance = null;
             base.OnDisabled();
@@ -86,26 +102,36 @@ namespace GejlonForExiledV2
 
         private void SubscribeEvents()
         {
-            // Server events
-            ServerEvents.WaitingForPlayers += MainHandlers.OnWaitingForPlayers;
-            ServerEvents.RoundStarted += MainHandlers.OnRoundStarted;
-            ServerEvents.RoundEnded += MainHandlers.OnRoundEnded;
+            ServerEvents.WaitingForPlayers += GeneralHandlers.OnWaitingForPlayers;
+            ServerEvents.RoundStarted += GeneralHandlers.OnRoundStarted;
 
-            // Player events
-            PlayerEvents.Spawned += MainHandlers.OnPlayerSpawned;
-            PlayerEvents.Shooting += MainHandlers.OnPlayerShooting;
+            if (Config.AutoDeadmanDisable)
+            {
+                ServerEvents.RoundStarted += GeneralHandlers.OnRoundStartedDeadman;
+            }
+
+            if (Config.CoinsEnabled)
+            {
+                PlayerEvents.Spawned += GeneralHandlers.OnPlayerSpawned;
+                ServerEvents.RoundStarted += GeneralHandlers.OnRoundStartedCoinWarhead;
+            }
+            
+            if (Config.WeaponJammingEnabled)
+                PlayerEvents.Shooting += GeneralHandlers.OnPlayerShooting;
+
+            ServerEvents.RoundEnded += GeneralHandlers.OnRoundEnded;
         }
 
         private void UnsubscribeEvents()
         {
             // Server events
-            ServerEvents.WaitingForPlayers -= MainHandlers.OnWaitingForPlayers;
-            ServerEvents.RoundStarted -= MainHandlers.OnRoundStarted;
-            ServerEvents.RoundEnded -= MainHandlers.OnRoundEnded;
+            ServerEvents.WaitingForPlayers -= GeneralHandlers.OnWaitingForPlayers;
+            ServerEvents.RoundStarted -= GeneralHandlers.OnRoundStarted;
+            ServerEvents.RoundEnded -= GeneralHandlers.OnRoundEnded;
 
             // Player events
-            PlayerEvents.Spawned -= MainHandlers.OnPlayerSpawned;
-            PlayerEvents.Shooting -= MainHandlers.OnPlayerShooting;
+            PlayerEvents.Spawned -= GeneralHandlers.OnPlayerSpawned;
+            PlayerEvents.Shooting -= GeneralHandlers.OnPlayerShooting;
         }
     }
 }

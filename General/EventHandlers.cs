@@ -25,11 +25,20 @@ namespace GejlonForExiledV2.General
         public void OnRoundStarted()
         {
             Room.Get(RoomType.Lcz914).Color = new Color(1f, 0f, 1f, 1f);
+        }
 
+        public void OnRoundStartedDeadman()
+        {
             Warhead.DeadmanSwitchEnabled = false;
+        }
 
+        public void OnRoundStartedCoinWarhead()
+        {
             Timing.RunCoroutine(WarheadDetonateCoroutine());
-            
+        }
+
+        public void OnRoundStartedScpSwap()
+        {
             if (Player.List.ToList().Count == 8)
             {
                 Timing.RunCoroutine(SCPSwap());
@@ -46,9 +55,9 @@ namespace GejlonForExiledV2.General
         {
             if (Random.Range(0, 2001) == 2000)
             {
-                int ammoCount = ev.Firearm.MagazineAmmo;
+                ushort ammoCount = (ushort)ev.Firearm.MagazineAmmo;
                 ev.Firearm.MagazineAmmo = 0;
-                ev.Player.AddAmmo(ev.Firearm.AmmoType, (ushort)ammoCount);
+                ev.Player.AddAmmo(ev.Firearm.AmmoType, ammoCount);
                 ev.Player.ShowHint("Twoja broń się zacięła!\nMusisz ją przeładować!", 6f);
             }
         }
